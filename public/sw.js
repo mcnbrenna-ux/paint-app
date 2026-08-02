@@ -1,7 +1,10 @@
 // Minimal app-shell service worker: precache the entry, cache-first for hashed
 // assets, network-first for navigations. Bump the version to invalidate.
-const CACHE = 'pigment-v1'
-const SHELL = ['/', '/manifest.webmanifest', '/icon.svg']
+const CACHE = 'pigment-v2'
+// Scope-relative so the app works at the domain root and under a subpath
+// (e.g. GitHub Pages at /paint-app/).
+const BASE = new URL('./', self.location).pathname
+const SHELL = [BASE, BASE + 'manifest.webmanifest', BASE + 'icon.svg']
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)))
@@ -24,10 +27,10 @@ self.addEventListener('fetch', (e) => {
       fetch(request)
         .then((res) => {
           const copy = res.clone()
-          caches.open(CACHE).then((c) => c.put('/', copy))
+          caches.open(CACHE).then((c) => c.put(BASE, copy))
           return res
         })
-        .catch(() => caches.match('/')),
+        .catch(() => caches.match(BASE)),
     )
     return
   }
