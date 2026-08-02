@@ -387,6 +387,15 @@ button:disabled {
   grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
   gap: 4px;
 }
+.pig-grid.wide {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+.brand-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
 .pig-check {
   display: flex;
   align-items: center;

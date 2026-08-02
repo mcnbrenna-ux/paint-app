@@ -124,14 +124,35 @@ export interface SearchProgress {
  * Core search as a generator so callers can drive it in chunks (the UI needs a
  * determinate progress indicator; the CLI just drains it).
  */
+// Above this many usable tubes, C(n,3) makes the full search miss the 3-second
+// budget. Pre-select the tubes closest to the target in OKLab, always keeping
+// whites and blacks (value adjusters mix into everything).
+const MAX_SEARCH_TUBES = 40
+const NEAREST_KEEP = 34
+
+function preselect(paints: Paint[], targetHex: string): Paint[] {
+  if (paints.length <= MAX_SEARCH_TUBES) return paints
+  const targetLab = linearRgbToOklab(hexToLinearRgb(targetHex))
+  const ranked = paints
+    .map((p) => ({ p, de: deltaE(linearRgbToOklab(ksVecToReflectance(Float64Array.from(p.ks))), targetLab) }))
+    .sort((a, b) => a.de - b.de)
+  const keep = new Set(ranked.slice(0, NEAREST_KEEP).map((r) => r.p))
+  for (const p of paints) {
+    const lead = p.pigment_ids[0]
+    if (lead?.startsWith('PW') || lead?.startsWith('PBk')) keep.add(p)
+  }
+  return paints.filter((p) => keep.has(p))
+}
+
 export function* searchGenerator(
-  paints: Paint[],
+  allPaints: Paint[],
   targetHex: string,
   opts: SearchOptions = {},
 ): Generator<SearchProgress, SearchOutput> {
   const maxK = opts.maxK ?? 3
+  if (allPaints.length < 2) throw new Error('Mix search needs at least 2 usable tubes')
+  const paints = preselect(allPaints, targetHex)
   const n = paints.length
-  if (n < 2) throw new Error('Mix search needs at least 2 usable tubes')
 
   const targetLin = hexToLinearRgb(targetHex)
   const targetKS = reflectanceVecToKS(targetLin)

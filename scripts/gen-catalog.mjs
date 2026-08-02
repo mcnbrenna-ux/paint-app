@@ -1,13 +1,14 @@
 // Writes data/catalog.csv — the versioned, hand-curated seed catalog (spec §5).
 //
-// 16 core colors across 5 brands (~80 tubes) weighted toward the standard
-// limited palette, plus a multi-pigment hue tube. Colour Index codes and
-// opacity come from commonly published manufacturer data. The masstone and
-// tint (1 part paint : 9 parts titanium white by volume) swatch hexes are
-// curated ESTIMATES standing in for the photographed swatches of the real
-// Phase 1 process — every row is marked source=estimated until a tube is
-// physically swatched, at which point the two hex columns are replaced with
-// measured values and the row flips to source=measured.
+// ~50 core colors across 5 brands (~250 tubes) spanning the full painter's
+// range — whites, yellows, oranges, reds, earths, violets, blues, greens,
+// blacks — plus multi-pigment hue tubes. Colour Index codes and opacity come
+// from commonly published manufacturer data. The masstone and tint
+// (1 part paint : 9 parts titanium white by volume) swatch hexes are curated
+// ESTIMATES standing in for the photographed swatches of the real Phase 1
+// process — every row is marked source=estimated until a tube is physically
+// swatched, at which point the two hex columns are replaced with measured
+// values and the row flips to source=measured.
 
 import { writeFileSync, mkdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
@@ -15,24 +16,76 @@ import { fileURLToPath } from 'node:url'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 
-// Base swatch data per core color: [pigments, opacity, hue_family, masstone, tint_1to9]
+// Base swatch data per core color: [name, pigments, opacity, hue_family, masstone, tint_1to9]
 const CORE = [
+  // Whites
   ['Titanium White', 'PW6', 'opaque', 'white', '#F5F4EF', '#F6F5F0'],
-  ['Ultramarine Blue', 'PB29', 'semi-transparent', 'blue', '#1E2D7D', '#8495D0'],
-  ['Phthalo Blue', 'PB15:3', 'transparent', 'blue', '#0E3050', '#2F86CC'],
-  ['Cerulean Blue', 'PB35', 'semi-opaque', 'blue', '#2E7BB4', '#A5CAE4'],
-  ['Cobalt Blue', 'PB28', 'semi-transparent', 'blue', '#2F4DA0', '#A2B4DF'],
+  ['Zinc White', 'PW4', 'semi-transparent', 'white', '#F7F6F2', '#F8F7F3'],
+  ['Titanium Buff', 'PW6:1', 'opaque', 'white', '#D8C9A9', '#E8DFC8'],
+
+  // Yellows
+  ['Lemon Yellow', 'PY3', 'semi-transparent', 'yellow', '#F7E63A', '#FAF2AE'],
   ['Cadmium Yellow Light', 'PY35', 'opaque', 'yellow', '#FFE01A', '#FDF3B4'],
   ['Cadmium Yellow Deep', 'PY35', 'opaque', 'yellow', '#FCB514', '#FBE4A8'],
+  ['Hansa Yellow Medium', 'PY74', 'semi-transparent', 'yellow', '#FFD514', '#FBEC9E'],
+  ['Indian Yellow', 'PY110', 'transparent', 'yellow', '#C87A0E', '#F2D48C'],
+  ['Naples Yellow Hue', 'PW6|PY35', 'opaque', 'yellow', '#EFD9A0', '#F4E6C0'],
+
+  // Earth yellows / browns
   ['Yellow Ochre', 'PY43', 'semi-opaque', 'earth', '#C08F2E', '#E5D2A8'],
-  ['Cadmium Orange', 'PO20', 'opaque', 'orange', '#ED7524', '#F8CBA4'],
-  ['Cadmium Red', 'PR108', 'opaque', 'red', '#C0272D', '#EEB0A6'],
-  ['Alizarin Crimson', 'PR83', 'transparent', 'red', '#6E1423', '#D08298'],
-  ['Quinacridone Rose', 'PV19', 'transparent', 'red', '#93265C', '#DE87B8'],
+  ['Raw Sienna', 'PBr7', 'semi-transparent', 'earth', '#B07A33', '#E0C69C'],
   ['Burnt Sienna', 'PBr7', 'semi-transparent', 'earth', '#7C3A18', '#DBA78D'],
+  ['Burnt Umber', 'PBr7', 'semi-transparent', 'earth', '#4A2E1C', '#C0A48D'],
   ['Raw Umber', 'PBr7', 'semi-transparent', 'earth', '#4A3A26', '#BFB4A2'],
-  ['Ivory Black', 'PBk9', 'semi-opaque', 'black', '#1B1B1D', '#8A8E93'],
+  ['Transparent Red Oxide', 'PR101', 'transparent', 'earth', '#8C3D1A', '#DCA184'],
+  ['Venetian Red', 'PR101', 'opaque', 'earth', '#A5432C', '#DFA893'],
+  ['Indian Red', 'PR101', 'opaque', 'earth', '#8F3B33', '#D6A198'],
+
+  // Oranges
+  ['Cadmium Orange', 'PO20', 'opaque', 'orange', '#ED7524', '#F8CBA4'],
+  ['Pyrrole Orange', 'PO73', 'semi-opaque', 'orange', '#E85C20', '#F5AE88'],
+  ['Transparent Orange', 'PO71', 'transparent', 'orange', '#D96018', '#F0B080'],
+
+  // Reds
+  ['Cadmium Red Light', 'PR108', 'opaque', 'red', '#D23227', '#F0B3A2'],
+  ['Cadmium Red', 'PR108', 'opaque', 'red', '#C0272D', '#EEB0A6'],
+  ['Pyrrole Red', 'PR254', 'semi-opaque', 'red', '#C41E2A', '#EF9E9A'],
+  ['Vermilion Hue', 'PR255', 'semi-opaque', 'red', '#D5402C', '#F2B49F'],
+  ['Alizarin Crimson', 'PR83', 'transparent', 'red', '#6E1423', '#D08298'],
+  ['Permanent Alizarin', 'PR177', 'transparent', 'red', '#7A1B2C', '#D68CA0'],
+  ['Quinacridone Rose', 'PV19', 'transparent', 'red', '#93265C', '#DE87B8'],
+  ['Quinacridone Magenta', 'PR122', 'transparent', 'red', '#A02D6E', '#E28BC0'],
+
+  // Violets
+  ['Dioxazine Violet', 'PV23', 'transparent', 'violet', '#2E1638', '#9678BC'],
+  ['Ultramarine Violet', 'PV15', 'semi-transparent', 'violet', '#4A3C7E', '#ACA3D2'],
+  ['Cobalt Violet', 'PV14', 'semi-transparent', 'violet', '#8E4C8E', '#E9D3E7'],
+
+  // Blues
+  ['Ultramarine Blue', 'PB29', 'semi-transparent', 'blue', '#1E2D7D', '#8495D0'],
+  ['Cobalt Blue', 'PB28', 'semi-transparent', 'blue', '#2F4DA0', '#A2B4DF'],
+  ['Cerulean Blue', 'PB35', 'semi-opaque', 'blue', '#2E7BB4', '#A5CAE4'],
+  ['Phthalo Blue', 'PB15:3', 'transparent', 'blue', '#0E3050', '#2F86CC'],
+  ['Phthalo Blue (Red Shade)', 'PB15:1', 'transparent', 'blue', '#122B56', '#4A80CC'],
+  ['Prussian Blue', 'PB27', 'transparent', 'blue', '#16222E', '#5C7E9A'],
+  ['Indanthrene Blue', 'PB60', 'transparent', 'blue', '#1C2440', '#6D7FAE'],
+  ['Phthalo Turquoise', 'PB16', 'transparent', 'blue', '#0C3038', '#3D9AA0'],
+  ["King's Blue Hue", 'PW6|PB29', 'opaque', 'blue', '#7C97D2', '#B9C6E8'],
+
+  // Greens
   ['Phthalo Green', 'PG7', 'transparent', 'green', '#06301F', '#2FA37E'],
+  ['Phthalo Green (Yellow Shade)', 'PG36', 'transparent', 'green', '#14381C', '#48A85E'],
+  ['Viridian', 'PG18', 'transparent', 'green', '#1E4B3C', '#7FB4A2'],
+  ['Chromium Oxide Green', 'PG17', 'opaque', 'green', '#5A6B3C', '#A9B78C'],
+  ['Sap Green', 'PG7|PY110', 'transparent', 'green', '#3A4A1E', '#8FA45C'],
+  ['Terre Verte', 'PG23', 'transparent', 'green', '#5C6B55', '#CCD1C5'],
+  ['Cobalt Teal', 'PG50', 'semi-opaque', 'green', '#2A9D9F', '#90D2CE'],
+
+  // Blacks & greys
+  ['Ivory Black', 'PBk9', 'semi-opaque', 'black', '#1B1B1D', '#8A8E93'],
+  ['Lamp Black', 'PBk6', 'opaque', 'black', '#191A1B', '#83878A'],
+  ['Mars Black', 'PBk11', 'opaque', 'black', '#1A1A1A', '#85888B'],
+  ["Payne's Grey", 'PBk6|PB29', 'semi-opaque', 'black', '#23293A', '#8E97AC'],
 ]
 
 // Brand-specific marketing names where they differ from the core name.
@@ -45,14 +98,21 @@ const BRANDS = [
     rename: {
       'Ultramarine Blue': 'French Ultramarine',
       'Phthalo Blue': 'Winsor Blue (Green Shade)',
+      'Phthalo Blue (Red Shade)': 'Winsor Blue (Red Shade)',
       'Phthalo Green': 'Winsor Green (Blue Shade)',
+      'Phthalo Green (Yellow Shade)': 'Winsor Green (Yellow Shade)',
       'Quinacridone Rose': 'Permanent Rose',
+      'Quinacridone Magenta': 'Permanent Magenta',
+      'Pyrrole Red': 'Winsor Red',
+      'Pyrrole Orange': 'Winsor Orange',
+      'Dioxazine Violet': 'Winsor Violet (Dioxazine)',
+      'Hansa Yellow Medium': 'Winsor Yellow',
     },
   },
   {
     name: 'Gamblin',
     delta: [4, 2, -3],
-    rename: {},
+    rename: { 'Dioxazine Violet': 'Dioxazine Purple', 'Vermilion Hue': 'Napthol Scarlet' },
     // Gamblin's Cerulean is the chromium variant: same marketing name as the
     // W&N tube, different pigment code — two distinct catalog entries.
     repigment: { 'Cerulean Blue': 'PB36' },
@@ -60,21 +120,30 @@ const BRANDS = [
   {
     name: 'Williamsburg',
     delta: [-3, 3, 2],
-    rename: { 'Ultramarine Blue': 'French Ultramarine Blue' },
+    rename: { 'Ultramarine Blue': 'French Ultramarine Blue', 'Pyrrole Orange': 'Permanent Orange' },
   },
   {
     name: 'Michael Harding',
     delta: [2, -4, 4],
-    rename: { 'Phthalo Blue': 'Phthalocyanine Blue Lake', 'Quinacridone Rose': 'Magenta' },
+    rename: {
+      'Phthalo Blue': 'Phthalocyanine Blue Lake',
+      'Quinacridone Rose': 'Rose Madder (Quinacridone)',
+      'Quinacridone Magenta': 'Magenta',
+      'Pyrrole Red': 'Scarlet Lake',
+    },
   },
   {
     name: 'Sennelier',
     delta: [-4, -2, -4],
-    rename: { 'Ultramarine Blue': 'French Ultramarine Blue', 'Cadmium Yellow Light': 'Cadmium Yellow Lemon' },
+    rename: {
+      'Ultramarine Blue': 'French Ultramarine Blue',
+      'Cadmium Yellow Light': 'Cadmium Yellow Lemon',
+      'Dioxazine Violet': 'Manganese Violet Hue',
+    },
   },
 ]
 
-// Multi-pigment tubes are first-class (spec §5).
+// Multi-pigment hue tubes beyond the shared core (spec §5: first-class).
 const EXTRA = [
   ['Winsor & Newton', 'Cerulean Blue Hue', 'PB15:3|PW6', 'opaque', 'blue', '#3E86BC', '#ACCEE6'],
 ]

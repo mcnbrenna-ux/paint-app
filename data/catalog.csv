@@ -1,82 +1,257 @@
 brand,product_name,pigment_ids,opacity,hue_family,masstone_hex,tint_hex,source,confidence
 Winsor & Newton,Titanium White,PW6,opaque,white,#F5F4EF,#F6F5F0,estimated,0.4
-Winsor & Newton,French Ultramarine,PB29,semi-transparent,blue,#1E2D7D,#8495D0,estimated,0.4
-Winsor & Newton,Winsor Blue (Green Shade),PB15:3,transparent,blue,#0E3050,#2F86CC,estimated,0.4
-Winsor & Newton,Cerulean Blue,PB35,semi-opaque,blue,#2E7BB4,#A5CAE4,estimated,0.4
-Winsor & Newton,Cobalt Blue,PB28,semi-transparent,blue,#2F4DA0,#A2B4DF,estimated,0.4
+Winsor & Newton,Zinc White,PW4,semi-transparent,white,#F7F6F2,#F8F7F3,estimated,0.4
+Winsor & Newton,Titanium Buff,PW6:1,opaque,white,#D8C9A9,#E8DFC8,estimated,0.4
+Winsor & Newton,Lemon Yellow,PY3,semi-transparent,yellow,#F7E63A,#FAF2AE,estimated,0.4
 Winsor & Newton,Cadmium Yellow Light,PY35,opaque,yellow,#FFE01A,#FDF3B4,estimated,0.4
 Winsor & Newton,Cadmium Yellow Deep,PY35,opaque,yellow,#FCB514,#FBE4A8,estimated,0.4
+Winsor & Newton,Winsor Yellow,PY74,semi-transparent,yellow,#FFD514,#FBEC9E,estimated,0.4
+Winsor & Newton,Indian Yellow,PY110,transparent,yellow,#C87A0E,#F2D48C,estimated,0.4
+Winsor & Newton,Naples Yellow Hue,PW6|PY35,opaque,yellow,#EFD9A0,#F4E6C0,estimated,0.4
 Winsor & Newton,Yellow Ochre,PY43,semi-opaque,earth,#C08F2E,#E5D2A8,estimated,0.4
-Winsor & Newton,Cadmium Orange,PO20,opaque,orange,#ED7524,#F8CBA4,estimated,0.4
-Winsor & Newton,Cadmium Red,PR108,opaque,red,#C0272D,#EEB0A6,estimated,0.4
-Winsor & Newton,Alizarin Crimson,PR83,transparent,red,#6E1423,#D08298,estimated,0.4
-Winsor & Newton,Permanent Rose,PV19,transparent,red,#93265C,#DE87B8,estimated,0.4
+Winsor & Newton,Raw Sienna,PBr7,semi-transparent,earth,#B07A33,#E0C69C,estimated,0.4
 Winsor & Newton,Burnt Sienna,PBr7,semi-transparent,earth,#7C3A18,#DBA78D,estimated,0.4
+Winsor & Newton,Burnt Umber,PBr7,semi-transparent,earth,#4A2E1C,#C0A48D,estimated,0.4
 Winsor & Newton,Raw Umber,PBr7,semi-transparent,earth,#4A3A26,#BFB4A2,estimated,0.4
-Winsor & Newton,Ivory Black,PBk9,semi-opaque,black,#1B1B1D,#8A8E93,estimated,0.4
+Winsor & Newton,Transparent Red Oxide,PR101,transparent,earth,#8C3D1A,#DCA184,estimated,0.4
+Winsor & Newton,Venetian Red,PR101,opaque,earth,#A5432C,#DFA893,estimated,0.4
+Winsor & Newton,Indian Red,PR101,opaque,earth,#8F3B33,#D6A198,estimated,0.4
+Winsor & Newton,Cadmium Orange,PO20,opaque,orange,#ED7524,#F8CBA4,estimated,0.4
+Winsor & Newton,Winsor Orange,PO73,semi-opaque,orange,#E85C20,#F5AE88,estimated,0.4
+Winsor & Newton,Transparent Orange,PO71,transparent,orange,#D96018,#F0B080,estimated,0.4
+Winsor & Newton,Cadmium Red Light,PR108,opaque,red,#D23227,#F0B3A2,estimated,0.4
+Winsor & Newton,Cadmium Red,PR108,opaque,red,#C0272D,#EEB0A6,estimated,0.4
+Winsor & Newton,Winsor Red,PR254,semi-opaque,red,#C41E2A,#EF9E9A,estimated,0.4
+Winsor & Newton,Vermilion Hue,PR255,semi-opaque,red,#D5402C,#F2B49F,estimated,0.4
+Winsor & Newton,Alizarin Crimson,PR83,transparent,red,#6E1423,#D08298,estimated,0.4
+Winsor & Newton,Permanent Alizarin,PR177,transparent,red,#7A1B2C,#D68CA0,estimated,0.4
+Winsor & Newton,Permanent Rose,PV19,transparent,red,#93265C,#DE87B8,estimated,0.4
+Winsor & Newton,Permanent Magenta,PR122,transparent,red,#A02D6E,#E28BC0,estimated,0.4
+Winsor & Newton,Winsor Violet (Dioxazine),PV23,transparent,violet,#2E1638,#9678BC,estimated,0.4
+Winsor & Newton,Ultramarine Violet,PV15,semi-transparent,violet,#4A3C7E,#ACA3D2,estimated,0.4
+Winsor & Newton,Cobalt Violet,PV14,semi-transparent,violet,#8E4C8E,#E9D3E7,estimated,0.4
+Winsor & Newton,French Ultramarine,PB29,semi-transparent,blue,#1E2D7D,#8495D0,estimated,0.4
+Winsor & Newton,Cobalt Blue,PB28,semi-transparent,blue,#2F4DA0,#A2B4DF,estimated,0.4
+Winsor & Newton,Cerulean Blue,PB35,semi-opaque,blue,#2E7BB4,#A5CAE4,estimated,0.4
+Winsor & Newton,Winsor Blue (Green Shade),PB15:3,transparent,blue,#0E3050,#2F86CC,estimated,0.4
+Winsor & Newton,Winsor Blue (Red Shade),PB15:1,transparent,blue,#122B56,#4A80CC,estimated,0.4
+Winsor & Newton,Prussian Blue,PB27,transparent,blue,#16222E,#5C7E9A,estimated,0.4
+Winsor & Newton,Indanthrene Blue,PB60,transparent,blue,#1C2440,#6D7FAE,estimated,0.4
+Winsor & Newton,Phthalo Turquoise,PB16,transparent,blue,#0C3038,#3D9AA0,estimated,0.4
+Winsor & Newton,King's Blue Hue,PW6|PB29,opaque,blue,#7C97D2,#B9C6E8,estimated,0.4
 Winsor & Newton,Winsor Green (Blue Shade),PG7,transparent,green,#06301F,#2FA37E,estimated,0.4
+Winsor & Newton,Winsor Green (Yellow Shade),PG36,transparent,green,#14381C,#48A85E,estimated,0.4
+Winsor & Newton,Viridian,PG18,transparent,green,#1E4B3C,#7FB4A2,estimated,0.4
+Winsor & Newton,Chromium Oxide Green,PG17,opaque,green,#5A6B3C,#A9B78C,estimated,0.4
+Winsor & Newton,Sap Green,PG7|PY110,transparent,green,#3A4A1E,#8FA45C,estimated,0.4
+Winsor & Newton,Terre Verte,PG23,transparent,green,#5C6B55,#CCD1C5,estimated,0.4
+Winsor & Newton,Cobalt Teal,PG50,semi-opaque,green,#2A9D9F,#90D2CE,estimated,0.4
+Winsor & Newton,Ivory Black,PBk9,semi-opaque,black,#1B1B1D,#8A8E93,estimated,0.4
+Winsor & Newton,Lamp Black,PBk6,opaque,black,#191A1B,#83878A,estimated,0.4
+Winsor & Newton,Mars Black,PBk11,opaque,black,#1A1A1A,#85888B,estimated,0.4
+Winsor & Newton,Payne's Grey,PBk6|PB29,semi-opaque,black,#23293A,#8E97AC,estimated,0.4
 Gamblin,Titanium White,PW6,opaque,white,#F9F6EC,#F8F6EF,estimated,0.4
-Gamblin,Ultramarine Blue,PB29,semi-transparent,blue,#222F7A,#8696CF,estimated,0.4
-Gamblin,Phthalo Blue,PB15:3,transparent,blue,#12324D,#3187CB,estimated,0.4
-Gamblin,Cerulean Blue,PB36,semi-opaque,blue,#327DB1,#A7CBE3,estimated,0.4
-Gamblin,Cobalt Blue,PB28,semi-transparent,blue,#334F9D,#A4B5DE,estimated,0.4
+Gamblin,Zinc White,PW4,semi-transparent,white,#FBF8EF,#FAF8F2,estimated,0.4
+Gamblin,Titanium Buff,PW6:1,opaque,white,#DCCBA6,#EAE0C7,estimated,0.4
+Gamblin,Lemon Yellow,PY3,semi-transparent,yellow,#FBE837,#FCF3AD,estimated,0.4
 Gamblin,Cadmium Yellow Light,PY35,opaque,yellow,#FFE217,#FFF4B3,estimated,0.4
 Gamblin,Cadmium Yellow Deep,PY35,opaque,yellow,#FFB711,#FDE5A7,estimated,0.4
+Gamblin,Hansa Yellow Medium,PY74,semi-transparent,yellow,#FFD711,#FDED9D,estimated,0.4
+Gamblin,Indian Yellow,PY110,transparent,yellow,#CC7C0B,#F4D58B,estimated,0.4
+Gamblin,Naples Yellow Hue,PW6|PY35,opaque,yellow,#F3DB9D,#F6E7BF,estimated,0.4
 Gamblin,Yellow Ochre,PY43,semi-opaque,earth,#C4912B,#E7D3A7,estimated,0.4
-Gamblin,Cadmium Orange,PO20,opaque,orange,#F17721,#FACCA3,estimated,0.4
-Gamblin,Cadmium Red,PR108,opaque,red,#C4292A,#F0B1A5,estimated,0.4
-Gamblin,Alizarin Crimson,PR83,transparent,red,#721620,#D28397,estimated,0.4
-Gamblin,Quinacridone Rose,PV19,transparent,red,#972859,#E088B7,estimated,0.4
+Gamblin,Raw Sienna,PBr7,semi-transparent,earth,#B47C30,#E2C79B,estimated,0.4
 Gamblin,Burnt Sienna,PBr7,semi-transparent,earth,#803C15,#DDA88C,estimated,0.4
+Gamblin,Burnt Umber,PBr7,semi-transparent,earth,#4E3019,#C2A58C,estimated,0.4
 Gamblin,Raw Umber,PBr7,semi-transparent,earth,#4E3C23,#C1B5A1,estimated,0.4
-Gamblin,Ivory Black,PBk9,semi-opaque,black,#1F1D1A,#8C8F92,estimated,0.4
+Gamblin,Transparent Red Oxide,PR101,transparent,earth,#903F17,#DEA283,estimated,0.4
+Gamblin,Venetian Red,PR101,opaque,earth,#A94529,#E1A992,estimated,0.4
+Gamblin,Indian Red,PR101,opaque,earth,#933D30,#D8A297,estimated,0.4
+Gamblin,Cadmium Orange,PO20,opaque,orange,#F17721,#FACCA3,estimated,0.4
+Gamblin,Pyrrole Orange,PO73,semi-opaque,orange,#EC5E1D,#F7AF87,estimated,0.4
+Gamblin,Transparent Orange,PO71,transparent,orange,#DD6215,#F2B17F,estimated,0.4
+Gamblin,Cadmium Red Light,PR108,opaque,red,#D63424,#F2B4A1,estimated,0.4
+Gamblin,Cadmium Red,PR108,opaque,red,#C4292A,#F0B1A5,estimated,0.4
+Gamblin,Pyrrole Red,PR254,semi-opaque,red,#C82027,#F19F99,estimated,0.4
+Gamblin,Napthol Scarlet,PR255,semi-opaque,red,#D94229,#F4B59E,estimated,0.4
+Gamblin,Alizarin Crimson,PR83,transparent,red,#721620,#D28397,estimated,0.4
+Gamblin,Permanent Alizarin,PR177,transparent,red,#7E1D29,#D88D9F,estimated,0.4
+Gamblin,Quinacridone Rose,PV19,transparent,red,#972859,#E088B7,estimated,0.4
+Gamblin,Quinacridone Magenta,PR122,transparent,red,#A42F6B,#E48CBF,estimated,0.4
+Gamblin,Dioxazine Purple,PV23,transparent,violet,#321835,#9879BB,estimated,0.4
+Gamblin,Ultramarine Violet,PV15,semi-transparent,violet,#4E3E7B,#AEA4D1,estimated,0.4
+Gamblin,Cobalt Violet,PV14,semi-transparent,violet,#924E8B,#EBD4E6,estimated,0.4
+Gamblin,Ultramarine Blue,PB29,semi-transparent,blue,#222F7A,#8696CF,estimated,0.4
+Gamblin,Cobalt Blue,PB28,semi-transparent,blue,#334F9D,#A4B5DE,estimated,0.4
+Gamblin,Cerulean Blue,PB36,semi-opaque,blue,#327DB1,#A7CBE3,estimated,0.4
+Gamblin,Phthalo Blue,PB15:3,transparent,blue,#12324D,#3187CB,estimated,0.4
+Gamblin,Phthalo Blue (Red Shade),PB15:1,transparent,blue,#162D53,#4C81CB,estimated,0.4
+Gamblin,Prussian Blue,PB27,transparent,blue,#1A242B,#5E7F99,estimated,0.4
+Gamblin,Indanthrene Blue,PB60,transparent,blue,#20263D,#6F80AD,estimated,0.4
+Gamblin,Phthalo Turquoise,PB16,transparent,blue,#103235,#3F9B9F,estimated,0.4
+Gamblin,King's Blue Hue,PW6|PB29,opaque,blue,#8099CF,#BBC7E7,estimated,0.4
 Gamblin,Phthalo Green,PG7,transparent,green,#0A321C,#31A47D,estimated,0.4
+Gamblin,Phthalo Green (Yellow Shade),PG36,transparent,green,#183A19,#4AA95D,estimated,0.4
+Gamblin,Viridian,PG18,transparent,green,#224D39,#81B5A1,estimated,0.4
+Gamblin,Chromium Oxide Green,PG17,opaque,green,#5E6D39,#ABB88B,estimated,0.4
+Gamblin,Sap Green,PG7|PY110,transparent,green,#3E4C1B,#91A55B,estimated,0.4
+Gamblin,Terre Verte,PG23,transparent,green,#606D52,#CED2C4,estimated,0.4
+Gamblin,Cobalt Teal,PG50,semi-opaque,green,#2E9F9C,#92D3CD,estimated,0.4
+Gamblin,Ivory Black,PBk9,semi-opaque,black,#1F1D1A,#8C8F92,estimated,0.4
+Gamblin,Lamp Black,PBk6,opaque,black,#1D1C18,#858889,estimated,0.4
+Gamblin,Mars Black,PBk11,opaque,black,#1E1C17,#87898A,estimated,0.4
+Gamblin,Payne's Grey,PBk6|PB29,semi-opaque,black,#272B37,#9098AB,estimated,0.4
 Williamsburg,Titanium White,PW6,opaque,white,#F2F7F1,#F5F7F1,estimated,0.4
-Williamsburg,French Ultramarine Blue,PB29,semi-transparent,blue,#1B307F,#8397D1,estimated,0.4
-Williamsburg,Phthalo Blue,PB15:3,transparent,blue,#0B3352,#2E88CD,estimated,0.4
-Williamsburg,Cerulean Blue,PB35,semi-opaque,blue,#2B7EB6,#A4CCE5,estimated,0.4
-Williamsburg,Cobalt Blue,PB28,semi-transparent,blue,#2C50A2,#A1B6E0,estimated,0.4
+Williamsburg,Zinc White,PW4,semi-transparent,white,#F4F9F4,#F7F9F4,estimated,0.4
+Williamsburg,Titanium Buff,PW6:1,opaque,white,#D5CCAB,#E7E1C9,estimated,0.4
+Williamsburg,Lemon Yellow,PY3,semi-transparent,yellow,#F4E93C,#F9F4AF,estimated,0.4
 Williamsburg,Cadmium Yellow Light,PY35,opaque,yellow,#FCE31C,#FCF5B5,estimated,0.4
 Williamsburg,Cadmium Yellow Deep,PY35,opaque,yellow,#F9B816,#FAE6A9,estimated,0.4
+Williamsburg,Hansa Yellow Medium,PY74,semi-transparent,yellow,#FCD816,#FAEE9F,estimated,0.4
+Williamsburg,Indian Yellow,PY110,transparent,yellow,#C57D10,#F1D68D,estimated,0.4
+Williamsburg,Naples Yellow Hue,PW6|PY35,opaque,yellow,#ECDCA2,#F3E8C1,estimated,0.4
 Williamsburg,Yellow Ochre,PY43,semi-opaque,earth,#BD9230,#E4D4A9,estimated,0.4
-Williamsburg,Cadmium Orange,PO20,opaque,orange,#EA7826,#F7CDA5,estimated,0.4
-Williamsburg,Cadmium Red,PR108,opaque,red,#BD2A2F,#EDB2A7,estimated,0.4
-Williamsburg,Alizarin Crimson,PR83,transparent,red,#6B1725,#CF8499,estimated,0.4
-Williamsburg,Quinacridone Rose,PV19,transparent,red,#90295E,#DD89B9,estimated,0.4
+Williamsburg,Raw Sienna,PBr7,semi-transparent,earth,#AD7D35,#DFC89D,estimated,0.4
 Williamsburg,Burnt Sienna,PBr7,semi-transparent,earth,#793D1A,#DAA98E,estimated,0.4
+Williamsburg,Burnt Umber,PBr7,semi-transparent,earth,#47311E,#BFA68E,estimated,0.4
 Williamsburg,Raw Umber,PBr7,semi-transparent,earth,#473D28,#BEB6A3,estimated,0.4
-Williamsburg,Ivory Black,PBk9,semi-opaque,black,#181E1F,#899094,estimated,0.4
+Williamsburg,Transparent Red Oxide,PR101,transparent,earth,#89401C,#DBA385,estimated,0.4
+Williamsburg,Venetian Red,PR101,opaque,earth,#A2462E,#DEAA94,estimated,0.4
+Williamsburg,Indian Red,PR101,opaque,earth,#8C3E35,#D5A399,estimated,0.4
+Williamsburg,Cadmium Orange,PO20,opaque,orange,#EA7826,#F7CDA5,estimated,0.4
+Williamsburg,Permanent Orange,PO73,semi-opaque,orange,#E55F22,#F4B089,estimated,0.4
+Williamsburg,Transparent Orange,PO71,transparent,orange,#D6631A,#EFB281,estimated,0.4
+Williamsburg,Cadmium Red Light,PR108,opaque,red,#CF3529,#EFB5A3,estimated,0.4
+Williamsburg,Cadmium Red,PR108,opaque,red,#BD2A2F,#EDB2A7,estimated,0.4
+Williamsburg,Pyrrole Red,PR254,semi-opaque,red,#C1212C,#EEA09B,estimated,0.4
+Williamsburg,Vermilion Hue,PR255,semi-opaque,red,#D2432E,#F1B6A0,estimated,0.4
+Williamsburg,Alizarin Crimson,PR83,transparent,red,#6B1725,#CF8499,estimated,0.4
+Williamsburg,Permanent Alizarin,PR177,transparent,red,#771E2E,#D58EA1,estimated,0.4
+Williamsburg,Quinacridone Rose,PV19,transparent,red,#90295E,#DD89B9,estimated,0.4
+Williamsburg,Quinacridone Magenta,PR122,transparent,red,#9D3070,#E18DC1,estimated,0.4
+Williamsburg,Dioxazine Violet,PV23,transparent,violet,#2B193A,#957ABD,estimated,0.4
+Williamsburg,Ultramarine Violet,PV15,semi-transparent,violet,#473F80,#ABA5D3,estimated,0.4
+Williamsburg,Cobalt Violet,PV14,semi-transparent,violet,#8B4F90,#E8D5E8,estimated,0.4
+Williamsburg,French Ultramarine Blue,PB29,semi-transparent,blue,#1B307F,#8397D1,estimated,0.4
+Williamsburg,Cobalt Blue,PB28,semi-transparent,blue,#2C50A2,#A1B6E0,estimated,0.4
+Williamsburg,Cerulean Blue,PB35,semi-opaque,blue,#2B7EB6,#A4CCE5,estimated,0.4
+Williamsburg,Phthalo Blue,PB15:3,transparent,blue,#0B3352,#2E88CD,estimated,0.4
+Williamsburg,Phthalo Blue (Red Shade),PB15:1,transparent,blue,#0F2E58,#4982CD,estimated,0.4
+Williamsburg,Prussian Blue,PB27,transparent,blue,#132530,#5B809B,estimated,0.4
+Williamsburg,Indanthrene Blue,PB60,transparent,blue,#192742,#6C81AF,estimated,0.4
+Williamsburg,Phthalo Turquoise,PB16,transparent,blue,#09333A,#3C9CA1,estimated,0.4
+Williamsburg,King's Blue Hue,PW6|PB29,opaque,blue,#799AD4,#B8C8E9,estimated,0.4
 Williamsburg,Phthalo Green,PG7,transparent,green,#033321,#2EA57F,estimated,0.4
+Williamsburg,Phthalo Green (Yellow Shade),PG36,transparent,green,#113B1E,#47AA5F,estimated,0.4
+Williamsburg,Viridian,PG18,transparent,green,#1B4E3E,#7EB6A3,estimated,0.4
+Williamsburg,Chromium Oxide Green,PG17,opaque,green,#576E3E,#A8B98D,estimated,0.4
+Williamsburg,Sap Green,PG7|PY110,transparent,green,#374D20,#8EA65D,estimated,0.4
+Williamsburg,Terre Verte,PG23,transparent,green,#596E57,#CBD3C6,estimated,0.4
+Williamsburg,Cobalt Teal,PG50,semi-opaque,green,#27A0A1,#8FD4CF,estimated,0.4
+Williamsburg,Ivory Black,PBk9,semi-opaque,black,#181E1F,#899094,estimated,0.4
+Williamsburg,Lamp Black,PBk6,opaque,black,#161D1D,#82898B,estimated,0.4
+Williamsburg,Mars Black,PBk11,opaque,black,#171D1C,#848A8C,estimated,0.4
+Williamsburg,Payne's Grey,PBk6|PB29,semi-opaque,black,#202C3C,#8D99AD,estimated,0.4
 Michael Harding,Titanium White,PW6,opaque,white,#F7F0F3,#F7F3F2,estimated,0.4
-Michael Harding,Ultramarine Blue,PB29,semi-transparent,blue,#202981,#8593D2,estimated,0.4
-Michael Harding,Phthalocyanine Blue Lake,PB15:3,transparent,blue,#102C54,#3084CE,estimated,0.4
-Michael Harding,Cerulean Blue,PB35,semi-opaque,blue,#3077B8,#A6C8E6,estimated,0.4
-Michael Harding,Cobalt Blue,PB28,semi-transparent,blue,#3149A4,#A3B2E1,estimated,0.4
+Michael Harding,Zinc White,PW4,semi-transparent,white,#F9F2F6,#F9F5F5,estimated,0.4
+Michael Harding,Titanium Buff,PW6:1,opaque,white,#DAC5AD,#E9DDCA,estimated,0.4
+Michael Harding,Lemon Yellow,PY3,semi-transparent,yellow,#F9E23E,#FBF0B0,estimated,0.4
 Michael Harding,Cadmium Yellow Light,PY35,opaque,yellow,#FFDC1E,#FEF1B6,estimated,0.4
 Michael Harding,Cadmium Yellow Deep,PY35,opaque,yellow,#FEB118,#FCE2AA,estimated,0.4
+Michael Harding,Hansa Yellow Medium,PY74,semi-transparent,yellow,#FFD118,#FCEAA0,estimated,0.4
+Michael Harding,Indian Yellow,PY110,transparent,yellow,#CA7612,#F3D28E,estimated,0.4
+Michael Harding,Naples Yellow Hue,PW6|PY35,opaque,yellow,#F1D5A4,#F5E4C2,estimated,0.4
 Michael Harding,Yellow Ochre,PY43,semi-opaque,earth,#C28B32,#E6D0AA,estimated,0.4
-Michael Harding,Cadmium Orange,PO20,opaque,orange,#EF7128,#F9C9A6,estimated,0.4
-Michael Harding,Cadmium Red,PR108,opaque,red,#C22331,#EFAEA8,estimated,0.4
-Michael Harding,Alizarin Crimson,PR83,transparent,red,#701027,#D1809A,estimated,0.4
-Michael Harding,Magenta,PV19,transparent,red,#952260,#DF85BA,estimated,0.4
+Michael Harding,Raw Sienna,PBr7,semi-transparent,earth,#B27637,#E1C49E,estimated,0.4
 Michael Harding,Burnt Sienna,PBr7,semi-transparent,earth,#7E361C,#DCA58F,estimated,0.4
+Michael Harding,Burnt Umber,PBr7,semi-transparent,earth,#4C2A20,#C1A28F,estimated,0.4
 Michael Harding,Raw Umber,PBr7,semi-transparent,earth,#4C362A,#C0B2A4,estimated,0.4
-Michael Harding,Ivory Black,PBk9,semi-opaque,black,#1D1721,#8B8C95,estimated,0.4
+Michael Harding,Transparent Red Oxide,PR101,transparent,earth,#8E391E,#DD9F86,estimated,0.4
+Michael Harding,Venetian Red,PR101,opaque,earth,#A73F30,#E0A695,estimated,0.4
+Michael Harding,Indian Red,PR101,opaque,earth,#913737,#D79F9A,estimated,0.4
+Michael Harding,Cadmium Orange,PO20,opaque,orange,#EF7128,#F9C9A6,estimated,0.4
+Michael Harding,Pyrrole Orange,PO73,semi-opaque,orange,#EA5824,#F6AC8A,estimated,0.4
+Michael Harding,Transparent Orange,PO71,transparent,orange,#DB5C1C,#F1AE82,estimated,0.4
+Michael Harding,Cadmium Red Light,PR108,opaque,red,#D42E2B,#F1B1A4,estimated,0.4
+Michael Harding,Cadmium Red,PR108,opaque,red,#C22331,#EFAEA8,estimated,0.4
+Michael Harding,Scarlet Lake,PR254,semi-opaque,red,#C61A2E,#F09C9C,estimated,0.4
+Michael Harding,Vermilion Hue,PR255,semi-opaque,red,#D73C30,#F3B2A1,estimated,0.4
+Michael Harding,Alizarin Crimson,PR83,transparent,red,#701027,#D1809A,estimated,0.4
+Michael Harding,Permanent Alizarin,PR177,transparent,red,#7C1730,#D78AA2,estimated,0.4
+Michael Harding,Rose Madder (Quinacridone),PV19,transparent,red,#952260,#DF85BA,estimated,0.4
+Michael Harding,Magenta,PR122,transparent,red,#A22972,#E389C2,estimated,0.4
+Michael Harding,Dioxazine Violet,PV23,transparent,violet,#30123C,#9776BE,estimated,0.4
+Michael Harding,Ultramarine Violet,PV15,semi-transparent,violet,#4C3882,#ADA1D4,estimated,0.4
+Michael Harding,Cobalt Violet,PV14,semi-transparent,violet,#904892,#EAD1E9,estimated,0.4
+Michael Harding,Ultramarine Blue,PB29,semi-transparent,blue,#202981,#8593D2,estimated,0.4
+Michael Harding,Cobalt Blue,PB28,semi-transparent,blue,#3149A4,#A3B2E1,estimated,0.4
+Michael Harding,Cerulean Blue,PB35,semi-opaque,blue,#3077B8,#A6C8E6,estimated,0.4
+Michael Harding,Phthalocyanine Blue Lake,PB15:3,transparent,blue,#102C54,#3084CE,estimated,0.4
+Michael Harding,Phthalo Blue (Red Shade),PB15:1,transparent,blue,#14275A,#4B7ECE,estimated,0.4
+Michael Harding,Prussian Blue,PB27,transparent,blue,#181E32,#5D7C9C,estimated,0.4
+Michael Harding,Indanthrene Blue,PB60,transparent,blue,#1E2044,#6E7DB0,estimated,0.4
+Michael Harding,Phthalo Turquoise,PB16,transparent,blue,#0E2C3C,#3E98A2,estimated,0.4
+Michael Harding,King's Blue Hue,PW6|PB29,opaque,blue,#7E93D6,#BAC4EA,estimated,0.4
 Michael Harding,Phthalo Green,PG7,transparent,green,#082C23,#30A180,estimated,0.4
+Michael Harding,Phthalo Green (Yellow Shade),PG36,transparent,green,#163420,#49A660,estimated,0.4
+Michael Harding,Viridian,PG18,transparent,green,#204740,#80B2A4,estimated,0.4
+Michael Harding,Chromium Oxide Green,PG17,opaque,green,#5C6740,#AAB58E,estimated,0.4
+Michael Harding,Sap Green,PG7|PY110,transparent,green,#3C4622,#90A25E,estimated,0.4
+Michael Harding,Terre Verte,PG23,transparent,green,#5E6759,#CDCFC7,estimated,0.4
+Michael Harding,Cobalt Teal,PG50,semi-opaque,green,#2C99A3,#91D0D0,estimated,0.4
+Michael Harding,Ivory Black,PBk9,semi-opaque,black,#1D1721,#8B8C95,estimated,0.4
+Michael Harding,Lamp Black,PBk6,opaque,black,#1B161F,#84858C,estimated,0.4
+Michael Harding,Mars Black,PBk11,opaque,black,#1C161E,#86868D,estimated,0.4
+Michael Harding,Payne's Grey,PBk6|PB29,semi-opaque,black,#25253E,#8F95AE,estimated,0.4
 Sennelier,Titanium White,PW6,opaque,white,#F1F2EB,#F4F4EE,estimated,0.4
-Sennelier,French Ultramarine Blue,PB29,semi-transparent,blue,#1A2B79,#8294CE,estimated,0.4
-Sennelier,Phthalo Blue,PB15:3,transparent,blue,#0A2E4C,#2D85CA,estimated,0.4
-Sennelier,Cerulean Blue,PB35,semi-opaque,blue,#2A79B0,#A3C9E2,estimated,0.4
-Sennelier,Cobalt Blue,PB28,semi-transparent,blue,#2B4B9C,#A0B3DD,estimated,0.4
+Sennelier,Zinc White,PW4,semi-transparent,white,#F3F4EE,#F6F6F1,estimated,0.4
+Sennelier,Titanium Buff,PW6:1,opaque,white,#D4C7A5,#E6DEC6,estimated,0.4
+Sennelier,Lemon Yellow,PY3,semi-transparent,yellow,#F3E436,#F8F1AC,estimated,0.4
 Sennelier,Cadmium Yellow Lemon,PY35,opaque,yellow,#FBDE16,#FBF2B2,estimated,0.4
 Sennelier,Cadmium Yellow Deep,PY35,opaque,yellow,#F8B310,#F9E3A6,estimated,0.4
+Sennelier,Hansa Yellow Medium,PY74,semi-transparent,yellow,#FBD310,#F9EB9C,estimated,0.4
+Sennelier,Indian Yellow,PY110,transparent,yellow,#C4780A,#F0D38A,estimated,0.4
+Sennelier,Naples Yellow Hue,PW6|PY35,opaque,yellow,#EBD79C,#F2E5BE,estimated,0.4
 Sennelier,Yellow Ochre,PY43,semi-opaque,earth,#BC8D2A,#E3D1A6,estimated,0.4
-Sennelier,Cadmium Orange,PO20,opaque,orange,#E97320,#F6CAA2,estimated,0.4
-Sennelier,Cadmium Red,PR108,opaque,red,#BC2529,#ECAFA4,estimated,0.4
-Sennelier,Alizarin Crimson,PR83,transparent,red,#6A121F,#CE8196,estimated,0.4
-Sennelier,Quinacridone Rose,PV19,transparent,red,#8F2458,#DC86B6,estimated,0.4
+Sennelier,Raw Sienna,PBr7,semi-transparent,earth,#AC782F,#DEC59A,estimated,0.4
 Sennelier,Burnt Sienna,PBr7,semi-transparent,earth,#783814,#D9A68B,estimated,0.4
+Sennelier,Burnt Umber,PBr7,semi-transparent,earth,#462C18,#BEA38B,estimated,0.4
 Sennelier,Raw Umber,PBr7,semi-transparent,earth,#463822,#BDB3A0,estimated,0.4
-Sennelier,Ivory Black,PBk9,semi-opaque,black,#171919,#888D91,estimated,0.4
+Sennelier,Transparent Red Oxide,PR101,transparent,earth,#883B16,#DAA082,estimated,0.4
+Sennelier,Venetian Red,PR101,opaque,earth,#A14128,#DDA791,estimated,0.4
+Sennelier,Indian Red,PR101,opaque,earth,#8B392F,#D4A096,estimated,0.4
+Sennelier,Cadmium Orange,PO20,opaque,orange,#E97320,#F6CAA2,estimated,0.4
+Sennelier,Pyrrole Orange,PO73,semi-opaque,orange,#E45A1C,#F3AD86,estimated,0.4
+Sennelier,Transparent Orange,PO71,transparent,orange,#D55E14,#EEAF7E,estimated,0.4
+Sennelier,Cadmium Red Light,PR108,opaque,red,#CE3023,#EEB2A0,estimated,0.4
+Sennelier,Cadmium Red,PR108,opaque,red,#BC2529,#ECAFA4,estimated,0.4
+Sennelier,Pyrrole Red,PR254,semi-opaque,red,#C01C26,#ED9D98,estimated,0.4
+Sennelier,Vermilion Hue,PR255,semi-opaque,red,#D13E28,#F0B39D,estimated,0.4
+Sennelier,Alizarin Crimson,PR83,transparent,red,#6A121F,#CE8196,estimated,0.4
+Sennelier,Permanent Alizarin,PR177,transparent,red,#761928,#D48B9E,estimated,0.4
+Sennelier,Quinacridone Rose,PV19,transparent,red,#8F2458,#DC86B6,estimated,0.4
+Sennelier,Quinacridone Magenta,PR122,transparent,red,#9C2B6A,#E08ABE,estimated,0.4
+Sennelier,Manganese Violet Hue,PV23,transparent,violet,#2A1434,#9477BA,estimated,0.4
+Sennelier,Ultramarine Violet,PV15,semi-transparent,violet,#463A7A,#AAA2D0,estimated,0.4
+Sennelier,Cobalt Violet,PV14,semi-transparent,violet,#8A4A8A,#E7D2E5,estimated,0.4
+Sennelier,French Ultramarine Blue,PB29,semi-transparent,blue,#1A2B79,#8294CE,estimated,0.4
+Sennelier,Cobalt Blue,PB28,semi-transparent,blue,#2B4B9C,#A0B3DD,estimated,0.4
+Sennelier,Cerulean Blue,PB35,semi-opaque,blue,#2A79B0,#A3C9E2,estimated,0.4
+Sennelier,Phthalo Blue,PB15:3,transparent,blue,#0A2E4C,#2D85CA,estimated,0.4
+Sennelier,Phthalo Blue (Red Shade),PB15:1,transparent,blue,#0E2952,#487FCA,estimated,0.4
+Sennelier,Prussian Blue,PB27,transparent,blue,#12202A,#5A7D98,estimated,0.4
+Sennelier,Indanthrene Blue,PB60,transparent,blue,#18223C,#6B7EAC,estimated,0.4
+Sennelier,Phthalo Turquoise,PB16,transparent,blue,#082E34,#3B999E,estimated,0.4
+Sennelier,King's Blue Hue,PW6|PB29,opaque,blue,#7895CE,#B7C5E6,estimated,0.4
 Sennelier,Phthalo Green,PG7,transparent,green,#022E1B,#2DA27C,estimated,0.4
+Sennelier,Phthalo Green (Yellow Shade),PG36,transparent,green,#103618,#46A75C,estimated,0.4
+Sennelier,Viridian,PG18,transparent,green,#1A4938,#7DB3A0,estimated,0.4
+Sennelier,Chromium Oxide Green,PG17,opaque,green,#566938,#A7B68A,estimated,0.4
+Sennelier,Sap Green,PG7|PY110,transparent,green,#36481A,#8DA35A,estimated,0.4
+Sennelier,Terre Verte,PG23,transparent,green,#586951,#CAD0C3,estimated,0.4
+Sennelier,Cobalt Teal,PG50,semi-opaque,green,#269B9B,#8ED1CC,estimated,0.4
+Sennelier,Ivory Black,PBk9,semi-opaque,black,#171919,#888D91,estimated,0.4
+Sennelier,Lamp Black,PBk6,opaque,black,#151817,#818688,estimated,0.4
+Sennelier,Mars Black,PBk11,opaque,black,#161816,#838789,estimated,0.4
+Sennelier,Payne's Grey,PBk6|PB29,semi-opaque,black,#1F2736,#8C96AA,estimated,0.4
 Winsor & Newton,Cerulean Blue Hue,PB15:3|PW6,opaque,blue,#3E86BC,#ACCEE6,estimated,0.4

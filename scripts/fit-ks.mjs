@@ -18,21 +18,56 @@ import { reflectanceVecToKS } from '../src/engine/km.ts'
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 
 const PIGMENTS = {
+  // Whites
   PW6: ['Titanium White', 'opaque', 'Rutile titanium dioxide. The tinting-strength reference (s = 1.0).'],
+  PW4: ['Zinc White', 'semi-transparent', 'Zinc oxide; weaker, more transparent white for tints and glazes.'],
+  'PW6:1': ['Titanium Buff', 'opaque', 'Unbleached titanium dioxide; warm off-white.'],
+  // Yellows
+  PY3: ['Hansa Yellow Light (Lemon)', 'semi-transparent', 'Arylide yellow, green-leaning lemon.'],
+  PY35: ['Cadmium Yellow', 'opaque', 'Cadmium zinc sulfide, light through deep shades.'],
+  PY74: ['Hansa Yellow Medium', 'semi-transparent', 'Arylide yellow, mid warmth.'],
+  PY110: ['Indian Yellow (Isoindolinone)', 'transparent', 'Deep amber glazing yellow.'],
+  PY43: ['Yellow Ochre', 'semi-opaque', 'Natural iron oxide.'],
+  // Oranges
+  PO20: ['Cadmium Orange', 'opaque', 'Cadmium sulfoselenide.'],
+  PO73: ['Pyrrole Orange', 'semi-opaque', 'High-chroma DPP orange.'],
+  PO71: ['Transparent Pyrrole Orange', 'transparent', 'Glazing orange.'],
+  // Reds
+  PR108: ['Cadmium Red', 'opaque', 'Cadmium sulfoselenide.'],
+  PR254: ['Pyrrole Red', 'semi-opaque', 'High-chroma DPP red; 3-band model is weakest here.'],
+  PR255: ['Pyrrole Scarlet', 'semi-opaque', 'Lighter, warmer DPP red.'],
+  PR83: ['Alizarin Crimson', 'transparent', 'Fugitive lake; kept for its mixing behavior.'],
+  PR177: ['Anthraquinone Red', 'transparent', 'Permanent alizarin-style crimson.'],
+  PV19: ['Quinacridone Rose', 'transparent', 'High-chroma organic; 3-band model is weakest here.'],
+  PR122: ['Quinacridone Magenta', 'transparent', 'High-chroma organic; 3-band model is weakest here.'],
+  PR101: ['Synthetic Iron Oxide Red', 'opaque', 'Covers venetian/indian red and transparent red oxide.'],
+  // Earths
+  PBr7: ['Natural Iron Oxide (Sienna/Umber)', 'semi-transparent', 'Covers siennas and umbers.'],
+  // Violets
+  PV23: ['Dioxazine Violet', 'transparent', 'Very strong glazing violet; 3-band model is weakest here.'],
+  PV15: ['Ultramarine Violet', 'semi-transparent', 'Muted mineral violet.'],
+  PV14: ['Cobalt Violet', 'semi-transparent', 'Weak-tinting mineral violet.'],
+  // Blues
   PB29: ['Ultramarine Blue', 'semi-transparent', 'Warm, red-leaning blue. Moderate tinter.'],
-  'PB15:3': ['Phthalo Blue (Green Shade)', 'transparent', 'Very high tinting strength; 3-band model is weakest here.'],
+  PB28: ['Cobalt Blue', 'semi-transparent', 'Cobalt aluminate.'],
   PB35: ['Cerulean Blue', 'semi-opaque', 'Genuine cerulean, tin-cobalt oxide.'],
   PB36: ['Cerulean Blue (Chromium)', 'semi-opaque', 'Cobalt chromite; greener and stronger than PB35.'],
-  PB28: ['Cobalt Blue', 'semi-transparent', 'Cobalt aluminate.'],
-  PY35: ['Cadmium Yellow', 'opaque', 'Cadmium zinc sulfide, light through deep shades.'],
-  PY43: ['Yellow Ochre', 'semi-opaque', 'Natural iron oxide.'],
-  PO20: ['Cadmium Orange', 'opaque', 'Cadmium sulfoselenide.'],
-  PR108: ['Cadmium Red', 'opaque', 'Cadmium sulfoselenide.'],
-  PR83: ['Alizarin Crimson', 'transparent', 'Fugitive lake; kept for its mixing behavior.'],
-  PV19: ['Quinacridone Rose', 'transparent', 'High-chroma organic; 3-band model is weakest here.'],
-  PBr7: ['Natural Iron Oxide (Sienna/Umber)', 'semi-transparent', 'Covers burnt sienna, raw/burnt umber.'],
-  PBk9: ['Ivory Black', 'semi-opaque', 'Bone black; slow drier.'],
+  'PB15:3': ['Phthalo Blue (Green Shade)', 'transparent', 'Very high tinting strength; 3-band model is weakest here.'],
+  'PB15:1': ['Phthalo Blue (Red Shade)', 'transparent', 'Warmer phthalo; very high tinting strength.'],
+  PB27: ['Prussian Blue', 'transparent', 'Deep, strong iron blue.'],
+  PB60: ['Indanthrene Blue', 'transparent', 'Muted, deep blue; less green than phthalo.'],
+  PB16: ['Phthalo Turquoise', 'transparent', 'Metal-free phthalo, cyan-leaning.'],
+  // Greens
   PG7: ['Phthalo Green (Blue Shade)', 'transparent', 'Very high tinting strength; 3-band model is weakest here.'],
+  PG36: ['Phthalo Green (Yellow Shade)', 'transparent', 'Warmer phthalo green.'],
+  PG18: ['Viridian', 'transparent', 'Hydrated chromium oxide; cool, weak-tinting green.'],
+  PG17: ['Chromium Oxide Green', 'opaque', 'Dense, muted opaque green.'],
+  PG23: ['Terre Verte (Green Earth)', 'transparent', 'Very weak, muted earth green.'],
+  PG50: ['Cobalt Teal', 'semi-opaque', 'Cobalt titanate; bright mineral teal.'],
+  // Blacks
+  PBk9: ['Ivory Black', 'semi-opaque', 'Bone black; slow drier.'],
+  PBk6: ['Lamp Black', 'opaque', 'Carbon black; cool and strong.'],
+  PBk11: ['Mars Black', 'opaque', 'Iron oxide black; fast drier, strong.'],
 }
 
 const csv = readFileSync(join(root, 'data', 'catalog.csv'), 'utf8').trim().split('\n')
@@ -61,9 +96,12 @@ for (const line of csv.slice(1)) {
   if (!ksWhite) throw new Error(`No titanium white reference for brand ${brand}`)
 
   // Solve KS_tint·(s+9) = s·KS_paint + 9·KS_white per band.
+  // White-led tubes are special-cased: their tint swatch is nearly identical
+  // to their masstone, which makes the solve numerically meaningless.
   let s
-  if (pigmentIds.length === 1 && pigmentIds[0] === 'PW6') {
-    s = 1.0
+  if (pigmentIds[0].startsWith('PW')) {
+    // Zinc white is a famously weak tinter; other whites sit at the reference.
+    s = pigmentIds[0] === 'PW4' ? 0.35 : 1.0
   } else {
     let num = 0
     let den = 0
