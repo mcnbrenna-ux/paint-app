@@ -3,7 +3,7 @@ import { Inventory } from './ui/Inventory.tsx'
 import { RecipeDetail } from './ui/RecipeDetail.tsx'
 import { Results } from './ui/Results.tsx'
 import { Saved } from './ui/Saved.tsx'
-import { TargetEntry } from './ui/TargetEntry.tsx'
+import { Studio } from './ui/Studio.tsx'
 
 function Screen() {
   const { route } = useApp()
@@ -11,7 +11,7 @@ function Screen() {
     case 'inventory':
       return <Inventory />
     case 'target':
-      return <TargetEntry />
+      return <Studio />
     case 'results':
       return <Results target={route.target} />
     case 'recipe':

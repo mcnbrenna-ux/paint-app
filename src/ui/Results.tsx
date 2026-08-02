@@ -55,7 +55,7 @@ export function Results({ target }: { target: Target }) {
       <header className="screen-head">
         <h2>Recipes</h2>
         <button className="ghost small" onClick={() => app.nav({ name: 'target' })}>
-          ← Change target
+          ← Back to Mix
         </button>
       </header>
 

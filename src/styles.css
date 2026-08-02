@@ -35,6 +35,28 @@ body {
   padding: 0 16px calc(76px + env(safe-area-inset-bottom));
 }
 
+/* iPad / wide screens: sidebar navigation and a roomier canvas. */
+@media (min-width: 900px) {
+  .shell {
+    max-width: 1280px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      'head head'
+      'nav main';
+    column-gap: 28px;
+    padding: 0 24px 24px;
+  }
+  .app-head {
+    grid-area: head;
+  }
+  main {
+    grid-area: main;
+    min-width: 0;
+  }
+}
+
 .app-head {
   padding: 20px 0 4px;
 }
@@ -137,6 +159,27 @@ button:disabled {
 .tab.active {
   color: var(--accent);
   background: var(--panel);
+}
+@media (min-width: 900px) {
+  .tabs {
+    grid-area: nav;
+    position: sticky;
+    inset: auto;
+    top: 20px;
+    align-self: start;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+  .tab {
+    flex: none;
+    width: 100%;
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 17px;
+  }
 }
 
 /* Rows */
@@ -533,5 +576,151 @@ progress {
   .saved-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Studio workspace: photo + per-spot mixes side by side on iPad. */
+.studio {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+@media (min-width: 700px) {
+  .studio {
+    grid-template-columns: minmax(0, 3fr) minmax(280px, 2fr);
+  }
+  .studio-side {
+    position: sticky;
+    top: 12px;
+    max-height: calc(100dvh - 40px);
+    overflow-y: auto;
+    padding-bottom: 8px;
+  }
+  .studio-side .group-head {
+    margin-top: 4px;
+  }
+}
+.mode-toggle {
+  display: flex;
+  gap: 8px;
+}
+.dropzone.tall {
+  padding: 56px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.pin-marker {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 2.5px solid #fff;
+  outline: 1.5px solid rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
+}
+.pin-card {
+  cursor: default;
+  align-items: flex-start;
+}
+.pin-card:hover {
+  border-color: var(--line);
+}
+.pin-num {
+  min-width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 10px;
+}
+.pin-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+.btn-row.left {
+  justify-content: flex-start;
+  margin: 12px 0;
+}
+.danger {
+  border-color: var(--error);
+  color: var(--error);
+}
+.picker-pane {
+  max-width: 460px;
+}
+
+/* Palettes */
+.palette-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  margin-bottom: 14px;
+}
+.palette-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-right: 4px;
+}
+.palette-chip {
+  display: inline-flex;
+  align-items: center;
+}
+.palette-chip .chip-x {
+  padding: 4px 8px;
+  margin-left: -1px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.palette-chip .ghost:first-child {
+  border-radius: var(--radius) 0 0 var(--radius);
+}
+.palette-confirm {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  flex-wrap: wrap;
+}
+.palette-confirm input {
+  padding: 6px 10px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--panel-2);
+  color: var(--text);
+  font: inherit;
+  width: 200px;
+}
+
+/* Comfortable touch targets on coarse pointers (iPad fingers, not trackpads). */
+@media (pointer: coarse) {
+  button {
+    min-height: 44px;
+  }
+  .small {
+    min-height: 36px;
   }
 }

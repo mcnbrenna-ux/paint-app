@@ -7,7 +7,10 @@ import type {
   CorrectionMagnitude,
   InventoryItem,
   Paint,
+  Palette,
   Recipe,
+  ReferenceDoc,
+  ReferencePin,
   Target,
 } from '../engine/types.ts'
 
@@ -30,6 +33,15 @@ interface AppState {
   addStarter: () => void
   addCustom: (brand: string, name: string, pigmentIds: string[], unknownPigment: boolean) => void
   removeTube: (itemId: string) => void
+  palettes: Palette[]
+  savePalette: (name: string) => void
+  loadPalette: (id: string) => void
+  deletePalette: (id: string) => void
+  reference: ReferenceDoc | null
+  setReferenceImage: (image: Blob) => void
+  addReferencePin: (pin: Omit<ReferencePin, 'id'>) => ReferencePin
+  removeReferencePin: (pinId: string) => void
+  clearReference: () => void
   recipes: Recipe[]
   saveRecipe: (r: Recipe) => Promise<void>
   corrections: Correction[]
@@ -51,6 +63,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [catalogLoading, setCatalogLoading] = useState(true)
   const [catalogError, setCatalogError] = useState(false)
   const [inventory, setInventory] = useState<InventoryItem[]>([])
+  const [palettes, setPalettes] = useState<Palette[]>([])
+  const [reference, setReference] = useState<ReferenceDoc | null>(null)
   const [recipes, setRecipes] = useState<Recipe[]>([])
   const [corrections, setCorrections] = useState<Correction[]>([])
   const [route, nav] = useState<Route>({ name: 'inventory' })
@@ -61,6 +75,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
       .catch(() => setCatalogError(true))
       .finally(() => setCatalogLoading(false))
     db.getAllInventory().then(setInventory).catch(() => {})
+    db.getAllPalettes()
+      .then((p) => setPalettes(p.sort((a, b) => a.name.localeCompare(b.name))))
+      .catch(() => {})
+    db.getReference()
+      .then((r) => setReference(r ?? null))
+      .catch(() => {})
     db.getAllRecipes().then((r) => setRecipes(r.sort((a, b) => b.saved_at - a.saved_at))).catch(() => {})
     db.getAllCorrections().then(setCorrections).catch(() => {})
   }, [])
@@ -123,6 +143,64 @@ export function AppProvider({ children }: { children: ReactNode }) {
     db.deleteInventory(itemId)
   }, [])
 
+  const savePalette = useCallback(
+    (name: string) => {
+      const p: Palette = { id: uid(), name, items: inventory, created_at: Date.now() }
+      setPalettes((ps) => [...ps, p].sort((a, b) => a.name.localeCompare(b.name)))
+      db.putPalette(p)
+    },
+    [inventory],
+  )
+
+  const loadPalette = useCallback(
+    (id: string) => {
+      const p = palettes.find((x) => x.id === id)
+      if (!p) return
+      setInventory(p.items)
+      db.replaceInventory(p.items)
+    },
+    [palettes],
+  )
+
+  const deletePalette = useCallback((id: string) => {
+    setPalettes((ps) => ps.filter((p) => p.id !== id))
+    db.deletePalette(id)
+  }, [])
+
+  const setReferenceImage = useCallback((image: Blob) => {
+    const doc: ReferenceDoc = { id: 'current', image, pins: [], updated_at: Date.now() }
+    setReference(doc)
+    db.putReference(doc)
+  }, [])
+
+  const addReferencePin = useCallback(
+    (pin: Omit<ReferencePin, 'id'>): ReferencePin => {
+      const full: ReferencePin = { ...pin, id: uid() }
+      setReference((r) => {
+        if (!r) return r
+        const doc: ReferenceDoc = { ...r, pins: [...r.pins, full], updated_at: Date.now() }
+        db.putReference(doc)
+        return doc
+      })
+      return full
+    },
+    [],
+  )
+
+  const removeReferencePin = useCallback((pinId: string) => {
+    setReference((r) => {
+      if (!r) return r
+      const doc: ReferenceDoc = { ...r, pins: r.pins.filter((p) => p.id !== pinId), updated_at: Date.now() }
+      db.putReference(doc)
+      return doc
+    })
+  }, [])
+
+  const clearReference = useCallback(() => {
+    setReference(null)
+    db.deleteReference()
+  }, [])
+
   const saveRecipe = useCallback(async (r: Recipe) => {
     setRecipes((rs) => [r, ...rs.filter((x) => x.id !== r.id)])
     await db.putRecipe(r)
@@ -153,6 +231,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
     addStarter,
     addCustom,
     removeTube,
+    palettes,
+    savePalette,
+    loadPalette,
+    deletePalette,
+    reference,
+    setReferenceImage,
+    addReferencePin,
+    removeReferencePin,
+    clearReference,
     recipes,
     saveRecipe,
     corrections,

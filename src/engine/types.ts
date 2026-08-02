@@ -59,6 +59,30 @@ export interface InventoryItem {
   }
 }
 
+/** A named, reloadable set of tubes (snapshot of inventory items). */
+export interface Palette {
+  id: string
+  name: string
+  items: InventoryItem[]
+  created_at: number
+}
+
+/** A sampled spot on the reference photo, in canvas-relative coordinates. */
+export interface ReferencePin {
+  id: string
+  x: number // 0..1
+  y: number // 0..1
+  hex: string
+}
+
+/** The persistent reference photo and its sample pins. One per workspace. */
+export interface ReferenceDoc {
+  id: 'current'
+  image: Blob
+  pins: ReferencePin[]
+  updated_at: number
+}
+
 export type TargetOrigin = 'picker' | 'image_sample'
 
 export interface Target {

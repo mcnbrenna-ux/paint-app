@@ -7,6 +7,9 @@ const FAMILY_ORDER = ['white', 'yellow', 'orange', 'red', 'earth', 'green', 'blu
 export function Inventory() {
   const app = useApp()
   const [adding, setAdding] = useState(false)
+  const [savingPalette, setSavingPalette] = useState(false)
+  const [paletteName, setPaletteName] = useState('')
+  const [confirmLoad, setConfirmLoad] = useState<string | null>(null)
 
   const groups = useMemo(() => {
     const m = new Map<string, typeof app.tubes>()
@@ -27,6 +30,80 @@ export function Inventory() {
           </button>
         )}
       </header>
+
+      {(app.palettes.length > 0 || app.tubes.length > 0) && (
+        <div className="palette-bar">
+          <span className="palette-label">Palettes</span>
+          {app.palettes.map((p) =>
+            confirmLoad === p.id ? (
+              <span key={p.id} className="palette-confirm">
+                Load “{p.name}” ({p.items.length} tubes)? Replaces your current {app.tubes.length}.
+                <button
+                  className="primary small"
+                  onClick={() => {
+                    app.loadPalette(p.id)
+                    setConfirmLoad(null)
+                  }}
+                >
+                  Load
+                </button>
+                <button className="ghost small" onClick={() => setConfirmLoad(null)}>
+                  Cancel
+                </button>
+              </span>
+            ) : (
+              <span key={p.id} className="palette-chip">
+                <button className="ghost small" onClick={() => setConfirmLoad(p.id)}>
+                  {p.name} ({p.items.length})
+                </button>
+                <button
+                  className="ghost small chip-x"
+                  aria-label={`Delete palette ${p.name}`}
+                  onClick={() => app.deletePalette(p.id)}
+                >
+                  ×
+                </button>
+              </span>
+            ),
+          )}
+          {app.tubes.length > 0 &&
+            (savingPalette ? (
+              <span className="palette-confirm">
+                <input
+                  autoFocus
+                  value={paletteName}
+                  onChange={(e) => setPaletteName(e.target.value)}
+                  placeholder="Palette name, e.g. Plein air"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && paletteName.trim()) {
+                      app.savePalette(paletteName.trim())
+                      setPaletteName('')
+                      setSavingPalette(false)
+                    }
+                  }}
+                />
+                <button
+                  className="primary small"
+                  disabled={!paletteName.trim()}
+                  onClick={() => {
+                    app.savePalette(paletteName.trim())
+                    setPaletteName('')
+                    setSavingPalette(false)
+                  }}
+                >
+                  Save
+                </button>
+                <button className="ghost small" onClick={() => setSavingPalette(false)}>
+                  Cancel
+                </button>
+              </span>
+            ) : (
+              <button className="ghost small" onClick={() => setSavingPalette(true)}>
+                + Save current as palette
+              </button>
+            ))}
+        </div>
+      )}
 
       {app.catalogError && (
         <p className="warn-banner">
