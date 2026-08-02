@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { ACHIEVABLE_DE, MIX_IT_DE, searchMixesAsync, type SearchOutput, type SearchRecipe } from '../engine/search.ts'
+import { NEAR_MISS_DE, searchMixesAsync, verdictLabel, type SearchOutput, type SearchRecipe } from '../engine/search.ts'
 import type { Recipe, Target } from '../engine/types.ts'
 import { uid } from '../db/db.ts'
 import { useApp } from '../state/app.tsx'
@@ -87,10 +87,17 @@ export function Results({ target }: { target: Target }) {
         <>
           {!phase.out.achievable && (
             <div className="nomatch-block">
-              <p>
-                Nothing in your inventory reaches this color. The closest attempt is shown below — to close the
-                gap, add <strong>{phase.out.missing_pigment_class}</strong>.
-              </p>
+              {phase.out.results[0] && phase.out.results[0].delta_e <= NEAR_MISS_DE ? (
+                <p>
+                  Nothing lands inside mixing tolerance, but the closest attempt below is borderline — worth
+                  mixing as a start. To close the gap, add <strong>{phase.out.missing_pigment_class}</strong>.
+                </p>
+              ) : (
+                <p>
+                  This color is out of reach of your current tubes. The closest attempt is shown below — to get
+                  there, add <strong>{phase.out.missing_pigment_class}</strong>.
+                </p>
+              )}
             </div>
           )}
           <ul className="cards">
@@ -105,13 +112,8 @@ export function Results({ target }: { target: Target }) {
                     {r.parts.map((p, j) => `${p} ${nameOf(r.paint_ids[j])}`).join(' : ')}
                   </p>
                   <p className="row-sub">
-                    ΔE {r.delta_e.toFixed(1)} —{' '}
-                    {r.delta_e <= MIX_IT_DE
-                      ? 'mix it'
-                      : r.delta_e <= ACHIEVABLE_DE
-                        ? 'usable start, adjust by eye'
-                        : 'not achievable'}{' '}
-                    · <ConfidenceTag band={r.confidence_band} />
+                    ΔE {r.delta_e.toFixed(1)} — {verdictLabel(r.delta_e)} ·{' '}
+                    <ConfidenceTag band={r.confidence_band} />
                   </p>
                 </div>
               </li>

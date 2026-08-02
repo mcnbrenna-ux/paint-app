@@ -42,44 +42,44 @@ const CORE = [
   ['Indian Red', 'PR101', 'opaque', 'earth', '#8F3B33', '#D6A198'],
 
   // Oranges
-  ['Cadmium Orange', 'PO20', 'opaque', 'orange', '#ED7524', '#F8CBA4'],
-  ['Pyrrole Orange', 'PO73', 'semi-opaque', 'orange', '#E85C20', '#F5AE88'],
+  ['Cadmium Orange', 'PO20', 'opaque', 'orange', '#F26D0F', '#F9C698'],
+  ['Pyrrole Orange', 'PO73', 'semi-opaque', 'orange', '#EF5510', '#F6A87E'],
   ['Transparent Orange', 'PO71', 'transparent', 'orange', '#D96018', '#F0B080'],
 
   // Reds
   ['Cadmium Red Light', 'PR108', 'opaque', 'red', '#D23227', '#F0B3A2'],
   ['Cadmium Red', 'PR108', 'opaque', 'red', '#C0272D', '#EEB0A6'],
-  ['Pyrrole Red', 'PR254', 'semi-opaque', 'red', '#C41E2A', '#EF9E9A'],
-  ['Vermilion Hue', 'PR255', 'semi-opaque', 'red', '#D5402C', '#F2B49F'],
+  ['Pyrrole Red', 'PR254', 'semi-opaque', 'red', '#CE1220', '#F09892'],
+  ['Vermilion Hue', 'PR255', 'semi-opaque', 'red', '#DE3A1E', '#F4AE94'],
   ['Alizarin Crimson', 'PR83', 'transparent', 'red', '#6E1423', '#D08298'],
   ['Permanent Alizarin', 'PR177', 'transparent', 'red', '#7A1B2C', '#D68CA0'],
-  ['Quinacridone Rose', 'PV19', 'transparent', 'red', '#93265C', '#DE87B8'],
-  ['Quinacridone Magenta', 'PR122', 'transparent', 'red', '#A02D6E', '#E28BC0'],
+  ['Quinacridone Rose', 'PV19', 'transparent', 'red', '#A81E64', '#E87CBC'],
+  ['Quinacridone Magenta', 'PR122', 'transparent', 'red', '#B02579', '#E680C6'],
 
   // Violets
-  ['Dioxazine Violet', 'PV23', 'transparent', 'violet', '#2E1638', '#9678BC'],
-  ['Ultramarine Violet', 'PV15', 'semi-transparent', 'violet', '#4A3C7E', '#ACA3D2'],
-  ['Cobalt Violet', 'PV14', 'semi-transparent', 'violet', '#8E4C8E', '#E9D3E7'],
+  ['Dioxazine Violet', 'PV23', 'transparent', 'violet', '#331060', '#8F5FC8'],
+  ['Ultramarine Violet', 'PV15', 'semi-transparent', 'violet', '#483399', '#A79AE0'],
+  ['Cobalt Violet', 'PV14', 'semi-transparent', 'violet', '#9A3FA2', '#E9CFEA'],
 
   // Blues
-  ['Ultramarine Blue', 'PB29', 'semi-transparent', 'blue', '#1E2D7D', '#8495D0'],
-  ['Cobalt Blue', 'PB28', 'semi-transparent', 'blue', '#2F4DA0', '#A2B4DF'],
-  ['Cerulean Blue', 'PB35', 'semi-opaque', 'blue', '#2E7BB4', '#A5CAE4'],
+  ['Ultramarine Blue', 'PB29', 'semi-transparent', 'blue', '#1A2596', '#7A8EDC'],
+  ['Cobalt Blue', 'PB28', 'semi-transparent', 'blue', '#2646AC', '#96ACE4'],
+  ['Cerulean Blue', 'PB35', 'semi-opaque', 'blue', '#1F82C4', '#9CCAEC'],
   ['Phthalo Blue', 'PB15:3', 'transparent', 'blue', '#0E3050', '#2F86CC'],
-  ['Phthalo Blue (Red Shade)', 'PB15:1', 'transparent', 'blue', '#122B56', '#4A80CC'],
+  ['Phthalo Blue (Red Shade)', 'PB15:1', 'transparent', 'blue', '#14276E', '#4678D4'],
   ['Prussian Blue', 'PB27', 'transparent', 'blue', '#16222E', '#5C7E9A'],
   ['Indanthrene Blue', 'PB60', 'transparent', 'blue', '#1C2440', '#6D7FAE'],
   ['Phthalo Turquoise', 'PB16', 'transparent', 'blue', '#0C3038', '#3D9AA0'],
   ["King's Blue Hue", 'PW6|PB29', 'opaque', 'blue', '#7C97D2', '#B9C6E8'],
 
   // Greens
-  ['Phthalo Green', 'PG7', 'transparent', 'green', '#06301F', '#2FA37E'],
-  ['Phthalo Green (Yellow Shade)', 'PG36', 'transparent', 'green', '#14381C', '#48A85E'],
+  ['Phthalo Green', 'PG7', 'transparent', 'green', '#04452B', '#28AA7C'],
+  ['Phthalo Green (Yellow Shade)', 'PG36', 'transparent', 'green', '#0F4A1F', '#3FAE52'],
   ['Viridian', 'PG18', 'transparent', 'green', '#1E4B3C', '#7FB4A2'],
   ['Chromium Oxide Green', 'PG17', 'opaque', 'green', '#5A6B3C', '#A9B78C'],
   ['Sap Green', 'PG7|PY110', 'transparent', 'green', '#3A4A1E', '#8FA45C'],
   ['Terre Verte', 'PG23', 'transparent', 'green', '#5C6B55', '#CCD1C5'],
-  ['Cobalt Teal', 'PG50', 'semi-opaque', 'green', '#2A9D9F', '#90D2CE'],
+  ['Cobalt Teal', 'PG50', 'semi-opaque', 'green', '#17A9AC', '#86D6D2'],
 
   // Blacks & greys
   ['Ivory Black', 'PBk9', 'semi-opaque', 'black', '#1B1B1D', '#8A8E93'],

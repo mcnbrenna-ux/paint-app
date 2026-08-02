@@ -13,6 +13,16 @@ import type { ConfidenceBand, Paint } from './types.ts'
 export const TOTAL_PARTS = 12
 export const ACHIEVABLE_DE = 6.0
 export const MIX_IT_DE = 3.0
+// Between ACHIEVABLE and NEAR_MISS the honest read is "visibly off but worth
+// trying", not "impossible" — flat 'not achievable' at dE 6.5 destroys trust.
+export const NEAR_MISS_DE = 10.0
+
+export function verdictLabel(de: number): string {
+  if (de <= MIX_IT_DE) return 'mix it'
+  if (de <= ACHIEVABLE_DE) return 'usable start, adjust by eye'
+  if (de <= NEAR_MISS_DE) return 'borderline — expect a visible difference'
+  return 'out of reach with these tubes'
+}
 // Relative K/S residual above which a combination's hull is considered unable
 // to reach the target. Lenient on purpose: K/S distance is not perceptual.
 const PRUNE_TAU = 0.6
@@ -125,16 +135,40 @@ export interface SearchProgress {
  * determinate progress indicator; the CLI just drains it).
  */
 // Above this many usable tubes, C(n,3) makes the full search miss the 3-second
-// budget. Pre-select the tubes closest to the target in OKLab, always keeping
-// whites and blacks (value adjusters mix into everything).
-const MAX_SEARCH_TUBES = 40
-const NEAREST_KEEP = 34
+// budget. Pre-select tubes whose reachable locus passes near the target,
+// always keeping whites and blacks (value adjusters mix into everything).
+//
+// Ranking by masstone distance alone is wrong: the paints a tint needs (white
+// + a strong chromatic) both sit FAR from a pastel target in masstone space.
+// Instead each tube is scored by the closest point among samples along its
+// tint ladder (masstone, 1:1, 1:3, 1:9 in a canonical white), which is where
+// mixing actually happens.
+const MAX_SEARCH_TUBES = 48
+const NEAREST_KEEP = 40
+const CANONICAL_WHITE_HEX = '#F5F4EF'
 
 function preselect(paints: Paint[], targetHex: string): Paint[] {
   if (paints.length <= MAX_SEARCH_TUBES) return paints
   const targetLab = linearRgbToOklab(hexToLinearRgb(targetHex))
+  const whiteKS = reflectanceVecToKS(hexToLinearRgb(CANONICAL_WHITE_HEX))
+  const ladder = [0, 1, 3, 9] // parts of white per 1 part paint
   const ranked = paints
-    .map((p) => ({ p, de: deltaE(linearRgbToOklab(ksVecToReflectance(Float64Array.from(p.ks))), targetLab) }))
+    .map((p) => {
+      const ks = Float64Array.from(p.ks)
+      let best = Infinity
+      for (const w of ladder) {
+        const mixed =
+          w === 0
+            ? ks
+            : mixKS([
+                { ks, s: p.tinting_strength, v: 1 },
+                { ks: whiteKS, s: 1, v: w },
+              ])
+        const de = deltaE(linearRgbToOklab(ksVecToReflectance(mixed)), targetLab)
+        if (de < best) best = de
+      }
+      return { p, de: best }
+    })
     .sort((a, b) => a.de - b.de)
   const keep = new Set(ranked.slice(0, NEAREST_KEEP).map((r) => r.p))
   for (const p of paints) {

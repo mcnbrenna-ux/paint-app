@@ -96,9 +96,9 @@
       "common_name": "Cadmium Orange",
       "transparency": "opaque",
       "ks_coefficients": [
-        0.01461,
-        1.91419,
-        28.04781
+        0.00772,
+        2.36443,
+        103.13235
       ],
       "notes": "Cadmium sulfoselenide."
     },
@@ -107,9 +107,9 @@
       "common_name": "Pyrrole Orange",
       "transparency": "semi-opaque",
       "ks_coefficients": [
-        0.02399,
-        3.75775,
-        34.60094
+        0.01156,
+        4.59141,
+        98.97566
       ],
       "notes": "High-chroma DPP orange."
     },
@@ -140,9 +140,9 @@
       "common_name": "Pyrrole Red",
       "transparency": "semi-opaque",
       "ks_coefficients": [
-        0.18407,
-        38.49975,
-        21.0493
+        0.12051,
+        85.2362,
+        34.60094
       ],
       "notes": "High-chroma DPP red; 3-band model is weakest here."
     },
@@ -151,9 +151,9 @@
       "common_name": "Pyrrole Scarlet",
       "transparency": "semi-opaque",
       "ks_coefficients": [
-        0.08566,
-        8.88212,
-        19.24895
+        0.05093,
+        10.97997,
+        38.68836
       ],
       "notes": "Lighter, warmer DPP red."
     },
@@ -184,9 +184,9 @@
       "common_name": "Quinacridone Rose",
       "transparency": "transparent",
       "ks_coefficients": [
-        0.86676,
-        25.31129,
-        3.76177
+        0.47705,
+        38.49975,
+        3.01469
       ],
       "notes": "High-chroma organic; 3-band model is weakest here."
     },
@@ -195,9 +195,9 @@
       "common_name": "Quinacridone Magenta",
       "transparency": "transparent",
       "ks_coefficients": [
-        0.60337,
-        18.37436,
-        2.30449
+        0.37237,
+        26.58122,
+        1.72497
       ],
       "notes": "High-chroma organic; 3-band model is weakest here."
     },
@@ -228,9 +228,9 @@
       "common_name": "Dioxazine Violet",
       "transparency": "transparent",
       "ks_coefficients": [
-        17.65081,
-        63.52987,
-        11.84584
+        14.3648,
+        97.96171,
+        3.3646
       ],
       "notes": "Very strong glazing violet; 3-band model is weakest here."
     },
@@ -239,9 +239,9 @@
       "common_name": "Ultramarine Violet",
       "transparency": "semi-transparent",
       "ks_coefficients": [
-        6.4105,
-        10.21538,
-        1.51328
+        6.8297,
+        14.33068,
+        0.73512
       ],
       "notes": "Muted mineral violet."
     },
@@ -250,9 +250,9 @@
       "common_name": "Cobalt Violet",
       "transparency": "semi-transparent",
       "ks_coefficients": [
-        0.99185,
-        6.01467,
-        0.99185
+        0.71494,
+        9.19327,
+        0.56954
       ],
       "notes": "Weak-tinting mineral violet."
     },
@@ -261,9 +261,9 @@
       "common_name": "Ultramarine Blue",
       "transparency": "semi-transparent",
       "ks_coefficients": [
-        38.68836,
-        18.37436,
-        1.55343
+        49.13485,
+        26.58122,
+        0.79859
       ],
       "notes": "Warm, red-leaning blue. Moderate tinter."
     },
@@ -272,9 +272,9 @@
       "common_name": "Cobalt Blue",
       "transparency": "semi-transparent",
       "ks_coefficients": [
-        16.91848,
-        5.83215,
-        0.60337
+        25.40198,
+        7.27277,
+        0.42224
       ],
       "notes": "Cobalt aluminate."
     },
@@ -283,9 +283,9 @@
       "common_name": "Cerulean Blue",
       "transparency": "semi-opaque",
       "ks_coefficients": [
-        18.39055,
-        1.65938,
-        0.3195
+        38.51773,
+        1.38139,
+        0.17903
       ],
       "notes": "Genuine cerulean, tin-cobalt oxide."
     },
@@ -294,9 +294,9 @@
       "common_name": "Cerulean Blue (Chromium)",
       "transparency": "semi-opaque",
       "ks_coefficients": [
-        14.69188,
-        1.54063,
-        0.35708
+        28.75725,
+        1.28231,
+        0.20424
       ],
       "notes": "Cobalt chromite; greener and stronger than PB35."
     },
@@ -316,9 +316,9 @@
       "common_name": "Phthalo Blue (Red Shade)",
       "transparency": "transparent",
       "ks_coefficients": [
-        85.9995,
-        20.06119,
-        4.46499
+        73.84982,
+        24.12292,
+        2.30449
       ],
       "notes": "Warmer phthalo; very high tinting strength."
     },
@@ -361,8 +361,8 @@
       "transparency": "transparent",
       "ks_coefficients": [
         124.002,
-        16.18444,
-        36.56563
+        7.51356,
+        20.12185
       ],
       "notes": "Very high tinting strength; 3-band model is weakest here."
     },
@@ -371,9 +371,9 @@
       "common_name": "Phthalo Green (Yellow Shade)",
       "transparency": "transparent",
       "ks_coefficients": [
-        73.84982,
-        11.82117,
-        43.47793
+        103.13235,
+        6.40144,
+        36.56563
       ],
       "notes": "Warmer phthalo green."
     },
@@ -415,9 +415,9 @@
       "common_name": "Cobalt Teal",
       "transparency": "semi-opaque",
       "ks_coefficients": [
-        21.0493,
-        0.65667,
-        0.62089
+        59.73737,
+        0.46247,
+        0.42224
       ],
       "notes": "Cobalt titanate; bright mineral teal."
     },
@@ -806,13 +806,13 @@
         "PO20"
       ],
       "opacity": "opaque",
-      "tinting_strength": 0.207,
+      "tinting_strength": 0.078,
       "ks": [
-        0.01384,
-        1.89969,
-        27.35035
+        0.00707,
+        2.34602,
+        103.67161
       ],
-      "masstone_hex": "#ED7524",
+      "masstone_hex": "#F26D0F",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "orange"
@@ -826,13 +826,13 @@
         "PO73"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.39,
+      "tinting_strength": 0.183,
       "ks": [
-        0.02309,
-        3.7254,
-        33.62405
+        0.01085,
+        4.5495,
+        95.49943
       ],
-      "masstone_hex": "#E85C20",
+      "masstone_hex": "#EF5510",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "orange"
@@ -906,13 +906,13 @@
         "PR254"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.211,
+      "tinting_strength": 0.129,
       "ks": [
-        0.18178,
-        37.5183,
-        20.60671
+        0.1187,
+        81.6636,
+        33.62405
       ],
-      "masstone_hex": "#C41E2A",
+      "masstone_hex": "#CE1220",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "red"
@@ -926,13 +926,13 @@
         "PR255"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.311,
+      "tinting_strength": 0.232,
       "ks": [
-        0.08414,
-        8.77803,
-        18.86421
+        0.04973,
+        10.8383,
+        37.5183
       ],
-      "masstone_hex": "#D5402C",
+      "masstone_hex": "#DE3A1E",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "red"
@@ -986,13 +986,13 @@
         "PV19"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.484,
+      "tinting_strength": 0.422,
       "ks": [
-        0.85956,
-        24.80634,
-        3.7254
+        0.47269,
+        37.5183,
+        2.98721
       ],
-      "masstone_hex": "#93265C",
+      "masstone_hex": "#A81E64",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "red"
@@ -1006,13 +1006,13 @@
         "PR122"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.595,
+      "tinting_strength": 0.544,
       "ks": [
-        0.59811,
-        18.06711,
-        2.2846
+        0.36874,
+        26.03596,
+        1.71064
       ],
-      "masstone_hex": "#A02D6E",
+      "masstone_hex": "#B02579",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "red"
@@ -1026,13 +1026,13 @@
         "PV23"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.286,
+      "tinting_strength": 0.376,
       "ks": [
-        17.31467,
-        61.32334,
-        11.6632
+        14.12012,
+        95.49943,
+        3.33306
       ],
-      "masstone_hex": "#2E1638",
+      "masstone_hex": "#331060",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "violet"
@@ -1046,13 +1046,13 @@
         "PV15"
       ],
       "opacity": "semi-transparent",
-      "tinting_strength": 0.558,
+      "tinting_strength": 0.54,
       "ks": [
-        6.33584,
-        10.08792,
-        1.50083
+        6.74806,
+        14.12012,
+        0.7289
       ],
-      "masstone_hex": "#4A3C7E",
+      "masstone_hex": "#483399",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "violet"
@@ -1066,13 +1066,13 @@
         "PV14"
       ],
       "opacity": "semi-transparent",
-      "tinting_strength": 0.138,
+      "tinting_strength": 0.118,
       "ks": [
-        0.98369,
-        5.95446,
-        0.98369
+        0.70887,
+        9.08389,
+        0.56452
       ],
-      "masstone_hex": "#8E4C8E",
+      "masstone_hex": "#9A3FA2",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "violet"
@@ -1086,13 +1086,13 @@
         "PB29"
       ],
       "opacity": "semi-transparent",
-      "tinting_strength": 0.358,
+      "tinting_strength": 0.338,
       "ks": [
-        37.5183,
-        18.06711,
-        1.54063
+        47.4087,
+        26.03596,
+        0.79191
       ],
-      "masstone_hex": "#1E2D7D",
+      "masstone_hex": "#1A2596",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "blue"
@@ -1106,13 +1106,13 @@
         "PB28"
       ],
       "opacity": "semi-transparent",
-      "tinting_strength": 0.375,
+      "tinting_strength": 0.354,
       "ks": [
-        16.60372,
-        5.77442,
-        0.59811
+        24.80634,
+        7.19441,
+        0.41827
       ],
-      "masstone_hex": "#2F4DA0",
+      "masstone_hex": "#2646AC",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "blue"
@@ -1126,13 +1126,13 @@
         "PB35"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.328,
+      "tinting_strength": 0.203,
       "ks": [
-        17.31467,
-        1.6234,
-        0.32371
+        35.49765,
+        1.35148,
+        0.18178
       ],
-      "masstone_hex": "#2E7BB4",
+      "masstone_hex": "#1F82C4",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "blue"
@@ -1166,13 +1166,13 @@
         "PB15:1"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.725,
+      "tinting_strength": 0.932,
       "ks": [
-        81.6636,
-        19.70947,
-        4.41947
+        70.47893,
+        23.65457,
+        2.2846
       ],
-      "masstone_hex": "#122B56",
+      "masstone_hex": "#14276E",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "blue"
@@ -1267,13 +1267,13 @@
         "PG7"
       ],
       "opacity": "transparent",
-      "tinting_strength": 1.092,
+      "tinting_strength": 1.773,
       "ks": [
         124.002,
-        15.93134,
-        35.49765
+        7.43153,
+        19.70947
       ],
-      "masstone_hex": "#06301F",
+      "masstone_hex": "#04452B",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "green"
@@ -1287,13 +1287,13 @@
         "PG36"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.853,
+      "tinting_strength": 0.998,
       "ks": [
-        70.47893,
-        11.6632,
-        42.0638
+        103.67161,
+        6.33584,
+        35.49765
       ],
-      "masstone_hex": "#14381C",
+      "masstone_hex": "#0F4A1F",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "green"
@@ -1388,13 +1388,13 @@
         "PG50"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.499,
+      "tinting_strength": 0.222,
       "ks": [
-        20.60671,
-        0.65154,
-        0.6155
+        57.3601,
+        0.4586,
+        0.41827
       ],
-      "masstone_hex": "#2A9D9F",
+      "masstone_hex": "#17A9AC",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "green"
@@ -1830,13 +1830,13 @@
         "PO20"
       ],
       "opacity": "opaque",
-      "tinting_strength": 0.181,
+      "tinting_strength": 0.066,
       "ks": [
-        0.00824,
-        1.80263,
-        31.88393
+        0.00334,
+        2.22491,
+        124.002
       ],
-      "masstone_hex": "#F17721",
+      "masstone_hex": "#F66F0C",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "orange"
@@ -1850,13 +1850,13 @@
         "PO73"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.339,
+      "tinting_strength": 0.145,
       "ks": [
-        0.01549,
-        3.52295,
-        39.70125
+        0.006,
+        4.29383,
+        123.23435
       ],
-      "masstone_hex": "#EC5E1D",
+      "masstone_hex": "#F3570D",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "orange"
@@ -1930,13 +1930,13 @@
         "PR254"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.214,
+      "tinting_strength": 0.135,
       "ks": [
-        0.15447,
-        33.62405,
-        23.65457
+        0.09806,
+        70.47893,
+        39.70125
       ],
-      "masstone_hex": "#C82027",
+      "masstone_hex": "#D2141D",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "red"
@@ -1950,13 +1950,13 @@
         "PR255"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.29,
+      "tinting_strength": 0.206,
       "ks": [
-        0.06753,
-        8.20487,
-        21.56014
+        0.0377,
+        10.08792,
+        44.62553
       ],
-      "masstone_hex": "#D94229",
+      "masstone_hex": "#E23C1B",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "red"
@@ -2010,13 +2010,13 @@
         "PV19"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.511,
+      "tinting_strength": 0.456,
       "ks": [
-        0.77041,
-        22.57439,
-        4.05502
+        0.41827,
+        33.62405,
+        3.24252
       ],
-      "masstone_hex": "#972859",
+      "masstone_hex": "#AC2061",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "red"
@@ -2030,13 +2030,13 @@
         "PR122"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.624,
+      "tinting_strength": 0.582,
       "ks": [
-        0.53246,
-        16.60372,
-        2.47424
+        0.32371,
+        23.65457,
+        1.85051
       ],
-      "masstone_hex": "#A42F6B",
+      "masstone_hex": "#B42776",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "red"
@@ -2050,13 +2050,13 @@
         "PV23"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.309,
+      "tinting_strength": 0.425,
       "ks": [
-        14.69188,
-        53.74475,
-        13.06223
+        12.10661,
+        81.6636,
+        3.62254
       ],
-      "masstone_hex": "#321835",
+      "masstone_hex": "#37125D",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "violet"
@@ -2070,13 +2070,13 @@
         "PV15"
       ],
       "opacity": "semi-transparent",
-      "tinting_strength": 0.582,
+      "tinting_strength": 0.569,
       "ks": [
-        5.60103,
-        9.4036,
-        1.6234
+        5.95446,
+        13.06223,
+        0.79191
       ],
-      "masstone_hex": "#4E3E7B",
+      "masstone_hex": "#4C3596",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "violet"
@@ -2090,13 +2090,13 @@
         "PV14"
       ],
       "opacity": "semi-transparent",
-      "tinting_strength": 0.137,
+      "tinting_strength": 0.118,
       "ks": [
-        0.88321,
-        5.60103,
-        1.0657
+        0.63331,
+        8.48526,
+        0.6155
       ],
-      "masstone_hex": "#924E8B",
+      "masstone_hex": "#9E419F",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "violet"
@@ -2110,13 +2110,13 @@
         "PB29"
       ],
       "opacity": "semi-transparent",
-      "tinting_strength": 0.408,
+      "tinting_strength": 0.391,
       "ks": [
-        30.26524,
-        16.60372,
-        1.66645
+        37.5183,
+        23.65457,
+        0.85956
       ],
-      "masstone_hex": "#222F7A",
+      "masstone_hex": "#1E2793",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "blue"
@@ -2130,13 +2130,13 @@
         "PB28"
       ],
       "opacity": "semi-transparent",
-      "tinting_strength": 0.409,
+      "tinting_strength": 0.396,
       "ks": [
-        14.12012,
-        5.43398,
-        0.65154
+        20.60671,
+        6.74806,
+        0.4586
       ],
-      "masstone_hex": "#334F9D",
+      "masstone_hex": "#2A48A9",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "blue"
@@ -2150,13 +2150,13 @@
         "PB36"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.363,
+      "tinting_strength": 0.237,
       "ks": [
-        14.69188,
-        1.54063,
-        0.35708
+        28.75725,
+        1.28231,
+        0.20424
       ],
-      "masstone_hex": "#327DB1",
+      "masstone_hex": "#2384C1",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "blue"
@@ -2190,13 +2190,13 @@
         "PB15:1"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.878,
+      "tinting_strength": 1.117,
       "ks": [
-        61.32334,
-        18.06711,
-        4.82357
+        53.74475,
+        21.56014,
+        2.47424
       ],
-      "masstone_hex": "#162D53",
+      "masstone_hex": "#18296B",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "blue"
@@ -2291,13 +2291,13 @@
         "PG7"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.975,
+      "tinting_strength": 1.577,
       "ks": [
         124.002,
-        14.69188,
-        42.0638
+        6.96675,
+        22.57439
       ],
-      "masstone_hex": "#0A321C",
+      "masstone_hex": "#084728",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "green"
@@ -2311,13 +2311,13 @@
         "PG36"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.903,
+      "tinting_strength": 1.146,
       "ks": [
-        53.74475,
-        10.8383,
-        50.43875
+        75.78351,
+        5.95446,
+        42.0638
       ],
-      "masstone_hex": "#183A19",
+      "masstone_hex": "#134C1C",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "green"
@@ -2412,13 +2412,13 @@
         "PG50"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.564,
+      "tinting_strength": 0.273,
       "ks": [
-        17.31467,
-        0.6155,
-        0.6702
+        44.62553,
+        0.4314,
+        0.4586
       ],
-      "masstone_hex": "#2E9F9C",
+      "masstone_hex": "#1BABA9",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "green"
@@ -2854,13 +2854,13 @@
         "PO20"
       ],
       "opacity": "opaque",
-      "tinting_strength": 0.22,
+      "tinting_strength": 0.089,
       "ks": [
-        0.01908,
-        1.75602,
-        24.80634
+        0.01085,
+        2.16687,
+        88.20264
       ],
-      "masstone_hex": "#EA7826",
+      "masstone_hex": "#EF7011",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "orange"
@@ -2874,13 +2874,13 @@
         "PO73"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.419,
+      "tinting_strength": 0.207,
       "ks": [
-        0.0299,
-        3.4265,
-        30.26524
+        0.01549,
+        4.17241,
+        81.6636
       ],
-      "masstone_hex": "#E55F22",
+      "masstone_hex": "#EC5812",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "orange"
@@ -2954,13 +2954,13 @@
         "PR254"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.233,
+      "tinting_strength": 0.149,
       "ks": [
-        0.20424,
-        31.88393,
-        18.86421
+        0.13584,
+        65.67902,
+        30.26524
       ],
-      "masstone_hex": "#C1212C",
+      "masstone_hex": "#CB1522",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "red"
@@ -2974,13 +2974,13 @@
         "PR255"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.328,
+      "tinting_strength": 0.25,
       "ks": [
-        0.09806,
-        7.9362,
-        17.31467
+        0.06003,
+        9.73798,
+        33.62405
       ],
-      "masstone_hex": "#D2432E",
+      "masstone_hex": "#DB3D20",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "red"
@@ -3034,13 +3034,13 @@
         "PV19"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.525,
+      "tinting_strength": 0.47,
       "ks": [
-        0.93224,
-        21.56014,
-        3.52295
+        0.51699,
+        31.88393,
+        2.82956
       ],
-      "masstone_hex": "#90295E",
+      "masstone_hex": "#A52166",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "red"
@@ -3054,13 +3054,13 @@
         "PR122"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.637,
+      "tinting_strength": 0.596,
       "ks": [
-        0.65154,
-        15.93134,
-        2.16687
+        0.40544,
+        22.57439,
+        1.6234
       ],
-      "masstone_hex": "#9D3070",
+      "masstone_hex": "#AD287B",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "red"
@@ -3074,13 +3074,13 @@
         "PV23"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.311,
+      "tinting_strength": 0.434,
       "ks": [
-        19.70947,
-        50.43875,
-        10.8383
+        15.93134,
+        75.78351,
+        3.15477
       ],
-      "masstone_hex": "#2B193A",
+      "masstone_hex": "#301362",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "violet"
@@ -3094,13 +3094,13 @@
         "PV15"
       ],
       "opacity": "semi-transparent",
-      "tinting_strength": 0.561,
+      "tinting_strength": 0.552,
       "ks": [
-        6.96675,
-        9.08389,
-        1.42424
+        7.43153,
+        12.57246,
+        0.68931
       ],
-      "masstone_hex": "#473F80",
+      "masstone_hex": "#45369B",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "violet"
@@ -3114,13 +3114,13 @@
         "PV14"
       ],
       "opacity": "semi-transparent",
-      "tinting_strength": 0.139,
+      "tinting_strength": 0.121,
       "ks": [
-        1.0657,
-        5.43398,
-        0.93224
+        0.77041,
+        8.20487,
+        0.53246
       ],
-      "masstone_hex": "#8B4F90",
+      "masstone_hex": "#9742A4",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "violet"
@@ -3134,13 +3134,13 @@
         "PB29"
       ],
       "opacity": "semi-transparent",
-      "tinting_strength": 0.328,
+      "tinting_strength": 0.309,
       "ks": [
-        44.62553,
-        15.93134,
-        1.46204
+        57.3601,
+        22.57439,
+        0.74941
       ],
-      "masstone_hex": "#1B307F",
+      "masstone_hex": "#172898",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "blue"
@@ -3154,13 +3154,13 @@
         "PB28"
       ],
       "opacity": "semi-transparent",
-      "tinting_strength": 0.346,
+      "tinting_strength": 0.32,
       "ks": [
-        18.86421,
-        5.27298,
-        0.56452
+        28.75725,
+        6.5379,
+        0.39292
       ],
-      "masstone_hex": "#2C50A2",
+      "masstone_hex": "#2349AE",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "blue"
@@ -3174,13 +3174,13 @@
         "PB35"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.294,
+      "tinting_strength": 0.174,
       "ks": [
-        19.70947,
-        1.50083,
-        0.30276
+        42.0638,
+        1.24901,
+        0.16776
       ],
-      "masstone_hex": "#2B7EB6",
+      "masstone_hex": "#1C85C6",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "blue"
@@ -3214,13 +3214,13 @@
         "PB15:1"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.615,
+      "tinting_strength": 0.811,
       "ks": [
-        103.67161,
-        17.31467,
-        4.17241
+        88.20264,
+        20.60671,
+        2.16687
       ],
-      "masstone_hex": "#0F2E58",
+      "masstone_hex": "#112A70",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "blue"
@@ -3315,13 +3315,13 @@
         "PG7"
       ],
       "opacity": "transparent",
-      "tinting_strength": 1.174,
+      "tinting_strength": 1.895,
       "ks": [
         124.002,
-        14.12012,
-        31.88393
+        6.74806,
+        18.06711
       ],
-      "masstone_hex": "#033321",
+      "masstone_hex": "#01482D",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "green"
@@ -3335,13 +3335,13 @@
         "PG36"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.779,
+      "tinting_strength": 0.904,
       "ks": [
-        88.20264,
-        10.45435,
-        37.5183
+        124.002,
+        5.77442,
+        31.88393
       ],
-      "masstone_hex": "#113B1E",
+      "masstone_hex": "#0C4D21",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "green"
@@ -3436,13 +3436,13 @@
         "PG50"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.442,
+      "tinting_strength": 0.184,
       "ks": [
-        23.65457,
-        0.59811,
-        0.58112
+        70.47893,
+        0.41827,
+        0.39292
       ],
-      "masstone_hex": "#27A0A1",
+      "masstone_hex": "#14ACAE",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "green"
@@ -3878,13 +3878,13 @@
         "PO20"
       ],
       "opacity": "opaque",
-      "tinting_strength": 0.239,
+      "tinting_strength": 0.103,
       "ks": [
-        0.01085,
-        2.11044,
-        22.57439
+        0.00502,
+        2.61012,
+        75.78351
       ],
-      "masstone_hex": "#EF7128",
+      "masstone_hex": "#F46913",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "orange"
@@ -3898,13 +3898,13 @@
         "PO73"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.453,
+      "tinting_strength": 0.237,
       "ks": [
-        0.01908,
-        4.17241,
-        27.35035
+        0.00824,
+        5.11775,
+        70.47893
       ],
-      "masstone_hex": "#EA5824",
+      "masstone_hex": "#F15114",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "orange"
@@ -3978,13 +3978,13 @@
         "PR254"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.19,
+      "tinting_strength": 0.106,
       "ks": [
-        0.16776,
-        47.4087,
-        17.31467
+        0.10808,
+        112.86001,
+        27.35035
       ],
-      "masstone_hex": "#C61A2E",
+      "masstone_hex": "#D00E24",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "red"
@@ -3998,13 +3998,13 @@
         "PR255"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.327,
+      "tinting_strength": 0.258,
       "ks": [
-        0.07556,
-        10.08792,
-        15.93134
+        0.04348,
+        12.57246,
+        30.26524
       ],
-      "masstone_hex": "#D73C30",
+      "masstone_hex": "#E03622",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "red"
@@ -4058,13 +4058,13 @@
         "PV19"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.423,
+      "tinting_strength": 0.353,
       "ks": [
-        0.81392,
-        30.26524,
-        3.33306
+        0.44484,
+        47.4087,
+        2.68111
       ],
-      "masstone_hex": "#952260",
+      "masstone_hex": "#AA1A68",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "red"
@@ -4078,13 +4078,13 @@
         "PR122"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.529,
+      "tinting_strength": 0.467,
       "ks": [
-        0.56452,
-        21.56014,
-        2.05556
+        0.34569,
+        31.88393,
+        1.54063
       ],
-      "masstone_hex": "#A22972",
+      "masstone_hex": "#B2217D",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "red"
@@ -4098,13 +4098,13 @@
         "PV23"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.244,
+      "tinting_strength": 0.313,
       "ks": [
-        15.93134,
-        81.6636,
-        10.08792
+        13.06223,
+        124.002,
+        2.98721
       ],
-      "masstone_hex": "#30123C",
+      "masstone_hex": "#350C64",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "violet"
@@ -4118,13 +4118,13 @@
         "PV15"
       ],
       "opacity": "semi-transparent",
-      "tinting_strength": 0.532,
+      "tinting_strength": 0.502,
       "ks": [
-        5.95446,
-        11.6632,
-        1.35148
+        6.33584,
+        16.60372,
+        0.65154
       ],
-      "masstone_hex": "#4C3882",
+      "masstone_hex": "#4A2F9D",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "violet"
@@ -4138,13 +4138,13 @@
         "PV14"
       ],
       "opacity": "semi-transparent",
-      "tinting_strength": 0.134,
+      "tinting_strength": 0.111,
       "ks": [
-        0.93224,
-        6.74806,
-        0.88321
+        0.6702,
+        10.45435,
+        0.50188
       ],
-      "masstone_hex": "#904892",
+      "masstone_hex": "#9C3BA6",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "violet"
@@ -4158,13 +4158,13 @@
         "PB29"
       ],
       "opacity": "semi-transparent",
-      "tinting_strength": 0.363,
+      "tinting_strength": 0.337,
       "ks": [
-        33.62405,
-        21.56014,
-        1.3874
+        42.0638,
+        31.88393,
+        0.70887
       ],
-      "masstone_hex": "#202981",
+      "masstone_hex": "#1C219A",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "blue"
@@ -4178,13 +4178,13 @@
         "PB28"
       ],
       "opacity": "semi-transparent",
-      "tinting_strength": 0.386,
+      "tinting_strength": 0.369,
       "ks": [
-        15.29487,
-        6.5379,
-        0.53246
+        22.57439,
+        8.20487,
+        0.36874
       ],
-      "masstone_hex": "#3149A4",
+      "masstone_hex": "#2842B0",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "blue"
@@ -4198,13 +4198,13 @@
         "PB35"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.348,
+      "tinting_strength": 0.223,
       "ks": [
-        15.93134,
-        1.80263,
-        0.2828
+        31.88393,
+        1.50083,
+        0.15447
       ],
-      "masstone_hex": "#3077B8",
+      "masstone_hex": "#217EC8",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "blue"
@@ -4238,13 +4238,13 @@
         "PB15:1"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.774,
+      "tinting_strength": 0.967,
       "ks": [
-        70.47893,
-        23.65457,
-        3.94149
+        61.32334,
+        28.75725,
+        2.05556
       ],
-      "masstone_hex": "#14275A",
+      "masstone_hex": "#162372",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "blue"
@@ -4339,13 +4339,13 @@
         "PG7"
       ],
       "opacity": "transparent",
-      "tinting_strength": 1.068,
+      "tinting_strength": 1.704,
       "ks": [
         124.002,
-        18.86421,
-        28.75725
+        8.48526,
+        16.60372
       ],
-      "masstone_hex": "#082C23",
+      "masstone_hex": "#06412F",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "green"
@@ -4359,13 +4359,13 @@
         "PG36"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.955,
+      "tinting_strength": 1.143,
       "ks": [
-        61.32334,
-        13.57753,
-        33.62405
+        88.20264,
+        7.19441,
+        28.75725
       ],
-      "masstone_hex": "#163420",
+      "masstone_hex": "#114623",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "green"
@@ -4460,13 +4460,13 @@
         "PG50"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.532,
+      "tinting_strength": 0.248,
       "ks": [
-        18.86421,
-        0.7289,
-        0.5483
+        50.43875,
+        0.51699,
+        0.36874
       ],
-      "masstone_hex": "#2C99A3",
+      "masstone_hex": "#19A5B0",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "green"
@@ -4902,13 +4902,13 @@
         "PO20"
       ],
       "opacity": "opaque",
-      "tinting_strength": 0.177,
+      "tinting_strength": 0.068,
       "ks": [
-        0.02104,
-        2.00217,
-        33.62405
+        0.0123,
+        2.47424,
+        124.002
       ],
-      "masstone_hex": "#E97320",
+      "masstone_hex": "#EE6B0B",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "orange"
@@ -4922,13 +4922,13 @@
         "PO73"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.328,
+      "tinting_strength": 0.148,
       "ks": [
-        0.03239,
-        3.94149,
-        42.0638
+        0.01724,
+        4.82357,
+        124.002
       ],
-      "masstone_hex": "#E45A1C",
+      "masstone_hex": "#EB530C",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "orange"
@@ -5002,13 +5002,13 @@
         "PR254"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.19,
+      "tinting_strength": 0.112,
       "ks": [
-        0.21212,
-        42.0638,
-        24.80634
+        0.14188,
+        95.49943,
+        42.0638
       ],
-      "masstone_hex": "#C01C26",
+      "masstone_hex": "#CA101C",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "red"
@@ -5022,13 +5022,13 @@
         "PR255"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.279,
+      "tinting_strength": 0.197,
       "ks": [
-        0.10299,
-        9.4036,
-        22.57439
+        0.06371,
+        11.6632,
+        47.4087
       ],
-      "masstone_hex": "#D13E28",
+      "masstone_hex": "#DA381A",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "red"
@@ -5082,13 +5082,13 @@
         "PV19"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.45,
+      "tinting_strength": 0.386,
       "ks": [
-        0.95766,
-        27.35035,
-        4.17241
+        0.53246,
+        42.0638,
+        3.33306
       ],
-      "masstone_hex": "#8F2458",
+      "masstone_hex": "#A41C60",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "red"
@@ -5102,13 +5102,13 @@
         "PR122"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.558,
+      "tinting_strength": 0.504,
       "ks": [
-        0.6702,
-        19.70947,
-        2.54119
+        0.41827,
+        28.75725,
+        1.89969
       ],
-      "masstone_hex": "#9C2B6A",
+      "masstone_hex": "#AC2375",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "red"
@@ -5122,13 +5122,13 @@
         "PV23"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.254,
+      "tinting_strength": 0.328,
       "ks": [
-        20.60671,
-        70.47893,
-        13.57753
+        16.60372,
+        112.86001,
+        3.7254
       ],
-      "masstone_hex": "#2A1434",
+      "masstone_hex": "#2F0E5C",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "violet"
@@ -5142,13 +5142,13 @@
         "PV15"
       ],
       "opacity": "semi-transparent",
-      "tinting_strength": 0.526,
+      "tinting_strength": 0.506,
       "ks": [
-        7.19441,
-        10.8383,
-        1.66645
+        7.67861,
+        15.29487,
+        0.81392
       ],
-      "masstone_hex": "#463A7A",
+      "masstone_hex": "#443195",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "violet"
@@ -5162,13 +5162,13 @@
         "PV14"
       ],
       "opacity": "semi-transparent",
-      "tinting_strength": 0.13,
+      "tinting_strength": 0.11,
       "ks": [
-        1.0944,
-        6.33584,
-        1.0944
+        0.79191,
+        9.73798,
+        0.63331
       ],
-      "masstone_hex": "#8A4A8A",
+      "masstone_hex": "#963D9E",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "violet"
@@ -5182,13 +5182,13 @@
         "PB29"
       ],
       "opacity": "semi-transparent",
-      "tinting_strength": 0.308,
+      "tinting_strength": 0.286,
       "ks": [
-        47.4087,
-        19.70947,
-        1.71064
+        61.32334,
+        28.75725,
+        0.88321
       ],
-      "masstone_hex": "#1A2B79",
+      "masstone_hex": "#162392",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "blue"
@@ -5202,13 +5202,13 @@
         "PB28"
       ],
       "opacity": "semi-transparent",
-      "tinting_strength": 0.337,
+      "tinting_strength": 0.31,
       "ks": [
-        19.70947,
-        6.14148,
-        0.6702
+        30.26524,
+        7.67861,
+        0.47269
       ],
-      "masstone_hex": "#2B4B9C",
+      "masstone_hex": "#2244A8",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "blue"
@@ -5222,13 +5222,13 @@
         "PB35"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.29,
+      "tinting_strength": 0.169,
       "ks": [
-        20.60671,
-        1.71064,
-        0.36874
+        44.62553,
+        1.42424,
+        0.21212
       ],
-      "masstone_hex": "#2A79B0",
+      "masstone_hex": "#1B80C0",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "blue"
@@ -5262,13 +5262,13 @@
         "PB15:1"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.572,
+      "tinting_strength": 0.751,
       "ks": [
-        112.86001,
-        21.56014,
-        4.96803
+        95.49943,
+        26.03596,
+        2.54119
       ],
-      "masstone_hex": "#0E2952",
+      "masstone_hex": "#10256A",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "blue"
@@ -5363,13 +5363,13 @@
         "PG7"
       ],
       "opacity": "transparent",
-      "tinting_strength": 1.13,
+      "tinting_strength": 1.924,
       "ks": [
         124.002,
-        17.31467,
-        44.62553
+        7.9362,
+        23.65457
       ],
-      "masstone_hex": "#022E1B",
+      "masstone_hex": "#004327",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "green"
@@ -5383,13 +5383,13 @@
         "PG36"
       ],
       "opacity": "transparent",
-      "tinting_strength": 0.682,
+      "tinting_strength": 0.869,
       "ks": [
-        95.49943,
-        12.57246,
-        53.74475
+        124.002,
+        6.74806,
+        44.62553
       ],
-      "masstone_hex": "#103618",
+      "masstone_hex": "#0B481B",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "green"
@@ -5484,13 +5484,13 @@
         "PG50"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.434,
+      "tinting_strength": 0.176,
       "ks": [
-        24.80634,
-        0.68931,
-        0.68931
+        75.78351,
+        0.48711,
+        0.47269
       ],
-      "masstone_hex": "#269B9B",
+      "masstone_hex": "#13A7A8",
       "source": "estimated",
       "confidence": 0.4,
       "hue_family": "green"

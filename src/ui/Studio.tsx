@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { hexToLinearRgb, linearRgbToOklab } from '../engine/color.ts'
-import { ACHIEVABLE_DE, MIX_IT_DE, searchMixesAsync, type SearchRecipe } from '../engine/search.ts'
+import { searchMixesAsync, verdictLabel, type SearchRecipe } from '../engine/search.ts'
 import type { ReferencePin, Target, TargetOrigin } from '../engine/types.ts'
 import { uid } from '../db/db.ts'
 import { useApp } from '../state/app.tsx'
@@ -256,13 +256,8 @@ function PhotoWorkspace() {
                           {mix.best.parts.map((p, j) => `${p} ${paintName(app, mix.best!.paint_ids[j])}`).join(' : ')}
                         </p>
                         <p className="row-sub">
-                          ΔE {mix.best.delta_e.toFixed(1)} —{' '}
-                          {mix.best.delta_e <= MIX_IT_DE
-                            ? 'mix it'
-                            : mix.best.delta_e <= ACHIEVABLE_DE
-                              ? 'usable start'
-                              : 'not achievable'}{' '}
-                          · <ConfidenceTag band={mix.best.confidence_band} />
+                          ΔE {mix.best.delta_e.toFixed(1)} — {verdictLabel(mix.best.delta_e)} ·{' '}
+                          <ConfidenceTag band={mix.best.confidence_band} />
                         </p>
                       </>
                     ) : (
