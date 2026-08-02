@@ -1,0 +1,1795 @@
+{
+  "version": 1,
+  "bands": 3,
+  "generated_from": "data/catalog.csv",
+  "pigments": [
+    {
+      "id": "PW6",
+      "common_name": "Titanium White",
+      "transparency": "opaque",
+      "ks_coefficients": [
+        0.00471,
+        0.00551,
+        0.01156
+      ],
+      "notes": "Rutile titanium dioxide. The tinting-strength reference (s = 1.0)."
+    },
+    {
+      "id": "PB29",
+      "common_name": "Ultramarine Blue",
+      "transparency": "semi-transparent",
+      "ks_coefficients": [
+        38.68836,
+        18.37436,
+        1.55343
+      ],
+      "notes": "Warm, red-leaning blue. Moderate tinter."
+    },
+    {
+      "id": "PB15:3",
+      "common_name": "Phthalo Blue (Green Shade)",
+      "transparency": "transparent",
+      "ks_coefficients": [
+        107.60541,
+        16.18444,
+        5.3308
+      ],
+      "notes": "Very high tinting strength; 3-band model is weakest here."
+    },
+    {
+      "id": "PB35",
+      "common_name": "Cerulean Blue",
+      "transparency": "semi-opaque",
+      "ks_coefficients": [
+        18.39055,
+        1.65938,
+        0.3195
+      ],
+      "notes": "Genuine cerulean, tin-cobalt oxide."
+    },
+    {
+      "id": "PB36",
+      "common_name": "Cerulean Blue (Chromium)",
+      "transparency": "semi-opaque",
+      "ks_coefficients": [
+        14.69188,
+        1.54063,
+        0.35708
+      ],
+      "notes": "Cobalt chromite; greener and stronger than PB35."
+    },
+    {
+      "id": "PB28",
+      "common_name": "Cobalt Blue",
+      "transparency": "semi-transparent",
+      "ks_coefficients": [
+        16.91848,
+        5.83215,
+        0.60337
+      ],
+      "notes": "Cobalt aluminate."
+    },
+    {
+      "id": "PY35",
+      "common_name": "Cadmium Yellow",
+      "transparency": "opaque",
+      "ks_coefficients": [
+        0.00049,
+        0.18026,
+        61.49233
+      ],
+      "notes": "Cadmium zinc sulfide, light through deep shades."
+    },
+    {
+      "id": "PY43",
+      "common_name": "Yellow Ochre",
+      "transparency": "semi-opaque",
+      "ks_coefficients": [
+        0.21463,
+        0.96487,
+        17.65081
+      ],
+      "notes": "Natural iron oxide."
+    },
+    {
+      "id": "PO20",
+      "common_name": "Cadmium Orange",
+      "transparency": "opaque",
+      "ks_coefficients": [
+        0.01461,
+        1.91419,
+        28.04781
+      ],
+      "notes": "Cadmium sulfoselenide."
+    },
+    {
+      "id": "PR108",
+      "common_name": "Cadmium Red",
+      "transparency": "opaque",
+      "ks_coefficients": [
+        0.21463,
+        24.12292,
+        18.42651
+      ],
+      "notes": "Cadmium sulfoselenide."
+    },
+    {
+      "id": "PR83",
+      "common_name": "Alizarin Crimson",
+      "transparency": "transparent",
+      "ks_coefficients": [
+        2.30449,
+        73.26508,
+        29.51389
+      ],
+      "notes": "Fugitive lake; kept for its mixing behavior."
+    },
+    {
+      "id": "PV19",
+      "common_name": "Quinacridone Rose",
+      "transparency": "transparent",
+      "ks_coefficients": [
+        0.86676,
+        25.31129,
+        3.76177
+      ],
+      "notes": "High-chroma organic; 3-band model is weakest here."
+    },
+    {
+      "id": "PBr7",
+      "common_name": "Natural Iron Oxide (Sienna/Umber)",
+      "transparency": "semi-transparent",
+      "ks_coefficients": [
+        4.00257,
+        10.97997,
+        40.63851
+      ],
+      "notes": "Covers burnt sienna, raw/burnt umber."
+    },
+    {
+      "id": "PBk9",
+      "common_name": "Ivory Black",
+      "transparency": "semi-opaque",
+      "ks_coefficients": [
+        46.18586,
+        45.92879,
+        40.98606
+      ],
+      "notes": "Bone black; slow drier."
+    },
+    {
+      "id": "PG7",
+      "common_name": "Phthalo Green (Blue Shade)",
+      "transparency": "transparent",
+      "ks_coefficients": [
+        124.002,
+        16.18444,
+        36.56563
+      ],
+      "notes": "Very high tinting strength; 3-band model is weakest here."
+    }
+  ],
+  "paints": [
+    {
+      "id": "winsor-newton-titanium-white",
+      "brand": "Winsor & Newton",
+      "product_name": "Titanium White",
+      "medium": "oil",
+      "pigment_ids": [
+        "PW6"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 1,
+      "ks": [
+        0.00414,
+        0.00502,
+        0.01085
+      ],
+      "masstone_hex": "#F5F4EF",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "white"
+    },
+    {
+      "id": "winsor-newton-french-ultramarine",
+      "brand": "Winsor & Newton",
+      "product_name": "French Ultramarine",
+      "medium": "oil",
+      "pigment_ids": [
+        "PB29"
+      ],
+      "opacity": "semi-transparent",
+      "tinting_strength": 0.358,
+      "ks": [
+        37.5183,
+        18.06711,
+        1.54063
+      ],
+      "masstone_hex": "#1E2D7D",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "blue"
+    },
+    {
+      "id": "winsor-newton-winsor-blue-green-shade-",
+      "brand": "Winsor & Newton",
+      "product_name": "Winsor Blue (Green Shade)",
+      "medium": "oil",
+      "pigment_ids": [
+        "PB15:3"
+      ],
+      "opacity": "transparent",
+      "tinting_strength": 1.403,
+      "ks": [
+        112.86001,
+        15.93134,
+        5.27298
+      ],
+      "masstone_hex": "#0E3050",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "blue"
+    },
+    {
+      "id": "winsor-newton-cerulean-blue",
+      "brand": "Winsor & Newton",
+      "product_name": "Cerulean Blue",
+      "medium": "oil",
+      "pigment_ids": [
+        "PB35"
+      ],
+      "opacity": "semi-opaque",
+      "tinting_strength": 0.328,
+      "ks": [
+        17.31467,
+        1.6234,
+        0.32371
+      ],
+      "masstone_hex": "#2E7BB4",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "blue"
+    },
+    {
+      "id": "winsor-newton-cobalt-blue",
+      "brand": "Winsor & Newton",
+      "product_name": "Cobalt Blue",
+      "medium": "oil",
+      "pigment_ids": [
+        "PB28"
+      ],
+      "opacity": "semi-transparent",
+      "tinting_strength": 0.375,
+      "ks": [
+        16.60372,
+        5.77442,
+        0.59811
+      ],
+      "masstone_hex": "#2F4DA0",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "blue"
+    },
+    {
+      "id": "winsor-newton-cadmium-yellow-light",
+      "brand": "Winsor & Newton",
+      "product_name": "Cadmium Yellow Light",
+      "medium": "oil",
+      "pigment_ids": [
+        "PY35"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 0.08,
+      "ks": [
+        0.00001,
+        0.04348,
+        47.4087
+      ],
+      "masstone_hex": "#FFE01A",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "yellow"
+    },
+    {
+      "id": "winsor-newton-cadmium-yellow-deep",
+      "brand": "Winsor & Newton",
+      "product_name": "Cadmium Yellow Deep",
+      "medium": "oil",
+      "pigment_ids": [
+        "PY35"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 0.069,
+      "ks": [
+        0.00036,
+        0.31311,
+        70.47893
+      ],
+      "masstone_hex": "#FCB514",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "yellow"
+    },
+    {
+      "id": "winsor-newton-yellow-ochre",
+      "brand": "Winsor & Newton",
+      "product_name": "Yellow Ochre",
+      "medium": "oil",
+      "pigment_ids": [
+        "PY43"
+      ],
+      "opacity": "semi-opaque",
+      "tinting_strength": 0.296,
+      "ks": [
+        0.21212,
+        0.95766,
+        17.31467
+      ],
+      "masstone_hex": "#C08F2E",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "earth"
+    },
+    {
+      "id": "winsor-newton-cadmium-orange",
+      "brand": "Winsor & Newton",
+      "product_name": "Cadmium Orange",
+      "medium": "oil",
+      "pigment_ids": [
+        "PO20"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 0.207,
+      "ks": [
+        0.01384,
+        1.89969,
+        27.35035
+      ],
+      "masstone_hex": "#ED7524",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "orange"
+    },
+    {
+      "id": "winsor-newton-cadmium-red",
+      "brand": "Winsor & Newton",
+      "product_name": "Cadmium Red",
+      "medium": "oil",
+      "pigment_ids": [
+        "PR108"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 0.19,
+      "ks": [
+        0.21212,
+        23.65457,
+        18.06711
+      ],
+      "masstone_hex": "#C0272D",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "red"
+    },
+    {
+      "id": "winsor-newton-alizarin-crimson",
+      "brand": "Winsor & Newton",
+      "product_name": "Alizarin Crimson",
+      "medium": "oil",
+      "pigment_ids": [
+        "PR83"
+      ],
+      "opacity": "transparent",
+      "tinting_strength": 0.199,
+      "ks": [
+        2.2846,
+        70.47893,
+        28.75725
+      ],
+      "masstone_hex": "#6E1423",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "red"
+    },
+    {
+      "id": "winsor-newton-permanent-rose",
+      "brand": "Winsor & Newton",
+      "product_name": "Permanent Rose",
+      "medium": "oil",
+      "pigment_ids": [
+        "PV19"
+      ],
+      "opacity": "transparent",
+      "tinting_strength": 0.484,
+      "ks": [
+        0.85956,
+        24.80634,
+        3.7254
+      ],
+      "masstone_hex": "#93265C",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "red"
+    },
+    {
+      "id": "winsor-newton-burnt-sienna",
+      "brand": "Winsor & Newton",
+      "product_name": "Burnt Sienna",
+      "medium": "oil",
+      "pigment_ids": [
+        "PBr7"
+      ],
+      "opacity": "semi-transparent",
+      "tinting_strength": 0.215,
+      "ks": [
+        1.58148,
+        10.8383,
+        53.74475
+      ],
+      "masstone_hex": "#7C3A18",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "earth"
+    },
+    {
+      "id": "winsor-newton-raw-umber",
+      "brand": "Winsor & Newton",
+      "product_name": "Raw Umber",
+      "medium": "oil",
+      "pigment_ids": [
+        "PBr7"
+      ],
+      "opacity": "semi-transparent",
+      "tinting_strength": 0.24,
+      "ks": [
+        6.33584,
+        10.8383,
+        24.80634
+      ],
+      "masstone_hex": "#4A3A26",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "earth"
+    },
+    {
+      "id": "winsor-newton-ivory-black",
+      "brand": "Winsor & Newton",
+      "product_name": "Ivory Black",
+      "medium": "oil",
+      "pigment_ids": [
+        "PBk9"
+      ],
+      "opacity": "semi-opaque",
+      "tinting_strength": 0.208,
+      "ks": [
+        44.62553,
+        44.62553,
+        39.70125
+      ],
+      "masstone_hex": "#1B1B1D",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "black"
+    },
+    {
+      "id": "winsor-newton-winsor-green-blue-shade-",
+      "brand": "Winsor & Newton",
+      "product_name": "Winsor Green (Blue Shade)",
+      "medium": "oil",
+      "pigment_ids": [
+        "PG7"
+      ],
+      "opacity": "transparent",
+      "tinting_strength": 1.092,
+      "ks": [
+        124.002,
+        15.93134,
+        35.49765
+      ],
+      "masstone_hex": "#06301F",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "green"
+    },
+    {
+      "id": "gamblin-titanium-white",
+      "brand": "Gamblin",
+      "product_name": "Titanium White",
+      "medium": "oil",
+      "pigment_ids": [
+        "PW6"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 1,
+      "ks": [
+        0.00147,
+        0.00334,
+        0.01549
+      ],
+      "masstone_hex": "#F9F6EC",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "white"
+    },
+    {
+      "id": "gamblin-ultramarine-blue",
+      "brand": "Gamblin",
+      "product_name": "Ultramarine Blue",
+      "medium": "oil",
+      "pigment_ids": [
+        "PB29"
+      ],
+      "opacity": "semi-transparent",
+      "tinting_strength": 0.408,
+      "ks": [
+        30.26524,
+        16.60372,
+        1.66645
+      ],
+      "masstone_hex": "#222F7A",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "blue"
+    },
+    {
+      "id": "gamblin-phthalo-blue",
+      "brand": "Gamblin",
+      "product_name": "Phthalo Blue",
+      "medium": "oil",
+      "pigment_ids": [
+        "PB15:3"
+      ],
+      "opacity": "transparent",
+      "tinting_strength": 1.783,
+      "ks": [
+        81.6636,
+        14.69188,
+        5.77442
+      ],
+      "masstone_hex": "#12324D",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "blue"
+    },
+    {
+      "id": "gamblin-cerulean-blue",
+      "brand": "Gamblin",
+      "product_name": "Cerulean Blue",
+      "medium": "oil",
+      "pigment_ids": [
+        "PB36"
+      ],
+      "opacity": "semi-opaque",
+      "tinting_strength": 0.363,
+      "ks": [
+        14.69188,
+        1.54063,
+        0.35708
+      ],
+      "masstone_hex": "#327DB1",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "blue"
+    },
+    {
+      "id": "gamblin-cobalt-blue",
+      "brand": "Gamblin",
+      "product_name": "Cobalt Blue",
+      "medium": "oil",
+      "pigment_ids": [
+        "PB28"
+      ],
+      "opacity": "semi-transparent",
+      "tinting_strength": 0.409,
+      "ks": [
+        14.12012,
+        5.43398,
+        0.65154
+      ],
+      "masstone_hex": "#334F9D",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "blue"
+    },
+    {
+      "id": "gamblin-cadmium-yellow-light",
+      "brand": "Gamblin",
+      "product_name": "Cadmium Yellow Light",
+      "medium": "oil",
+      "pigment_ids": [
+        "PY35"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 0.051,
+      "ks": [
+        0.00001,
+        0.0377,
+        57.3601
+      ],
+      "masstone_hex": "#FFE217",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "yellow"
+    },
+    {
+      "id": "gamblin-cadmium-yellow-deep",
+      "brand": "Gamblin",
+      "product_name": "Cadmium Yellow Deep",
+      "medium": "oil",
+      "pigment_ids": [
+        "PY35"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 0.052,
+      "ks": [
+        0.00001,
+        0.29266,
+        88.20264
+      ],
+      "masstone_hex": "#FFB711",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "yellow"
+    },
+    {
+      "id": "gamblin-yellow-ochre",
+      "brand": "Gamblin",
+      "product_name": "Yellow Ochre",
+      "medium": "oil",
+      "pigment_ids": [
+        "PY43"
+      ],
+      "opacity": "semi-opaque",
+      "tinting_strength": 0.264,
+      "ks": [
+        0.18178,
+        0.90743,
+        19.70947
+      ],
+      "masstone_hex": "#C4912B",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "earth"
+    },
+    {
+      "id": "gamblin-cadmium-orange",
+      "brand": "Gamblin",
+      "product_name": "Cadmium Orange",
+      "medium": "oil",
+      "pigment_ids": [
+        "PO20"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 0.181,
+      "ks": [
+        0.00824,
+        1.80263,
+        31.88393
+      ],
+      "masstone_hex": "#F17721",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "orange"
+    },
+    {
+      "id": "gamblin-cadmium-red",
+      "brand": "Gamblin",
+      "product_name": "Cadmium Red",
+      "medium": "oil",
+      "pigment_ids": [
+        "PR108"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 0.188,
+      "ks": [
+        0.18178,
+        21.56014,
+        20.60671
+      ],
+      "masstone_hex": "#C4292A",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "red"
+    },
+    {
+      "id": "gamblin-alizarin-crimson",
+      "brand": "Gamblin",
+      "product_name": "Alizarin Crimson",
+      "medium": "oil",
+      "pigment_ids": [
+        "PR83"
+      ],
+      "opacity": "transparent",
+      "tinting_strength": 0.206,
+      "ks": [
+        2.05556,
+        61.32334,
+        33.62405
+      ],
+      "masstone_hex": "#721620",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "red"
+    },
+    {
+      "id": "gamblin-quinacridone-rose",
+      "brand": "Gamblin",
+      "product_name": "Quinacridone Rose",
+      "medium": "oil",
+      "pigment_ids": [
+        "PV19"
+      ],
+      "opacity": "transparent",
+      "tinting_strength": 0.511,
+      "ks": [
+        0.77041,
+        22.57439,
+        4.05502
+      ],
+      "masstone_hex": "#972859",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "red"
+    },
+    {
+      "id": "gamblin-burnt-sienna",
+      "brand": "Gamblin",
+      "product_name": "Burnt Sienna",
+      "medium": "oil",
+      "pigment_ids": [
+        "PBr7"
+      ],
+      "opacity": "semi-transparent",
+      "tinting_strength": 0.185,
+      "ks": [
+        1.42424,
+        10.08792,
+        65.67902
+      ],
+      "masstone_hex": "#803C15",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "earth"
+    },
+    {
+      "id": "gamblin-raw-umber",
+      "brand": "Gamblin",
+      "product_name": "Raw Umber",
+      "medium": "oil",
+      "pigment_ids": [
+        "PBr7"
+      ],
+      "opacity": "semi-transparent",
+      "tinting_strength": 0.224,
+      "ks": [
+        5.60103,
+        10.08792,
+        28.75725
+      ],
+      "masstone_hex": "#4E3C23",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "earth"
+    },
+    {
+      "id": "gamblin-ivory-black",
+      "brand": "Gamblin",
+      "product_name": "Ivory Black",
+      "medium": "oil",
+      "pigment_ids": [
+        "PBk9"
+      ],
+      "opacity": "semi-opaque",
+      "tinting_strength": 0.215,
+      "ks": [
+        35.49765,
+        39.70125,
+        47.4087
+      ],
+      "masstone_hex": "#1F1D1A",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "black"
+    },
+    {
+      "id": "gamblin-phthalo-green",
+      "brand": "Gamblin",
+      "product_name": "Phthalo Green",
+      "medium": "oil",
+      "pigment_ids": [
+        "PG7"
+      ],
+      "opacity": "transparent",
+      "tinting_strength": 0.975,
+      "ks": [
+        124.002,
+        14.69188,
+        42.0638
+      ],
+      "masstone_hex": "#0A321C",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "green"
+    },
+    {
+      "id": "williamsburg-titanium-white",
+      "brand": "Williamsburg",
+      "product_name": "Titanium White",
+      "medium": "oil",
+      "pigment_ids": [
+        "PW6"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 1,
+      "ks": [
+        0.00707,
+        0.00263,
+        0.00824
+      ],
+      "masstone_hex": "#F2F7F1",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "white"
+    },
+    {
+      "id": "williamsburg-french-ultramarine-blue",
+      "brand": "Williamsburg",
+      "product_name": "French Ultramarine Blue",
+      "medium": "oil",
+      "pigment_ids": [
+        "PB29"
+      ],
+      "opacity": "semi-transparent",
+      "tinting_strength": 0.328,
+      "ks": [
+        44.62553,
+        15.93134,
+        1.46204
+      ],
+      "masstone_hex": "#1B307F",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "blue"
+    },
+    {
+      "id": "williamsburg-phthalo-blue",
+      "brand": "Williamsburg",
+      "product_name": "Phthalo Blue",
+      "medium": "oil",
+      "pigment_ids": [
+        "PB15:3"
+      ],
+      "opacity": "transparent",
+      "tinting_strength": 1.352,
+      "ks": [
+        124.002,
+        14.12012,
+        4.96803
+      ],
+      "masstone_hex": "#0B3352",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "blue"
+    },
+    {
+      "id": "williamsburg-cerulean-blue",
+      "brand": "Williamsburg",
+      "product_name": "Cerulean Blue",
+      "medium": "oil",
+      "pigment_ids": [
+        "PB35"
+      ],
+      "opacity": "semi-opaque",
+      "tinting_strength": 0.294,
+      "ks": [
+        19.70947,
+        1.50083,
+        0.30276
+      ],
+      "masstone_hex": "#2B7EB6",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "blue"
+    },
+    {
+      "id": "williamsburg-cobalt-blue",
+      "brand": "Williamsburg",
+      "product_name": "Cobalt Blue",
+      "medium": "oil",
+      "pigment_ids": [
+        "PB28"
+      ],
+      "opacity": "semi-transparent",
+      "tinting_strength": 0.346,
+      "ks": [
+        18.86421,
+        5.27298,
+        0.56452
+      ],
+      "masstone_hex": "#2C50A2",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "blue"
+    },
+    {
+      "id": "williamsburg-cadmium-yellow-light",
+      "brand": "Williamsburg",
+      "product_name": "Cadmium Yellow Light",
+      "medium": "oil",
+      "pigment_ids": [
+        "PY35"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 0.066,
+      "ks": [
+        0.00036,
+        0.03499,
+        42.0638
+      ],
+      "masstone_hex": "#FCE31C",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "yellow"
+    },
+    {
+      "id": "williamsburg-cadmium-yellow-deep",
+      "brand": "Williamsburg",
+      "product_name": "Cadmium Yellow Deep",
+      "medium": "oil",
+      "pigment_ids": [
+        "PY35"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 0.07,
+      "ks": [
+        0.00147,
+        0.2828,
+        61.32334
+      ],
+      "masstone_hex": "#F9B816",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "yellow"
+    },
+    {
+      "id": "williamsburg-yellow-ochre",
+      "brand": "Williamsburg",
+      "product_name": "Yellow Ochre",
+      "medium": "oil",
+      "pigment_ids": [
+        "PY43"
+      ],
+      "opacity": "semi-opaque",
+      "tinting_strength": 0.31,
+      "ks": [
+        0.23699,
+        0.88321,
+        15.93134
+      ],
+      "masstone_hex": "#BD9230",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "earth"
+    },
+    {
+      "id": "williamsburg-cadmium-orange",
+      "brand": "Williamsburg",
+      "product_name": "Cadmium Orange",
+      "medium": "oil",
+      "pigment_ids": [
+        "PO20"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 0.22,
+      "ks": [
+        0.01908,
+        1.75602,
+        24.80634
+      ],
+      "masstone_hex": "#EA7826",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "orange"
+    },
+    {
+      "id": "williamsburg-cadmium-red",
+      "brand": "Williamsburg",
+      "product_name": "Cadmium Red",
+      "medium": "oil",
+      "pigment_ids": [
+        "PR108"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 0.204,
+      "ks": [
+        0.23699,
+        20.60671,
+        16.60372
+      ],
+      "masstone_hex": "#BD2A2F",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "red"
+    },
+    {
+      "id": "williamsburg-alizarin-crimson",
+      "brand": "Williamsburg",
+      "product_name": "Alizarin Crimson",
+      "medium": "oil",
+      "pigment_ids": [
+        "PR83"
+      ],
+      "opacity": "transparent",
+      "tinting_strength": 0.227,
+      "ks": [
+        2.47424,
+        57.3601,
+        26.03596
+      ],
+      "masstone_hex": "#6B1725",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "red"
+    },
+    {
+      "id": "williamsburg-quinacridone-rose",
+      "brand": "Williamsburg",
+      "product_name": "Quinacridone Rose",
+      "medium": "oil",
+      "pigment_ids": [
+        "PV19"
+      ],
+      "opacity": "transparent",
+      "tinting_strength": 0.525,
+      "ks": [
+        0.93224,
+        21.56014,
+        3.52295
+      ],
+      "masstone_hex": "#90295E",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "red"
+    },
+    {
+      "id": "williamsburg-burnt-sienna",
+      "brand": "Williamsburg",
+      "product_name": "Burnt Sienna",
+      "medium": "oil",
+      "pigment_ids": [
+        "PBr7"
+      ],
+      "opacity": "semi-transparent",
+      "tinting_strength": 0.234,
+      "ks": [
+        1.71064,
+        9.73798,
+        47.4087
+      ],
+      "masstone_hex": "#793D1A",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "earth"
+    },
+    {
+      "id": "williamsburg-raw-umber",
+      "brand": "Williamsburg",
+      "product_name": "Raw Umber",
+      "medium": "oil",
+      "pigment_ids": [
+        "PBr7"
+      ],
+      "opacity": "semi-transparent",
+      "tinting_strength": 0.25,
+      "ks": [
+        6.96675,
+        9.73798,
+        22.57439
+      ],
+      "masstone_hex": "#473D28",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "earth"
+    },
+    {
+      "id": "williamsburg-ivory-black",
+      "brand": "Williamsburg",
+      "product_name": "Ivory Black",
+      "medium": "oil",
+      "pigment_ids": [
+        "PBk9"
+      ],
+      "opacity": "semi-opaque",
+      "tinting_strength": 0.209,
+      "ks": [
+        53.74475,
+        37.5183,
+        35.49765
+      ],
+      "masstone_hex": "#181E1F",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "black"
+    },
+    {
+      "id": "williamsburg-phthalo-green",
+      "brand": "Williamsburg",
+      "product_name": "Phthalo Green",
+      "medium": "oil",
+      "pigment_ids": [
+        "PG7"
+      ],
+      "opacity": "transparent",
+      "tinting_strength": 1.174,
+      "ks": [
+        124.002,
+        14.12012,
+        31.88393
+      ],
+      "masstone_hex": "#033321",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "green"
+    },
+    {
+      "id": "michael-harding-titanium-white",
+      "brand": "Michael Harding",
+      "product_name": "Titanium White",
+      "medium": "oil",
+      "pigment_ids": [
+        "PW6"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 1,
+      "ks": [
+        0.00263,
+        0.00949,
+        0.006
+      ],
+      "masstone_hex": "#F7F0F3",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "white"
+    },
+    {
+      "id": "michael-harding-ultramarine-blue",
+      "brand": "Michael Harding",
+      "product_name": "Ultramarine Blue",
+      "medium": "oil",
+      "pigment_ids": [
+        "PB29"
+      ],
+      "opacity": "semi-transparent",
+      "tinting_strength": 0.363,
+      "ks": [
+        33.62405,
+        21.56014,
+        1.3874
+      ],
+      "masstone_hex": "#202981",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "blue"
+    },
+    {
+      "id": "michael-harding-phthalocyanine-blue-lake",
+      "brand": "Michael Harding",
+      "product_name": "Phthalocyanine Blue Lake",
+      "medium": "oil",
+      "pigment_ids": [
+        "PB15:3"
+      ],
+      "opacity": "transparent",
+      "tinting_strength": 1.557,
+      "ks": [
+        95.49943,
+        18.86421,
+        4.68413
+      ],
+      "masstone_hex": "#102C54",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "blue"
+    },
+    {
+      "id": "michael-harding-cerulean-blue",
+      "brand": "Michael Harding",
+      "product_name": "Cerulean Blue",
+      "medium": "oil",
+      "pigment_ids": [
+        "PB35"
+      ],
+      "opacity": "semi-opaque",
+      "tinting_strength": 0.348,
+      "ks": [
+        15.93134,
+        1.80263,
+        0.2828
+      ],
+      "masstone_hex": "#3077B8",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "blue"
+    },
+    {
+      "id": "michael-harding-cobalt-blue",
+      "brand": "Michael Harding",
+      "product_name": "Cobalt Blue",
+      "medium": "oil",
+      "pigment_ids": [
+        "PB28"
+      ],
+      "opacity": "semi-transparent",
+      "tinting_strength": 0.386,
+      "ks": [
+        15.29487,
+        6.5379,
+        0.53246
+      ],
+      "masstone_hex": "#3149A4",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "blue"
+    },
+    {
+      "id": "michael-harding-cadmium-yellow-light",
+      "brand": "Michael Harding",
+      "product_name": "Cadmium Yellow Light",
+      "medium": "oil",
+      "pigment_ids": [
+        "PY35"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 0.123,
+      "ks": [
+        0.00001,
+        0.05647,
+        37.5183
+      ],
+      "masstone_hex": "#FFDC1E",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "yellow"
+    },
+    {
+      "id": "michael-harding-cadmium-yellow-deep",
+      "brand": "Michael Harding",
+      "product_name": "Cadmium Yellow Deep",
+      "medium": "oil",
+      "pigment_ids": [
+        "PY35"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 0.082,
+      "ks": [
+        0.00004,
+        0.35708,
+        53.74475
+      ],
+      "masstone_hex": "#FEB118",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "yellow"
+    },
+    {
+      "id": "michael-harding-yellow-ochre",
+      "brand": "Michael Harding",
+      "product_name": "Yellow Ochre",
+      "medium": "oil",
+      "pigment_ids": [
+        "PY43"
+      ],
+      "opacity": "semi-opaque",
+      "tinting_strength": 0.333,
+      "ks": [
+        0.19656,
+        1.0657,
+        14.69188
+      ],
+      "masstone_hex": "#C28B32",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "earth"
+    },
+    {
+      "id": "michael-harding-cadmium-orange",
+      "brand": "Michael Harding",
+      "product_name": "Cadmium Orange",
+      "medium": "oil",
+      "pigment_ids": [
+        "PO20"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 0.239,
+      "ks": [
+        0.01085,
+        2.11044,
+        22.57439
+      ],
+      "masstone_hex": "#EF7128",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "orange"
+    },
+    {
+      "id": "michael-harding-cadmium-red",
+      "brand": "Michael Harding",
+      "product_name": "Cadmium Red",
+      "medium": "oil",
+      "pigment_ids": [
+        "PR108"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 0.179,
+      "ks": [
+        0.19656,
+        28.75725,
+        15.29487
+      ],
+      "masstone_hex": "#C22331",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "red"
+    },
+    {
+      "id": "michael-harding-alizarin-crimson",
+      "brand": "Michael Harding",
+      "product_name": "Alizarin Crimson",
+      "medium": "oil",
+      "pigment_ids": [
+        "PR83"
+      ],
+      "opacity": "transparent",
+      "tinting_strength": 0.168,
+      "ks": [
+        2.16687,
+        95.49943,
+        23.65457
+      ],
+      "masstone_hex": "#701027",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "red"
+    },
+    {
+      "id": "michael-harding-magenta",
+      "brand": "Michael Harding",
+      "product_name": "Magenta",
+      "medium": "oil",
+      "pigment_ids": [
+        "PV19"
+      ],
+      "opacity": "transparent",
+      "tinting_strength": 0.423,
+      "ks": [
+        0.81392,
+        30.26524,
+        3.33306
+      ],
+      "masstone_hex": "#952260",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "red"
+    },
+    {
+      "id": "michael-harding-burnt-sienna",
+      "brand": "Michael Harding",
+      "product_name": "Burnt Sienna",
+      "medium": "oil",
+      "pigment_ids": [
+        "PBr7"
+      ],
+      "opacity": "semi-transparent",
+      "tinting_strength": 0.25,
+      "ks": [
+        1.50083,
+        12.57246,
+        42.0638
+      ],
+      "masstone_hex": "#7E361C",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "earth"
+    },
+    {
+      "id": "michael-harding-raw-umber",
+      "brand": "Michael Harding",
+      "product_name": "Raw Umber",
+      "medium": "oil",
+      "pigment_ids": [
+        "PBr7"
+      ],
+      "opacity": "semi-transparent",
+      "tinting_strength": 0.254,
+      "ks": [
+        5.95446,
+        12.57246,
+        20.60671
+      ],
+      "masstone_hex": "#4C362A",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "earth"
+    },
+    {
+      "id": "michael-harding-ivory-black",
+      "brand": "Michael Harding",
+      "product_name": "Ivory Black",
+      "medium": "oil",
+      "pigment_ids": [
+        "PBk9"
+      ],
+      "opacity": "semi-opaque",
+      "tinting_strength": 0.207,
+      "ks": [
+        39.70125,
+        57.3601,
+        31.88393
+      ],
+      "masstone_hex": "#1D1721",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "black"
+    },
+    {
+      "id": "michael-harding-phthalo-green",
+      "brand": "Michael Harding",
+      "product_name": "Phthalo Green",
+      "medium": "oil",
+      "pigment_ids": [
+        "PG7"
+      ],
+      "opacity": "transparent",
+      "tinting_strength": 1.068,
+      "ks": [
+        124.002,
+        18.86421,
+        28.75725
+      ],
+      "masstone_hex": "#082C23",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "green"
+    },
+    {
+      "id": "sennelier-titanium-white",
+      "brand": "Sennelier",
+      "product_name": "Titanium White",
+      "medium": "oil",
+      "pigment_ids": [
+        "PW6"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 1,
+      "ks": [
+        0.00824,
+        0.00707,
+        0.01724
+      ],
+      "masstone_hex": "#F1F2EB",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "white"
+    },
+    {
+      "id": "sennelier-french-ultramarine-blue",
+      "brand": "Sennelier",
+      "product_name": "French Ultramarine Blue",
+      "medium": "oil",
+      "pigment_ids": [
+        "PB29"
+      ],
+      "opacity": "semi-transparent",
+      "tinting_strength": 0.308,
+      "ks": [
+        47.4087,
+        19.70947,
+        1.71064
+      ],
+      "masstone_hex": "#1A2B79",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "blue"
+    },
+    {
+      "id": "sennelier-phthalo-blue",
+      "brand": "Sennelier",
+      "product_name": "Phthalo Blue",
+      "medium": "oil",
+      "pigment_ids": [
+        "PB15:3"
+      ],
+      "opacity": "transparent",
+      "tinting_strength": 1.382,
+      "ks": [
+        124.002,
+        17.31467,
+        5.95446
+      ],
+      "masstone_hex": "#0A2E4C",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "blue"
+    },
+    {
+      "id": "sennelier-cerulean-blue",
+      "brand": "Sennelier",
+      "product_name": "Cerulean Blue",
+      "medium": "oil",
+      "pigment_ids": [
+        "PB35"
+      ],
+      "opacity": "semi-opaque",
+      "tinting_strength": 0.29,
+      "ks": [
+        20.60671,
+        1.71064,
+        0.36874
+      ],
+      "masstone_hex": "#2A79B0",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "blue"
+    },
+    {
+      "id": "sennelier-cobalt-blue",
+      "brand": "Sennelier",
+      "product_name": "Cobalt Blue",
+      "medium": "oil",
+      "pigment_ids": [
+        "PB28"
+      ],
+      "opacity": "semi-transparent",
+      "tinting_strength": 0.337,
+      "ks": [
+        19.70947,
+        6.14148,
+        0.6702
+      ],
+      "masstone_hex": "#2B4B9C",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "blue"
+    },
+    {
+      "id": "sennelier-cadmium-yellow-lemon",
+      "brand": "Sennelier",
+      "product_name": "Cadmium Yellow Lemon",
+      "medium": "oil",
+      "pigment_ids": [
+        "PY35"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 0.05,
+      "ks": [
+        0.00065,
+        0.04973,
+        61.32334
+      ],
+      "masstone_hex": "#FBDE16",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "yellow"
+    },
+    {
+      "id": "sennelier-cadmium-yellow-deep",
+      "brand": "Sennelier",
+      "product_name": "Cadmium Yellow Deep",
+      "medium": "oil",
+      "pigment_ids": [
+        "PY35"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 0.05,
+      "ks": [
+        0.002,
+        0.33457,
+        95.49943
+      ],
+      "masstone_hex": "#F8B310",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "yellow"
+    },
+    {
+      "id": "sennelier-yellow-ochre",
+      "brand": "Sennelier",
+      "product_name": "Yellow Ochre",
+      "medium": "oil",
+      "pigment_ids": [
+        "PY43"
+      ],
+      "opacity": "semi-opaque",
+      "tinting_strength": 0.261,
+      "ks": [
+        0.2457,
+        1.01037,
+        20.60671
+      ],
+      "masstone_hex": "#BC8D2A",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "earth"
+    },
+    {
+      "id": "sennelier-cadmium-orange",
+      "brand": "Sennelier",
+      "product_name": "Cadmium Orange",
+      "medium": "oil",
+      "pigment_ids": [
+        "PO20"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 0.177,
+      "ks": [
+        0.02104,
+        2.00217,
+        33.62405
+      ],
+      "masstone_hex": "#E97320",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "orange"
+    },
+    {
+      "id": "sennelier-cadmium-red",
+      "brand": "Sennelier",
+      "product_name": "Cadmium Red",
+      "medium": "oil",
+      "pigment_ids": [
+        "PR108"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 0.172,
+      "ks": [
+        0.2457,
+        26.03596,
+        21.56014
+      ],
+      "masstone_hex": "#BC2529",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "red"
+    },
+    {
+      "id": "sennelier-alizarin-crimson",
+      "brand": "Sennelier",
+      "product_name": "Alizarin Crimson",
+      "medium": "oil",
+      "pigment_ids": [
+        "PR83"
+      ],
+      "opacity": "transparent",
+      "tinting_strength": 0.174,
+      "ks": [
+        2.54119,
+        81.6636,
+        35.49765
+      ],
+      "masstone_hex": "#6A121F",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "red"
+    },
+    {
+      "id": "sennelier-quinacridone-rose",
+      "brand": "Sennelier",
+      "product_name": "Quinacridone Rose",
+      "medium": "oil",
+      "pigment_ids": [
+        "PV19"
+      ],
+      "opacity": "transparent",
+      "tinting_strength": 0.45,
+      "ks": [
+        0.95766,
+        27.35035,
+        4.17241
+      ],
+      "masstone_hex": "#8F2458",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "red"
+    },
+    {
+      "id": "sennelier-burnt-sienna",
+      "brand": "Sennelier",
+      "product_name": "Burnt Sienna",
+      "medium": "oil",
+      "pigment_ids": [
+        "PBr7"
+      ],
+      "opacity": "semi-transparent",
+      "tinting_strength": 0.176,
+      "ks": [
+        1.75602,
+        11.6632,
+        70.47893
+      ],
+      "masstone_hex": "#783814",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "earth"
+    },
+    {
+      "id": "sennelier-raw-umber",
+      "brand": "Sennelier",
+      "product_name": "Raw Umber",
+      "medium": "oil",
+      "pigment_ids": [
+        "PBr7"
+      ],
+      "opacity": "semi-transparent",
+      "tinting_strength": 0.214,
+      "ks": [
+        7.19441,
+        11.6632,
+        30.26524
+      ],
+      "masstone_hex": "#463822",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "earth"
+    },
+    {
+      "id": "sennelier-ivory-black",
+      "brand": "Sennelier",
+      "product_name": "Ivory Black",
+      "medium": "oil",
+      "pigment_ids": [
+        "PBk9"
+      ],
+      "opacity": "semi-opaque",
+      "tinting_strength": 0.176,
+      "ks": [
+        57.3601,
+        50.43875,
+        50.43875
+      ],
+      "masstone_hex": "#171919",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "black"
+    },
+    {
+      "id": "sennelier-phthalo-green",
+      "brand": "Sennelier",
+      "product_name": "Phthalo Green",
+      "medium": "oil",
+      "pigment_ids": [
+        "PG7"
+      ],
+      "opacity": "transparent",
+      "tinting_strength": 1.13,
+      "ks": [
+        124.002,
+        17.31467,
+        44.62553
+      ],
+      "masstone_hex": "#022E1B",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "green"
+    },
+    {
+      "id": "winsor-newton-cerulean-blue-hue",
+      "brand": "Winsor & Newton",
+      "product_name": "Cerulean Blue Hue",
+      "medium": "oil",
+      "pigment_ids": [
+        "PB15:3",
+        "PW6"
+      ],
+      "opacity": "opaque",
+      "tinting_strength": 0.478,
+      "ks": [
+        9.4036,
+        1.21654,
+        0.2457
+      ],
+      "masstone_hex": "#3E86BC",
+      "source": "estimated",
+      "confidence": 0.4,
+      "hue_family": "blue"
+    }
+  ]
+}

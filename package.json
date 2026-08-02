@@ -1,0 +1,28 @@
+{
+  "name": "pigment",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Oil paint mixing recipes from the tubes you actually own. Single-constant Kubelka-Munk engine, offline PWA.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "gen:catalog": "node scripts/gen-catalog.mjs && node scripts/fit-ks.mjs",
+    "cli": "node cli/mix.mjs"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "playwright-core": "^1.62.1",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.8"
+  }
+}
