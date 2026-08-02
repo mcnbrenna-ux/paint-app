@@ -1,4 +1,5 @@
 import { AppProvider, useApp } from './state/app.tsx'
+import { APP_VERSION } from './version.ts'
 import { Inventory } from './ui/Inventory.tsx'
 import { RecipeDetail } from './ui/RecipeDetail.tsx'
 import { Results } from './ui/Results.tsx'
@@ -46,7 +47,7 @@ export default function App() {
     <AppProvider>
       <div className="shell">
         <header className="app-head">
-          <h1>Pigment</h1>
+          <h1>Pigment <span className="version">v{APP_VERSION}</span></h1>
           <p className="tagline">Which tubes, what ratio, how wrong.</p>
         </header>
         <main>

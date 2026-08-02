@@ -22,8 +22,28 @@ function openDb(): Promise<IDBDatabase> {
           }
         }
       }
-      req.onsuccess = () => resolve(req.result)
-      req.onerror = () => reject(req.error)
+      req.onsuccess = () => {
+        // If a newer app version needs to upgrade the schema, close this
+        // connection so its upgrade isn't blocked forever.
+        req.result.onversionchange = () => {
+          req.result.close()
+          dbPromise = null
+        }
+        resolve(req.result)
+      }
+      req.onerror = () => reject(req.error ?? new Error('Device storage refused to open'))
+      // An older app version (another tab, or the installed home-screen copy)
+      // is holding the database open — waiting silently would hang every save.
+      req.onblocked = () =>
+        reject(
+          new Error(
+            'Another open copy of Pigment is blocking a storage upgrade. Close other tabs or the installed app, then reload.',
+          ),
+        )
+    })
+    // Let a later call retry rather than caching the failure forever.
+    dbPromise.catch(() => {
+      dbPromise = null
     })
   }
   return dbPromise

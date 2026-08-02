@@ -10,6 +10,22 @@ export function Inventory() {
   const [savingPalette, setSavingPalette] = useState(false)
   const [paletteName, setPaletteName] = useState('')
   const [confirmLoad, setConfirmLoad] = useState<string | null>(null)
+  const [paletteError, setPaletteError] = useState<string | null>(null)
+
+  const doSavePalette = (name: string) => {
+    setPaletteError(null)
+    app
+      .savePalette(name)
+      .then(() => {
+        setPaletteName('')
+        setSavingPalette(false)
+      })
+      .catch((e) => {
+        setPaletteError(
+          `Couldn’t save the palette to device storage: ${e instanceof Error ? e.message : String(e)}`,
+        )
+      })
+  }
 
   const groups = useMemo(() => {
     const m = new Map<string, typeof app.tubes>()
@@ -75,21 +91,13 @@ export function Inventory() {
                   onChange={(e) => setPaletteName(e.target.value)}
                   placeholder="Palette name, e.g. Plein air"
                   onKeyDown={(e) => {
-                    if (e.key === 'Enter' && paletteName.trim()) {
-                      app.savePalette(paletteName.trim())
-                      setPaletteName('')
-                      setSavingPalette(false)
-                    }
+                    if (e.key === 'Enter' && paletteName.trim()) doSavePalette(paletteName.trim())
                   }}
                 />
                 <button
                   className="primary small"
                   disabled={!paletteName.trim()}
-                  onClick={() => {
-                    app.savePalette(paletteName.trim())
-                    setPaletteName('')
-                    setSavingPalette(false)
-                  }}
+                  onClick={() => doSavePalette(paletteName.trim())}
                 >
                   Save
                 </button>
@@ -103,6 +111,11 @@ export function Inventory() {
               </button>
             ))}
         </div>
+      )}
+      {paletteError && (
+        <p className="inline-error" role="alert">
+          {paletteError}
+        </p>
       )}
 
       {app.catalogError && (

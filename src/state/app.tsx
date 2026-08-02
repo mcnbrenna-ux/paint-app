@@ -34,7 +34,7 @@ interface AppState {
   addCustom: (brand: string, name: string, pigmentIds: string[], unknownPigment: boolean) => void
   removeTube: (itemId: string) => void
   palettes: Palette[]
-  savePalette: (name: string) => void
+  savePalette: (name: string) => Promise<void>
   loadPalette: (id: string) => void
   deletePalette: (id: string) => void
   reference: ReferenceDoc | null
@@ -144,10 +144,16 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const savePalette = useCallback(
-    (name: string) => {
+    async (name: string) => {
       const p: Palette = { id: uid(), name, items: inventory, created_at: Date.now() }
       setPalettes((ps) => [...ps, p].sort((a, b) => a.name.localeCompare(b.name)))
-      db.putPalette(p)
+      try {
+        await db.putPalette(p)
+      } catch (e) {
+        // Roll back the optimistic chip so the UI never lies about what's on disk.
+        setPalettes((ps) => ps.filter((x) => x.id !== p.id))
+        throw e
+      }
     },
     [inventory],
   )
