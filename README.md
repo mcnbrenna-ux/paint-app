@@ -68,6 +68,8 @@ Colour Index codes, opacity classes, and product names are curated from commonly
 - `src/coach/glaze.ts` — Phase C layer-over-substrate K-M composite (glaze / thin scumble / opaque) that transforms the user's pixels, never generates imagery.
 - `src/coach/guidance.ts` + `content/guidance/*.json` — the rule tree with the six authored classical-workflow transitions, fat-over-lean as a blocking precondition, drying windows as ranges. Content is versioned and schema-tested.
 
+Reference targets, cheapest first (see `docs/spec-amendments.md` A1): a thick matte patch of the user's own **titanium white** (±5.0 floor, $0), an **18% gray card** (±3.5 floor, ~$10), or a genuine **ColorChecker** (measured residual, ~$60). There is deliberately no skip-calibration path.
+
 **Phase A harness:** `node cli/calibrate.mjs --selftest` (synthetic validation) or feed it shot JSONs of photographed reference cards. The gate to unlock any Coach UI: median captureError ≤ 4.0 ΔE00 across ≥ 20 photos under 3 lighting conditions — that requires a physical gray card / ColorChecker and real photographs.
 
 ## Validation to do (Phase 3, physical)

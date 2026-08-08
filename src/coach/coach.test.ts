@@ -10,7 +10,9 @@ import {
   COLORCHECKER_LAB,
   calibrateColorChecker,
   calibrateGrayCard,
+  calibrateTitaniumWhite,
   GRAY_CARD_ERROR_FLOOR,
+  TITANIUM_WHITE_ERROR_FLOOR,
 } from './calibrate.ts'
 import { diagnose, predictDeclaredMix } from './diagnose.ts'
 import { compoundedError } from './errors.ts'
@@ -85,6 +87,26 @@ describe('calibration pipeline', () => {
     expect(cal.captureError).toBe(GRAY_CARD_ERROR_FLOOR)
     const lab = linearRgbToLabD50(cal.correct(distort([0.18, 0.18, 0.18], gains)))
     expect(Math.hypot(lab[1], lab[2])).toBeLessThan(0.5)
+  })
+
+  it('titanium-white patch neutralizes a cast with the wider honesty floor', () => {
+    const whiteRef: [number, number, number] = [0.916, 0.906, 0.867] // ~#F5F4EF linear
+    const gains = [1.2, 1.0, 0.75]
+    const observed = distort([...whiteRef], gains).map((v) => v * 0.8) // cast + underexposed
+    const cal = calibrateTitaniumWhite(observed, whiteRef)
+    expect(cal.captureError).toBe(TITANIUM_WHITE_ERROR_FLOOR)
+    expect(cal.captureError).toBeGreaterThan(GRAY_CARD_ERROR_FLOOR)
+    const corrected = cal.correct(observed)
+    expect(corrected[0]).toBeCloseTo(whiteRef[0], 6)
+    expect(corrected[2]).toBeCloseTo(whiteRef[2], 6)
+  })
+
+  it('rejects a clipped white patch — blown white is unrecoverable', () => {
+    expect(() => calibrateTitaniumWhite([0.999, 0.99, 0.98])).toThrow(CaptureRejectedError)
+  })
+
+  it('rejects a patch too dark to be titanium white', () => {
+    expect(() => calibrateTitaniumWhite([0.05, 0.05, 0.06])).toThrow(/too dark/)
   })
 })
 

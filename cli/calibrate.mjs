@@ -27,6 +27,7 @@ import { readFileSync } from 'node:fs'
 import {
   calibrateColorChecker,
   calibrateGrayCard,
+  calibrateTitaniumWhite,
   CaptureRejectedError,
   COLORCHECKER_LAB,
 } from '../src/coach/calibrate.ts'
@@ -54,7 +55,13 @@ for (const file of args) {
   const patches = shot.patches_srgb.map((h) => [...hexToLinearRgb(h)])
   let cal
   try {
-    cal = shot.target === 'graycard' ? calibrateGrayCard(patches[0]) : calibrateColorChecker(patches)
+    if (shot.target === 'graycard') cal = calibrateGrayCard(patches[0])
+    else if (shot.target === 'titaniumwhite' || shot.target === 'titanium_white')
+      cal = calibrateTitaniumWhite(
+        patches[0],
+        shot.white_reference_srgb ? hexToLinearRgb(shot.white_reference_srgb) : undefined,
+      )
+    else cal = calibrateColorChecker(patches)
   } catch (e) {
     if (e instanceof CaptureRejectedError) {
       console.log(`✗ ${shot.name ?? file}: REJECTED — ${e.message}`)
@@ -109,6 +116,12 @@ function selftest() {
     const ok = cal.captureError < 1.0
     console.log(`  ${ok ? '✓' : '✗'} ${cam.name}: residual ${cal.captureError.toFixed(3)} dE00`)
   }
+  const whiteRef = hexToLinearRgb('#F5F4EF')
+  const castWhite = whiteRef.map((v, i) => v * [1.2, 1.0, 0.75][i] * 0.8)
+  const twCal = calibrateTitaniumWhite(castWhite)
+  const twBack = twCal.correct(castWhite)
+  const twOk = Math.abs(twBack[0] - whiteRef[0]) < 1e-9 && twCal.captureError === 5.0
+  console.log(`  ${twOk ? '✓' : '✗'} titanium-white patch: cast neutralized, floor ±${twCal.captureError} dE00`)
   const crushed = referenceRgb.map((p) => [Math.pow(p[0], 2.6), Math.pow(p[1], 0.4), p[2] * 0.15 + 0.35])
   try {
     calibrateColorChecker(crushed)

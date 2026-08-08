@@ -12,10 +12,18 @@
 //   neutral patches. captureError = mean dE00 across all 24 corrected
 //   patches vs reference values.
 
+import { hexToLinearRgb } from '../engine/color.ts'
 import { deltaE00, labD50ToLinearRgb, linearRgbToLabD50, type Lab } from './lab.ts'
 
 export const CAPTURE_REJECT_DE = 6.0
 export const GRAY_CARD_ERROR_FLOOR = 3.5
+// Owner-approved spec amendment (docs/spec-amendments.md): a thick matte
+// patch of the user's own titanium white may serve as the reference target.
+// Weaker than a manufactured card — whites vary by brand and a glossy patch
+// misleads — so the error floor is wider still. It is calibration with an
+// admitted cost, not a skip-calibration path.
+export const TITANIUM_WHITE_ERROR_FLOOR = 5.0
+export const DEFAULT_TITANIUM_WHITE_HEX = '#F5F4EF'
 
 // Classic 24-patch ColorChecker reference values, Lab(D50), BabelColor
 // averages. Reference data, not measured by us.
@@ -49,7 +57,7 @@ export const COLORCHECKER_LAB: Lab[] = [
 const NEUTRAL_PATCHES = [18, 19, 20, 21, 22, 23]
 
 export interface Calibration {
-  kind: 'gray_card' | 'colorchecker'
+  kind: 'gray_card' | 'colorchecker' | 'titanium_white'
   /** Mean dE00 of corrected patches vs reference (floored for gray card). */
   captureError: number
   /** Corrects a linear-RGB sample from the photographed frame. */
@@ -74,6 +82,39 @@ export function calibrateGrayCard(observedCardLinearRgb: ArrayLike<number>): Cal
   return {
     kind: 'gray_card',
     captureError: GRAY_CARD_ERROR_FLOOR,
+    correct: (rgb) => [rgb[0] * gains[0], rgb[1] * gains[1], rgb[2] * gains[2]],
+  }
+}
+
+/**
+ * Titanium-white patch calibration: per-channel gains mapping the observed
+ * patch to the reference white. Pass the masstone of the user's actual white
+ * tube (from their inventory) when known; defaults to the catalog's titanium
+ * white estimate.
+ */
+export function calibrateTitaniumWhite(
+  observedPatchLinearRgb: ArrayLike<number>,
+  referenceLinearRgb: ArrayLike<number> = hexToLinearRgb(DEFAULT_TITANIUM_WHITE_HEX),
+): Calibration {
+  const o = [observedPatchLinearRgb[0], observedPatchLinearRgb[1], observedPatchLinearRgb[2]]
+  if (o.some((v) => v >= 0.995)) {
+    throw new CaptureRejectedError(
+      'The white patch is clipped — the camera blew it out, so its true color is unrecoverable. ' +
+        'Lower the exposure or angle the light away and re-shoot.',
+      Infinity,
+    )
+  }
+  const lum = 0.2126 * o[0] + 0.7152 * o[1] + 0.0722 * o[2]
+  if (lum < 0.15) {
+    throw new CaptureRejectedError(
+      'The white patch reads far too dark to be titanium white — check that the paint patch is in frame and lit.',
+      Infinity,
+    )
+  }
+  const gains = [0, 1, 2].map((c) => referenceLinearRgb[c] / Math.max(o[c], 1e-4))
+  return {
+    kind: 'titanium_white',
+    captureError: TITANIUM_WHITE_ERROR_FLOOR,
     correct: (rgb) => [rgb[0] * gains[0], rgb[1] * gains[1], rgb[2] * gains[2]],
   }
 }
