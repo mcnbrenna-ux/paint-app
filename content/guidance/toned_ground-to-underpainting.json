@@ -1,0 +1,31 @@
+{
+  "id": "toned_ground-to-underpainting",
+  "fromStage": "TONED_GROUND",
+  "toStage": "UNDERPAINTING",
+  "preconditions": ["layerDrynessDeclared", "paletteDefined"],
+  "cautions": ["fat_over_lean", "drying_window", "solvent_sparingly"],
+  "dryingWindow": { "min_days": 1, "max_days": 3 },
+  "steps": [
+    {
+      "ordinal": 1,
+      "instruction": "Confirm the imprimatura is dry to touch with no lift when you drag a knuckle across it."
+    },
+    {
+      "ordinal": 2,
+      "instruction": "Mix one dark — raw umber, or umber knocked back with a touch of black — thinned lean. No white yet if you want a wipe-out underpainting; add white only for a built-up grisaille.",
+      "mixTargets": [{ "label": "underpainting dark", "hex": "#3d3226" }]
+    },
+    {
+      "ordinal": 3,
+      "instruction": "State the shadow shapes first: mass in everything darker than mid-value as one connected pattern. Squint — if a shape disappears when you squint, it does not belong in this layer."
+    },
+    {
+      "ordinal": 4,
+      "instruction": "Pull lights out with a rag or dry brush rather than painting them in. The ground tone is your light for now."
+    },
+    {
+      "ordinal": 5,
+      "instruction": "Stop while it reads as three values: ground, half-tone, dark. Detail added now is detail you will bury later."
+    }
+  ]
+}

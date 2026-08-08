@@ -56,6 +56,20 @@ node cli/mix.mjs '#6a8f5a' --all --harder  # whole catalog, allow 4-paint mixes
 
 Colour Index codes, opacity classes, and product names are curated from commonly published manufacturer data. The masstone/tint swatch hexes that K/S coefficients and tinting strengths are fitted from are **estimates** standing in for the physical swatch photography of Phase 1 — every paint is marked `source: "estimated"`, which is why the UI's confidence label tops out at "Decent estimate". Replacing the two hex columns in `data/catalog.csv` with measured swatch values (and flipping `source` to `measured`) upgrades the whole pipeline with no code changes.
 
+## Canvas Coach (v1.5 module — engine built, UI gated)
+
+`docs/pigment-canvas-coach-spec-v1.5.md` specs the canvas-photo coaching module. Its own hard gates forbid UI before physical validation, so what ships today is everything buildable before those gates:
+
+- `src/coach/lab.ts` — Lab(D50), Bradford adaptation, real CIEDE2000 (validated against the published Sharma test pairs).
+- `src/coach/calibrate.ts` — Phase A capture calibration: 18% gray card (with an honest error floor — one patch can't detect a cast, so it never reports zero) and 24-patch ColorChecker (least-squares CCM + neutral-ramp LUTs, captureError = mean ΔE00, rejects > 6.0).
+- `src/coach/extract.ts` — tap-region extraction with specular-outlier rejection and blown-highlight detection; captureError rides on every extracted color forever.
+- `src/coach/errors.ts` — compounded error in quadrature (capture ⊕ KM model ⊕ 3-band fallback), always labeled an estimate.
+- `src/coach/diagnose.ts` — Phase B diagnosis: declared mix forward pass vs actual, closed hypothesis list ranked from the Lab delta direction, "outside model" fallback.
+- `src/coach/glaze.ts` — Phase C layer-over-substrate K-M composite (glaze / thin scumble / opaque) that transforms the user's pixels, never generates imagery.
+- `src/coach/guidance.ts` + `content/guidance/*.json` — the rule tree with the six authored classical-workflow transitions, fat-over-lean as a blocking precondition, drying windows as ranges. Content is versioned and schema-tested.
+
+**Phase A harness:** `node cli/calibrate.mjs --selftest` (synthetic validation) or feed it shot JSONs of photographed reference cards. The gate to unlock any Coach UI: median captureError ≤ 4.0 ΔE00 across ≥ 20 photos under 3 lighting conditions — that requires a physical gray card / ColorChecker and real photographs.
+
 ## Validation to do (Phase 3, physical)
 
 Hand-mix 15–20 predicted recipes, photograph beside targets, measure the spread; adjust the ΔE thresholds and confidence bands from data. The open risks in the PRD (§9) all have cheap physical tests — none of them are answerable in software.

@@ -1,0 +1,31 @@
+{
+  "id": "first_painting-to-glazing",
+  "fromStage": "FIRST_PAINTING",
+  "toStage": "GLAZING",
+  "preconditions": ["layerDrynessDeclared", "paletteDefined"],
+  "cautions": ["fat_over_lean", "glaze_over_dry_only", "drying_window"],
+  "dryingWindow": { "min_days": 7, "max_days": 21 },
+  "steps": [
+    {
+      "ordinal": 1,
+      "instruction": "Test dryness where the paint is thickest, not the edges. Any drag or smell of solvent means wait."
+    },
+    {
+      "ordinal": 2,
+      "instruction": "Choose transparent pigments only — check the tube's opacity tag in your inventory. An opaque pigment thinned with medium is a veil, not a glaze."
+    },
+    {
+      "ordinal": 3,
+      "instruction": "Mix glaze piles thin: a nut of transparent color loaded with medium, no white. Preview the shift on your photo before committing brush to canvas.",
+      "previewTransform": { "thicknessClass": "glaze", "mediumLoad": 0.7 }
+    },
+    {
+      "ordinal": 4,
+      "instruction": "Glaze shadows and mid-tones to deepen and unify; leave the lights alone or the painting sinks. Work one region fully, then stop — a second pass goes over dry, not into wet."
+    },
+    {
+      "ordinal": 5,
+      "instruction": "Wipe back immediately with a soft rag anywhere the glaze pools or the value drops more than one step."
+    }
+  ]
+}

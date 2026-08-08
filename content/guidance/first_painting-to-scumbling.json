@@ -1,0 +1,31 @@
+{
+  "id": "first_painting-to-scumbling",
+  "fromStage": "FIRST_PAINTING",
+  "toStage": "SCUMBLING",
+  "preconditions": ["layerDrynessDeclared", "paletteDefined"],
+  "cautions": ["fat_over_lean", "scumble_pressure", "drying_window"],
+  "dryingWindow": { "min_days": 7, "max_days": 21 },
+  "steps": [
+    {
+      "ordinal": 1,
+      "instruction": "Confirm the surface is dry to firm touch — a scumble drags wet paint into mud."
+    },
+    {
+      "ordinal": 2,
+      "instruction": "Mix the scumble slightly lighter and cooler than the passage under it; white-heavy mixes with a whisper of the local color work best.",
+      "previewTransform": { "thicknessClass": "thinScumble", "mediumLoad": 0.2 }
+    },
+    {
+      "ordinal": 3,
+      "instruction": "Load the brush, then wipe most of it off on a rag. The right amount feels like too little."
+    },
+    {
+      "ordinal": 4,
+      "instruction": "Drag flat across the texture high points — atmosphere, mist, turning light on cloth and skin. The underlayer must stay visible through every stroke."
+    },
+    {
+      "ordinal": 5,
+      "instruction": "Stop before it reads as a solid layer. If you lose the underlayer, wipe back while wet and retry with less paint."
+    }
+  ]
+}

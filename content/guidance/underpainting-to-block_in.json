@@ -1,0 +1,31 @@
+{
+  "id": "underpainting-to-block_in",
+  "fromStage": "UNDERPAINTING",
+  "toStage": "BLOCK_IN",
+  "preconditions": ["layerDrynessDeclared", "paletteDefined", "valueRangeCheck"],
+  "cautions": ["fat_over_lean", "drying_window"],
+  "dryingWindow": { "min_days": 2, "max_days": 5 },
+  "steps": [
+    {
+      "ordinal": 1,
+      "instruction": "Premix a pile for each major mass before touching the canvas: shadow, half-tone, and light for every big form. Use the app to target each pile from your reference spots."
+    },
+    {
+      "ordinal": 2,
+      "instruction": "Match value to your underpainting first, hue second. A block-in that keeps the value structure can be wrong in color and still recover; the reverse cannot.",
+      "previewTransform": { "thicknessClass": "opaque", "mediumLoad": 0.2 }
+    },
+    {
+      "ordinal": 3,
+      "instruction": "Work dark to light, background to foreground. Cover everything — no bare underpainting left — at even, modest thickness."
+    },
+    {
+      "ordinal": 4,
+      "instruction": "Keep edges soft everywhere. A block-in with hard edges is a coloring book; you will sharpen the few that matter at the end."
+    },
+    {
+      "ordinal": 5,
+      "instruction": "Step back three meters. If the masses do not read as the subject at that distance, fix it now — nothing later in the process can save a wrong block-in."
+    }
+  ]
+}

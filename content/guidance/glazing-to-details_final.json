@@ -1,0 +1,32 @@
+{
+  "id": "glazing-to-details_final",
+  "fromStage": "GLAZING",
+  "toStage": "DETAILS_FINAL",
+  "preconditions": ["layerDrynessDeclared", "paletteDefined"],
+  "cautions": ["fat_over_lean", "drying_window"],
+  "dryingWindow": { "min_days": 2, "max_days": 7 },
+  "steps": [
+    {
+      "ordinal": 1,
+      "instruction": "Let the glazes set up until touch-dry so accents sit on top instead of sinking in."
+    },
+    {
+      "ordinal": 2,
+      "instruction": "Place the highlights last and thickest — small, opaque, slightly warm or cool of pure white, never pure white everywhere.",
+      "mixTargets": [{ "label": "warm highlight", "hex": "#f4ead8" }],
+      "previewTransform": { "thicknessClass": "opaque", "mediumLoad": 0.4 }
+    },
+    {
+      "ordinal": 3,
+      "instruction": "Sharpen at most a handful of edges — the ones that hold the focal point. Count them; if it is more than five, you are outlining, not finishing."
+    },
+    {
+      "ordinal": 4,
+      "instruction": "Restate the single darkest accent if the glazing lightened it. One touch, done."
+    },
+    {
+      "ordinal": 5,
+      "instruction": "Walk away for a day, then look in a mirror or a phone photo. Fix only what still jumps out — then sign it and stop."
+    }
+  ]
+}

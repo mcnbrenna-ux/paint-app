@@ -1,0 +1,31 @@
+{
+  "id": "block_in-to-first_painting",
+  "fromStage": "BLOCK_IN",
+  "toStage": "FIRST_PAINTING",
+  "preconditions": ["layerDrynessDeclared", "paletteDefined"],
+  "cautions": ["fat_over_lean", "drying_window"],
+  "dryingWindow": { "min_days": 3, "max_days": 7 },
+  "steps": [
+    {
+      "ordinal": 1,
+      "instruction": "Add a little more medium to your piles than the block-in had — this layer must be fatter than the last."
+    },
+    {
+      "ordinal": 2,
+      "instruction": "Restate each mass with its real color temperature: warm/cool shifts across a form come before any detail inside it. Sample your reference photo on both the lit and shadow side of each form.",
+      "previewTransform": { "thicknessClass": "opaque", "mediumLoad": 0.35 }
+    },
+    {
+      "ordinal": 3,
+      "instruction": "Model form with value steps no smaller than you can actually see at arm's length — usually three to five per form. More steps now means chalky overblending."
+    },
+    {
+      "ordinal": 4,
+      "instruction": "Place the darkest accent and the lightest light deliberately, once each. Everything else must sit inside that range."
+    },
+    {
+      "ordinal": 5,
+      "instruction": "Resolve edges by kind: lost where form turns away, firm where planes meet, hard only where you want the eye to land."
+    }
+  ]
+}
