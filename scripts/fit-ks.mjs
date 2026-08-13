@@ -158,6 +158,35 @@ const pigments = Object.entries(PIGMENTS).map(([id, [common_name, transparency, 
   }
 })
 
+// Physically-measured overrides, applied after the estimate fit. Provenance:
+// owner's Phase A photo set (2026-08-08) — five swatches (titanium-white
+// reference + four declared mixes) shot under window / lamp / mixed light and
+// white-patch calibrated (±6.2 dE00 compounded band; patch colors read
+// visually from uploaded photos, not pixel-sampled). Cerulean K/S derived
+// from the 3:1-in-white tint swatch with strength anchored at 0.10 (weak
+// tinter, per its real-world reputation); the K/S triple is the effective
+// value single-constant KM needs to reproduce that measurement, not a claim
+// about the tube's masstone appearance. Sienna strength fitted from the
+// 2:1-in-white swatch. Held-out validation (2W:1C:1S mix) improved from
+// dE00 ~30 to ~9-14. Confidence 0.6 reflects the visual-read uncertainty.
+const MEASURED_OVERRIDES = {
+  'winsor-newton-cerulean-blue': {
+    ks: [6.354, 1.831, 0.063],
+    tinting_strength: 0.1,
+    source: 'measured',
+    confidence: 0.6,
+  },
+  'winsor-newton-burnt-sienna': {
+    tinting_strength: 0.16,
+    source: 'measured',
+    confidence: 0.6,
+  },
+}
+for (const paint of paints) {
+  const override = MEASURED_OVERRIDES[paint.id]
+  if (override) Object.assign(paint, override)
+}
+
 const catalog = {
   version: 1,
   bands: 3,

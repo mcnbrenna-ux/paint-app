@@ -686,15 +686,15 @@
         "PBr7"
       ],
       "opacity": "semi-transparent",
-      "tinting_strength": 0.215,
+      "tinting_strength": 0.16,
       "ks": [
         1.58148,
         10.8383,
         53.74475
       ],
       "masstone_hex": "#7C3A18",
-      "source": "estimated",
-      "confidence": 0.4,
+      "source": "measured",
+      "confidence": 0.6,
       "hue_family": "earth"
     },
     {
@@ -1126,15 +1126,15 @@
         "PB35"
       ],
       "opacity": "semi-opaque",
-      "tinting_strength": 0.203,
+      "tinting_strength": 0.1,
       "ks": [
-        35.49765,
-        1.35148,
-        0.18178
+        6.354,
+        1.831,
+        0.063
       ],
       "masstone_hex": "#1F82C4",
-      "source": "estimated",
-      "confidence": 0.4,
+      "source": "measured",
+      "confidence": 0.6,
       "hue_family": "blue"
     },
     {
