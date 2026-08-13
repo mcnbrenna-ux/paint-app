@@ -169,17 +169,21 @@ const pigments = Object.entries(PIGMENTS).map(([id, [common_name, transparency, 
 // about the tube's masstone appearance. Sienna strength fitted from the
 // 2:1-in-white swatch. Held-out validation (2W:1C:1S mix) improved from
 // dE00 ~30 to ~9-14. Confidence 0.6 reflects the visual-read uncertainty.
+// Phase A pixel data later showed the capture pipeline is lighting-
+// inconsistent (docs/phase-a-results.md), so these stay 'estimated': the
+// directional corrections are supported under every lighting, the absolute
+// values are not certifiable.
 const MEASURED_OVERRIDES = {
   'winsor-newton-cerulean-blue': {
     ks: [6.354, 1.831, 0.063],
     tinting_strength: 0.1,
-    source: 'measured',
-    confidence: 0.6,
+    source: 'estimated',
+    confidence: 0.5,
   },
   'winsor-newton-burnt-sienna': {
     tinting_strength: 0.16,
-    source: 'measured',
-    confidence: 0.6,
+    source: 'estimated',
+    confidence: 0.5,
   },
 }
 for (const paint of paints) {
