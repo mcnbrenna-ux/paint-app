@@ -1,7 +1,19 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { hexToLinearRgb, linearRgbToOklab } from '../engine/color.ts'
+import { hexToLinearRgb, linearRgbToHex, linearRgbToOklab } from '../engine/color.ts'
 import { searchMixesAsync, verdictLabel, type SearchRecipe } from '../engine/search.ts'
 import type { ReferencePin, Target, TargetOrigin } from '../engine/types.ts'
+import { linearRgbToLabD65 } from '../coach/lab.ts'
+import {
+  applyGains,
+  defaultProfile,
+  FrameRejectedError,
+  matchInProfile,
+  medianRegion,
+  sampleAnchor,
+  srgb8ToLinear,
+  vonKriesGains,
+  type LinearRgb,
+} from '../profiles/correction.ts'
 import { uid } from '../db/db.ts'
 import { useApp } from '../state/app.tsx'
 import { ConfidenceTag, EmptyLine, Swatch, UncalibratedWarning } from './components.tsx'
@@ -14,6 +26,18 @@ type PinMix = { key: string; loading: boolean; best: SearchRecipe | null; achiev
 export function Studio() {
   const app = useApp()
   const [mode, setMode] = useState<'photo' | 'picker'>('photo')
+
+  // §7: entering the comparison flow defaults to the most-used profile —
+  // pre-selected automatically (without inflating its use count), switchable
+  // in one tap in the workspace below.
+  useEffect(() => {
+    if (!app.activeProfile) {
+      const verified = app.profiles.filter((p) => p.lastVerifiedAt > 0)
+      const def = defaultProfile(verified)
+      if (def) app.setActiveProfile(def.id, false)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [app.profiles.length])
 
   return (
     <section>
@@ -58,8 +82,15 @@ function PhotoWorkspace() {
   const [ready, setReady] = useState(false)
   const [confirmClear, setConfirmClear] = useState(false)
   const [mixes, setMixes] = useState<Record<string, PinMix>>({})
+  const [anchorError, setAnchorError] = useState<string | null>(null)
 
   const pins = app.reference?.pins ?? []
+  const profile = app.activeProfile
+  const verifiedProfiles = app.profiles.filter((p) => p.lastVerifiedAt > 0)
+  // The photo's anchor only counts for the profile it was tapped under.
+  const photoAnchor =
+    profile && app.reference?.anchor && app.reference.anchor.profile_id === profile.id ? app.reference.anchor : null
+  const needsAnchor = !!profile && !!app.reference && !photoAnchor
   const invKey = useMemo(() => app.usablePaints.map((p) => p.id).sort().join('|'), [app.usablePaints])
 
   // Draw the persisted reference photo whenever it changes.
@@ -117,40 +148,76 @@ function PhotoWorkspace() {
 
   const onFile = (file: File | undefined) => {
     setImageError(null)
+    setAnchorError(null)
     if (!file) return
     if (!ACCEPTED.includes(file.type)) {
       setImageError('Unsupported file type. Accepted formats: JPEG, PNG, WebP, GIF.')
       return
     }
-    // Replacing the photo starts a fresh set of pins.
+    // Replacing the photo starts a fresh set of pins (and a fresh anchor).
     app.setReferenceImage(file)
     setMixes({})
     setConfirmClear(false)
   }
 
-  const samplePin = (e: React.MouseEvent<HTMLCanvasElement>) => {
+  /** §5.1–5.2: linear pixels in a small radius around the tap. */
+  const sampleTapRegion = (e: React.MouseEvent<HTMLCanvasElement>): { pixels: LinearRgb[]; relX: number; relY: number } | null => {
     const canvas = canvasRef.current
-    if (!canvas || !ready) return
+    if (!canvas || !ready) return null
     const rect = canvas.getBoundingClientRect()
     const relX = (e.clientX - rect.left) / rect.width
     const relY = (e.clientY - rect.top) / rect.height
-    const px = Math.round(relX * canvas.width)
-    const py = Math.round(relY * canvas.height)
-    // 5x5 pixel average around the tap (spec F2).
-    const x0 = Math.max(0, Math.min(canvas.width - 5, px - 2))
-    const y0 = Math.max(0, Math.min(canvas.height - 5, py - 2))
-    const data = canvas.getContext('2d', { willReadFrequently: true })!.getImageData(x0, y0, 5, 5).data
-    let r = 0
-    let g = 0
-    let b = 0
-    for (let i = 0; i < data.length; i += 4) {
-      r += data[i]
-      g += data[i + 1]
-      b += data[i + 2]
+    const cx = Math.round(relX * canvas.width)
+    const cy = Math.round(relY * canvas.height)
+    const radius = Math.max(4, Math.round(Math.min(canvas.width, canvas.height) * 0.008))
+    const x0 = Math.max(0, Math.min(canvas.width - 2 * radius - 1, cx - radius))
+    const y0 = Math.max(0, Math.min(canvas.height - 2 * radius - 1, cy - radius))
+    const data = canvas
+      .getContext('2d', { willReadFrequently: true })!
+      .getImageData(x0, y0, 2 * radius + 1, 2 * radius + 1).data
+    const pixels: LinearRgb[] = []
+    for (let i = 0; i < data.length; i += 4) pixels.push(srgb8ToLinear(data[i], data[i + 1], data[i + 2]))
+    return { pixels, relX, relY }
+  }
+
+  const onCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    const sample = sampleTapRegion(e)
+    if (!sample) return
+    setAnchorError(null)
+
+    // With a profile active, the first tap must be the white anchor (§2.3).
+    if (needsAnchor) {
+      try {
+        const anchor = sampleAnchor(sample.pixels)
+        app.setReferenceAnchor({
+          x: sample.relX,
+          y: sample.relY,
+          r: anchor[0],
+          g: anchor[1],
+          b: anchor[2],
+          profile_id: profile!.id,
+        })
+      } catch (err) {
+        if (err instanceof FrameRejectedError) setAnchorError(err.message)
+        else throw err
+      }
+      return
     }
-    const n = data.length / 4
-    const toHex = (v: number) => Math.round(v / n).toString(16).padStart(2, '0')
-    app.addReferencePin({ x: relX, y: relY, hex: `#${toHex(r)}${toHex(g)}${toHex(b)}` })
+
+    const raw = medianRegion(sample.pixels)
+    let hex: string
+    let calibrated = false
+    if (profile && photoAnchor) {
+      // §5.4: von Kries against this photo's anchor. We correct every sampled
+      // pixel rather than repainting the whole displayed frame — only sampled
+      // colors flow downstream, and the visible photo stays what the camera saw.
+      const gains = vonKriesGains(profile.anchorReference, [photoAnchor.r, photoAnchor.g, photoAnchor.b])
+      hex = linearRgbToHex(applyGains(raw, gains))
+      calibrated = true
+    } else {
+      hex = linearRgbToHex(raw)
+    }
+    app.addReferencePin({ x: sample.relX, y: sample.relY, hex, calibrated })
   }
 
   const openAllRecipes = (pin: ReferencePin) => {
@@ -161,12 +228,40 @@ function PhotoWorkspace() {
       origin: 'image_sample',
       image_ref: 'reference',
     }
+    if (profile && photoAnchor) {
+      target.profile_name = profile.name
+      target.profile_kind = profile.kind
+    }
     app.nav({ name: 'results', target })
   }
+
+  const tubeName = (paintId: string) =>
+    app.tubes.find((t) => t.paint?.id === paintId)?.product_name ?? paintId
 
   return (
     <div className="studio">
       <div className="studio-main">
+        {/* §7: the active profile is one tap and never ambiguous. */}
+        <div className="profile-bar">
+          <span className="palette-label">Light</span>
+          <select
+            value={profile?.id ?? ''}
+            onChange={(e) => app.setActiveProfile(e.target.value || null)}
+            aria-label="Active lighting profile"
+          >
+            <option value="">None — uncalibrated</option>
+            {verifiedProfiles.map((p) => (
+              <option key={p.id} value={p.id}>
+                {p.name}
+                {p.kind === 'daylight' ? ' (variable)' : ''}
+              </option>
+            ))}
+          </select>
+          {verifiedProfiles.length === 0 && (
+            <span className="hint">Set one up on the Light tab for repeatable colors.</span>
+          )}
+        </div>
+
         {!app.reference ? (
           <div
             className="dropzone tall"
@@ -181,13 +276,32 @@ function PhotoWorkspace() {
               Choose an image
               <input type="file" accept={ACCEPTED.join(',')} onChange={(e) => onFile(e.target.files?.[0])} hidden />
             </label>
-            <p className="hint">The photo stays here — across screens and app restarts — until you replace it.</p>
+            <p className="hint">
+              The photo stays here — across screens and app restarts — until you replace it.
+              {profile ? ' Keep your white dab visible in the shot.' : ''}
+            </p>
           </div>
         ) : (
           <>
+            {needsAnchor && (
+              <p className="warn-banner" role="alert">
+                Tap your {profile?.anchorKind === 'gray_card' ? 'gray card' : 'white dab'} in the photo first — it
+                calibrates every color you sample from this shot.
+              </p>
+            )}
+            {anchorError && (
+              <p className="inline-error" role="alert">
+                {anchorError}
+              </p>
+            )}
             <div className="canvas-wrap">
               {decoding && <div className="spinner" aria-label="Decoding image" />}
-              <canvas ref={canvasRef} onClick={samplePin} />
+              <canvas ref={canvasRef} onClick={onCanvasClick} />
+              {photoAnchor && (
+                <span className="anchor-marker" style={{ left: `${photoAnchor.x * 100}%`, top: `${photoAnchor.y * 100}%` }}>
+                  A
+                </span>
+              )}
               {pins.map((pin, i) => (
                 <span
                   key={pin.id}
@@ -231,29 +345,53 @@ function PhotoWorkspace() {
       </div>
 
       <aside className="studio-side">
-        <h3 className="group-head">Sampled spots</h3>
-        {pins.length > 0 && <UncalibratedWarning />}
+        <h3 className="group-head">
+          Sampled spots
+          {/* AC5: the active profile is visible wherever matches are shown. */}
+          {profile && photoAnchor ? (
+            <span className={`profile-chip ${profile.kind === 'daylight' ? 'chip-warn' : ''}`}>{profile.name}</span>
+          ) : null}
+        </h3>
+        {profile && photoAnchor && profile.kind === 'daylight' && (
+          <p className="hint">Daylight profile — variable light, treat matches as lower confidence.</p>
+        )}
+        {pins.length > 0 && !(profile && photoAnchor) && <UncalibratedWarning />}
         {pins.length === 0 ? (
           <EmptyLine>
             {app.reference
-              ? 'Tap anywhere on the photo to sample a spot — each spot gets its own mix here.'
+              ? needsAnchor
+                ? 'Tap the white dab first, then tap anywhere to sample spots.'
+                : 'Tap anywhere on the photo to sample a spot — each spot gets its own mix here.'
               : 'Add a photo, then tap it to collect spots. Every spot gets its own mix.'}
           </EmptyLine>
         ) : (
           <ul className="cards">
             {pins.map((pin, i) => {
               const mix = mixes[pin.id]
+              const matches =
+                profile && photoAnchor && profile.swatches.length
+                  ? matchInProfile(profile, linearRgbToLabD65(hexToLinearRgb(pin.hex)), 1)
+                  : []
               return (
                 <li key={pin.id} className="card pin-card">
                   <span className="pin-num">{i + 1}</span>
                   <Swatch hex={pin.hex} size={44} label={pin.hex} />
                   <div className="card-main">
+                    {profile && photoAnchor && !pin.calibrated && (
+                      <p className="row-sub"><em className="tag-unusable">sampled before calibration — re-tap it</em></p>
+                    )}
+                    {matches.length > 0 && (
+                      <p className="row-sub">
+                        Closest tube here: <strong>{tubeName(matches[0].pigmentId)}</strong> · ΔE2000{' '}
+                        {matches[0].deltaE2000.toFixed(1)}
+                      </p>
+                    )}
                     {!mix || mix.loading ? (
                       <p className="row-sub">Searching…</p>
                     ) : mix.best ? (
                       <>
                         <p className="ratio">
-                          {mix.best.parts.map((p, j) => `${p} ${paintName(app, mix.best!.paint_ids[j])}`).join(' : ')}
+                          {mix.best.parts.map((p, j) => `${p} ${tubeName(mix.best!.paint_ids[j])}`).join(' : ')}
                         </p>
                         <p className="row-sub">
                           ΔE {mix.best.delta_e.toFixed(1)} — {verdictLabel(mix.best.delta_e)} ·{' '}
@@ -334,11 +472,6 @@ function PickerPane() {
       </div>
     </div>
   )
-}
-
-function paintName(app: ReturnType<typeof useApp>, paintId: string): string {
-  const p = app.usablePaints.find((x) => x.id === paintId)
-  return p ? p.product_name : paintId
 }
 
 function normalizeHex(hex: string): string | null {

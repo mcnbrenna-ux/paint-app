@@ -1,6 +1,6 @@
 // Minimal app-shell service worker: precache the entry, cache-first for hashed
 // assets, network-first for navigations. Bump the version to invalidate.
-const CACHE = 'pigment-v4'
+const CACHE = 'pigment-v5'
 // Scope-relative so the app works at the domain root and under a subpath
 // (e.g. GitHub Pages at /paint-app/).
 const BASE = new URL('./', self.location).pathname

@@ -56,6 +56,10 @@ node cli/mix.mjs '#6a8f5a' --all --harder  # whole catalog, allow 4-paint mixes
 
 Colour Index codes, opacity classes, and product names are curated from commonly published manufacturer data. The masstone/tint swatch hexes that K/S coefficients and tinting strengths are fitted from are **estimates** standing in for the physical swatch photography of Phase 1 — every paint is marked `source: "estimated"`, which is why the UI's confidence label tops out at "Decent estimate". Replacing the two hex columns in `data/catalog.csv` with measured swatch values (and flipping `source` to `measured`) upgrades the whole pipeline with no code changes.
 
+## Lighting profiles (calibration PRD — shipped)
+
+`docs/pigment-calibration-lighting-profiles-prd.md`. No calibration hardware: a dab of the user's own titanium white (or an optional 18% gray card) anchors every photo, and each lighting condition gets its own profile with its own captured swatch library. Pipeline per capture: linearize → median anchor → validate (clip/underexposed/occluded, non-technical re-shoot prompts) → per-channel von Kries → Lab(D65) → ΔE2000 against the active profile only. Profiles are data (create/rename/re-shoot/delete, two ship as defaults), raw linear values are retained for algorithm-revision reprocessing, artificial profiles prompt re-verification at 6 months or on bulb change, daylight profiles are flagged inherently variable. The active profile is visible on every screen that shows a color match. Honest scope, stated in the UI: repeatable relative color within a profile — not absolute color accuracy.
+
 ## Canvas Coach (v1.5 module — engine built, UI gated)
 
 `docs/pigment-canvas-coach-spec-v1.5.md` specs the canvas-photo coaching module. Its own hard gates forbid UI before physical validation, so what ships today is everything buildable before those gates:

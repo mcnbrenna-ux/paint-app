@@ -40,6 +40,7 @@ export function Results({ target }: { target: Target }) {
       target_id: target.id,
       target_hex: target.srgb_hex,
       target_origin: target.origin,
+      profile_name: target.profile_name,
       components: r.paint_ids.map((paint_id, i) => ({ paint_id, parts: r.parts[i] })),
       predicted_oklab: r.predicted_oklab,
       predicted_hex: r.predicted_hex,
@@ -61,7 +62,18 @@ export function Results({ target }: { target: Target }) {
 
       <div className="target-pin">
         <Swatch hex={target.srgb_hex} size={64} label={`target ${target.srgb_hex}`} />
-        {target.origin === 'image_sample' && <UncalibratedWarning />}
+        {target.profile_name ? (
+          <div>
+            <span className={`profile-chip ${target.profile_kind === 'daylight' ? 'chip-warn' : ''}`}>
+              {target.profile_name}
+            </span>
+            {target.profile_kind === 'daylight' && (
+              <p className="hint">Daylight profile — variable light, lower confidence.</p>
+            )}
+          </div>
+        ) : (
+          target.origin === 'image_sample' && <UncalibratedWarning />
+        )}
       </div>
 
       {phase.s === 'searching' && (

@@ -2,11 +2,11 @@
 // named palettes, and the reference-photo workspace. No backend, no sync —
 // offline at the easel is the whole point.
 
-import type { Correction, InventoryItem, Palette, Recipe, ReferenceDoc } from '../engine/types.ts'
+import type { Correction, InventoryItem, LightingProfile, Palette, Recipe, ReferenceDoc } from '../engine/types.ts'
 
 const DB_NAME = 'pigment'
-const DB_VERSION = 2
-const STORES = ['inventory', 'recipes', 'corrections', 'palettes', 'reference'] as const
+const DB_VERSION = 3
+const STORES = ['inventory', 'recipes', 'corrections', 'palettes', 'reference', 'profiles'] as const
 type StoreName = (typeof STORES)[number]
 
 let dbPromise: Promise<IDBDatabase> | null = null
@@ -92,6 +92,13 @@ export const db = {
   getAllPalettes: () => tx<Palette[]>('palettes', 'readonly', (s) => s.getAll()),
   putPalette: (p: Palette) => tx('palettes', 'readwrite', (s) => s.put(p)),
   deletePalette: (id: string) => tx('palettes', 'readwrite', (s) => s.delete(id)),
+
+  getAllProfiles: () => tx<LightingProfile[]>('profiles', 'readonly', (s) => s.getAll()),
+  putProfile: (p: LightingProfile) => tx('profiles', 'readwrite', (s) => s.put(p)),
+  // Deleting a profile deletes its swatch captures with it — swatches are
+  // embedded in the profile record, so orphaning into another profile is
+  // structurally impossible (AC3).
+  deleteProfile: (id: string) => tx('profiles', 'readwrite', (s) => s.delete(id)),
 
   getReference: () =>
     tx<ReferenceDoc | undefined>('reference', 'readonly', (s) => s.get('current') as IDBRequest<ReferenceDoc | undefined>),

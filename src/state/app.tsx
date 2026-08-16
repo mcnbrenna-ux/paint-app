@@ -2,15 +2,19 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
 import { loadCatalog, resolveTube, STARTER_PALETTE_IDS, type Catalog, type ResolvedTube } from '../data/catalog.ts'
 import { db, uid } from '../db/db.ts'
 import type {
+  AnchorKind,
   Correction,
   CorrectionAxis,
   CorrectionMagnitude,
   InventoryItem,
+  LightingProfile,
   Paint,
   Palette,
+  ProfileKind,
   Recipe,
   ReferenceDoc,
   ReferencePin,
+  SwatchCapture,
   Target,
 } from '../engine/types.ts'
 
@@ -20,6 +24,7 @@ export type Route =
   | { name: 'results'; target: Target }
   | { name: 'recipe'; recipe: Recipe; saved: boolean }
   | { name: 'saved' }
+  | { name: 'profiles' }
 
 interface AppState {
   catalog: Catalog | null
@@ -37,8 +42,22 @@ interface AppState {
   savePalette: (name: string) => Promise<void>
   loadPalette: (id: string) => void
   deletePalette: (id: string) => void
+  profiles: LightingProfile[]
+  activeProfile: LightingProfile | null
+  setActiveProfile: (id: string | null, countUse?: boolean) => void
+  createProfile: (
+    name: string,
+    kind: ProfileKind,
+    anchorKind: AnchorKind,
+    anchor: { r: number; g: number; b: number },
+  ) => LightingProfile
+  updateProfile: (id: string, patch: Partial<Pick<LightingProfile, 'name' | 'notes'>>) => void
+  deleteProfile: (id: string) => void
+  reshootAnchor: (id: string, anchor: { r: number; g: number; b: number }) => void
+  addSwatch: (id: string, capture: SwatchCapture) => void
   reference: ReferenceDoc | null
   setReferenceImage: (image: Blob) => void
+  setReferenceAnchor: (anchor: NonNullable<ReferenceDoc['anchor']> | null) => void
   addReferencePin: (pin: Omit<ReferencePin, 'id'>) => ReferencePin
   removeReferencePin: (pinId: string) => void
   clearReference: () => void
@@ -64,6 +83,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [catalogError, setCatalogError] = useState(false)
   const [inventory, setInventory] = useState<InventoryItem[]>([])
   const [palettes, setPalettes] = useState<Palette[]>([])
+  const [profiles, setProfiles] = useState<LightingProfile[]>([])
+  const [activeProfileId, setActiveProfileId] = useState<string | null>(
+    () => localStorage.getItem('pigment-active-profile'),
+  )
   const [reference, setReference] = useState<ReferenceDoc | null>(null)
   const [recipes, setRecipes] = useState<Recipe[]>([])
   const [corrections, setCorrections] = useState<Correction[]>([])
@@ -77,6 +100,32 @@ export function AppProvider({ children }: { children: ReactNode }) {
     db.getAllInventory().then(setInventory).catch(() => {})
     db.getAllPalettes()
       .then((p) => setPalettes(p.sort((a, b) => a.name.localeCompare(b.name))))
+      .catch(() => {})
+    db.getAllProfiles()
+      .then((ps) => {
+        // §2.4: two profiles ship as defaults. They arrive needing their
+        // anchor shot (lastVerifiedAt 0 = "needs setup"); the count is not fixed.
+        if (ps.length === 0 && !localStorage.getItem('pigment-profiles-seeded')) {
+          const mk = (name: string, kind: ProfileKind): LightingProfile => ({
+            id: uid(),
+            name,
+            createdAt: Date.now(),
+            lastVerifiedAt: 0,
+            anchorReference: { r: 0, g: 0, b: 0 },
+            swatches: [],
+            notes: '',
+            kind,
+            anchorKind: 'white_paint',
+            useCount: 0,
+          })
+          const defaults = [mk('Evening — lamp', 'artificial'), mk('Daylight — window', 'daylight')]
+          defaults.forEach((p) => db.putProfile(p))
+          localStorage.setItem('pigment-profiles-seeded', '1')
+          setProfiles(defaults)
+        } else {
+          setProfiles(ps)
+        }
+      })
       .catch(() => {})
     db.getReference()
       .then((r) => setReference(r ?? null))
@@ -173,10 +222,116 @@ export function AppProvider({ children }: { children: ReactNode }) {
     db.deletePalette(id)
   }, [])
 
+  const patchProfile = useCallback((id: string, fn: (p: LightingProfile) => LightingProfile) => {
+    setProfiles((ps) =>
+      ps.map((p) => {
+        if (p.id !== id) return p
+        const next = fn(p)
+        db.putProfile(next)
+        return next
+      }),
+    )
+  }, [])
+
+  const setActiveProfile = useCallback((id: string | null, countUse = true) => {
+    setActiveProfileId(id)
+    if (id) {
+      localStorage.setItem('pigment-active-profile', id)
+      // §7: default to most-used — only explicit user picks count as use,
+      // so the automatic default can't inflate its own ranking.
+      if (countUse) {
+        setProfiles((ps) =>
+          ps.map((p) => {
+            if (p.id !== id) return p
+            const next = { ...p, useCount: p.useCount + 1 }
+            db.putProfile(next)
+            return next
+          }),
+        )
+      }
+    } else {
+      localStorage.removeItem('pigment-active-profile')
+    }
+  }, [])
+
+  const createProfile = useCallback(
+    (name: string, kind: ProfileKind, anchorKind: AnchorKind, anchor: { r: number; g: number; b: number }) => {
+      const p: LightingProfile = {
+        id: uid(),
+        name,
+        createdAt: Date.now(),
+        lastVerifiedAt: Date.now(),
+        anchorReference: anchor,
+        swatches: [],
+        notes: '',
+        kind,
+        anchorKind,
+        useCount: 0,
+      }
+      setProfiles((ps) => [...ps, p])
+      db.putProfile(p)
+      return p
+    },
+    [],
+  )
+
+  const updateProfile = useCallback(
+    (id: string, patch: Partial<Pick<LightingProfile, 'name' | 'notes'>>) => {
+      patchProfile(id, (p) => ({ ...p, ...patch }))
+    },
+    [patchProfile],
+  )
+
+  const deleteProfile = useCallback(
+    (id: string) => {
+      // AC3: swatches are embedded in the record — they die with it.
+      setProfiles((ps) => ps.filter((p) => p.id !== id))
+      db.deleteProfile(id)
+      setActiveProfileId((cur) => {
+        if (cur === id) {
+          localStorage.removeItem('pigment-active-profile')
+          return null
+        }
+        return cur
+      })
+    },
+    [],
+  )
+
+  const reshootAnchor = useCallback(
+    (id: string, anchor: { r: number; g: number; b: number }) => {
+      // §8: one-tap anchor re-shoot updates the reference without touching swatches.
+      patchProfile(id, (p) => ({ ...p, anchorReference: anchor, lastVerifiedAt: Date.now() }))
+    },
+    [patchProfile],
+  )
+
+  const addSwatch = useCallback(
+    (id: string, capture: SwatchCapture) => {
+      patchProfile(id, (p) => ({
+        ...p,
+        // one capture per tube: a re-shoot replaces the old capture
+        swatches: [...p.swatches.filter((s) => s.pigmentId !== capture.pigmentId), capture],
+      }))
+    },
+    [patchProfile],
+  )
+
+  const activeProfile = profiles.find((p) => p.id === activeProfileId) ?? null
+
   const setReferenceImage = useCallback((image: Blob) => {
     const doc: ReferenceDoc = { id: 'current', image, pins: [], updated_at: Date.now() }
     setReference(doc)
     db.putReference(doc)
+  }, [])
+
+  const setReferenceAnchor = useCallback((anchor: NonNullable<ReferenceDoc['anchor']> | null) => {
+    setReference((r) => {
+      if (!r) return r
+      const doc: ReferenceDoc = { ...r, anchor, updated_at: Date.now() }
+      db.putReference(doc)
+      return doc
+    })
   }, [])
 
   const addReferencePin = useCallback(
@@ -241,8 +396,17 @@ export function AppProvider({ children }: { children: ReactNode }) {
     savePalette,
     loadPalette,
     deletePalette,
+    profiles,
+    activeProfile,
+    setActiveProfile,
+    createProfile,
+    updateProfile,
+    deleteProfile,
+    reshootAnchor,
+    addSwatch,
     reference,
     setReferenceImage,
+    setReferenceAnchor,
     addReferencePin,
     removeReferencePin,
     clearReference,

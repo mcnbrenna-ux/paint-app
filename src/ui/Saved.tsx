@@ -46,6 +46,7 @@ export function Saved() {
                 <p className="ratio">{r.components.map((c) => `${c.parts} ${nameOf(c.paint_id)}`).join(' : ')}</p>
                 <p className="row-sub">
                   ΔE {r.delta_e.toFixed(1)} · {new Date(r.saved_at).toLocaleDateString()}
+                  {r.profile_name ? ` · ${r.profile_name}` : ''}
                 </p>
               </div>
             </li>

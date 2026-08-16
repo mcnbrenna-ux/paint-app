@@ -20,6 +20,7 @@ const BRADFORD_D65_TO_D50 = [
 ]
 
 export const D50_WHITE = [0.96422, 1.0, 0.82521] as const
+export const D65_WHITE = [0.95047, 1.0, 1.08883] as const
 
 function mat3mul(m: number[][], v: ArrayLike<number>): [number, number, number] {
   return [
@@ -59,6 +60,15 @@ export function labToXyzD50(lab: Lab): [number, number, number] {
 
 export function linearRgbToLabD50(rgb: ArrayLike<number>): Lab {
   return xyzD50ToLab(linearRgbToXyzD50(rgb))
+}
+
+/** CIELAB under D65 (no adaptation) — the lighting-profiles PRD's working space (§5.5). */
+export function linearRgbToLabD65(rgb: ArrayLike<number>): Lab {
+  const xyz = mat3mul(SRGB_TO_XYZ, rgb)
+  const fx = fLab(xyz[0] / D65_WHITE[0])
+  const fy = fLab(xyz[1] / D65_WHITE[1])
+  const fz = fLab(xyz[2] / D65_WHITE[2])
+  return [116 * fy - 16, 500 * (fx - fy), 200 * (fy - fz)]
 }
 
 /** Lab(D50) -> linear sRGB (via inverse Bradford), for reference-value fitting. */

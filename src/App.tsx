@@ -1,6 +1,7 @@
 import { AppProvider, useApp } from './state/app.tsx'
 import { APP_VERSION } from './version.ts'
 import { Inventory } from './ui/Inventory.tsx'
+import { Profiles } from './ui/Profiles.tsx'
 import { RecipeDetail } from './ui/RecipeDetail.tsx'
 import { Results } from './ui/Results.tsx'
 import { Saved } from './ui/Saved.tsx'
@@ -19,18 +20,22 @@ function Screen() {
       return <RecipeDetail recipe={route.recipe} saved={route.saved} />
     case 'saved':
       return <Saved />
+    case 'profiles':
+      return <Profiles />
   }
 }
 
 function Nav() {
   const { route, nav } = useApp()
-  const tab = route.name === 'results' || route.name === 'target' ? 'target' : route.name === 'recipe' ? 'saved' : route.name
+  const tab =
+    route.name === 'results' || route.name === 'target' ? 'target' : route.name === 'recipe' ? 'saved' : route.name
   return (
     <nav className="tabs">
       {(
         [
           ['inventory', 'Tubes'],
           ['target', 'Mix'],
+          ['profiles', 'Light'],
           ['saved', 'Saved'],
         ] as const
       ).map(([name, label]) => (

@@ -53,8 +53,9 @@ export function RecipeDetail({ recipe, saved }: { recipe: Recipe; saved: boolean
       </div>
       <p className="row-sub center">
         ΔE {recipe.delta_e.toFixed(1)} · <ConfidenceTag band={recipe.confidence_band} />
+        {recipe.profile_name && <span className="profile-chip">{recipe.profile_name}</span>}
       </p>
-      {recipe.target_origin === 'image_sample' && <UncalibratedWarning />}
+      {recipe.target_origin === 'image_sample' && !recipe.profile_name && <UncalibratedWarning />}
 
       <h3 className="group-head">Mixing order — largest volume first</h3>
       <ol className="rows">
