@@ -1,0 +1,876 @@
+/* ============================================================
+   PRISM — Glass Primitives & Components
+   Requires tokens.css to be loaded first.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   BASE
+   ------------------------------------------------------------ */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+.prism {
+  position: relative;
+  min-height: 100%;
+  /* A fixed violet wash under the drifting blobs. Guarantees no
+     region of a long page is ever a dead flat black — glass with
+     nothing behind it is just a dark rectangle. */
+  background:
+    radial-gradient(140% 90% at 50% 0%, rgba(123, 92, 255, 0.14), transparent 60%),
+    radial-gradient(120% 80% at 10% 100%, rgba(255, 61, 196, 0.10), transparent 65%),
+    var(--ink-900);
+  background-attachment: fixed;
+  color: var(--text-hi);
+  font-family: var(--font-ui);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--tr-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   1. THE BLOB FIELD
+   Six blurred radial fields drifting on independent orbits.
+   This is the light source for the entire system — every glass
+   surface is sampling from it via backdrop-filter. Remove it and
+   the glass has nothing to refract.
+
+   Rules learned the hard way:
+   - Use `filter: blur()` on the element, NOT a soft gradient stop.
+     A soft stop banded on gradients; a hard stop + blur does not.
+   - Keep blobs at 30-55% viewport width. Smaller reads as a dot,
+     larger reads as a flat wash.
+   - `will-change: transform` or the drift stutters on Safari.
+   ============================================================ */
+.prism-blobs {
+  position: fixed;
+  inset: -20%;
+  z-index: var(--z-blobs);
+  pointer-events: none;
+  overflow: hidden;
+  contain: strict;
+}
+
+.prism-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.62;
+  will-change: transform;
+  mix-blend-mode: screen;
+  animation: blob-drift var(--dur-drift) var(--ease-in-out) infinite alternate;
+}
+
+[data-theme='light'] .prism-blob {
+  mix-blend-mode: multiply;
+  opacity: 0.4;
+  filter: blur(110px);
+}
+
+.prism-blob--1 { width: 46vw; height: 46vw; top: -6%;  left: -4%;  background: radial-gradient(circle at 40% 40%, var(--iri-magenta), transparent 68%); animation-duration: calc(var(--dur-drift) * 1);    }
+.prism-blob--2 { width: 40vw; height: 40vw; top: 8%;   left: 46%;  background: radial-gradient(circle at 55% 45%, var(--iri-violet),  transparent 68%); animation-duration: calc(var(--dur-drift) * 1.35); animation-delay: -6s;  }
+.prism-blob--3 { width: 52vw; height: 52vw; top: 42%;  left: 58%;  background: radial-gradient(circle at 45% 55%, var(--iri-cyan),    transparent 66%); animation-duration: calc(var(--dur-drift) * 0.85); animation-delay: -11s; }
+.prism-blob--4 { width: 36vw; height: 36vw; top: 62%;  left: 2%;   background: radial-gradient(circle at 50% 50%, var(--iri-mint),    transparent 68%); animation-duration: calc(var(--dur-drift) * 1.6);  animation-delay: -3s;  }
+.prism-blob--5 { width: 30vw; height: 30vw; top: 30%;  left: 22%;  background: radial-gradient(circle at 50% 50%, var(--iri-gold),    transparent 70%); animation-duration: calc(var(--dur-drift) * 1.15); animation-delay: -17s; opacity: 0.34; }
+.prism-blob--6 { width: 34vw; height: 34vw; top: 76%;  left: 40%;  background: radial-gradient(circle at 50% 50%, var(--iri-blush),   transparent 70%); animation-duration: calc(var(--dur-drift) * 1.45); animation-delay: -9s;  }
+
+@keyframes blob-drift {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  33%  { transform: translate3d(6vw, -4vh, 0) scale(1.12); }
+  66%  { transform: translate3d(-4vw, 5vh, 0) scale(0.94); }
+  100% { transform: translate3d(3vw, 3vh, 0) scale(1.06); }
+}
+
+/* ------------------------------------------------------------
+   2. GRAIN
+   1.6% opacity of film grain over everything. You will not
+   consciously see it. You will absolutely notice its absence —
+   without it, large blurred gradients look like cheap CSS.
+   ------------------------------------------------------------ */
+.prism-grain {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-grain);
+  pointer-events: none;
+  opacity: 0.16;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   3. THE GLASS SURFACE
+   One class, three tiers. Everything else composes from this.
+   ============================================================ */
+.glass {
+  position: relative;
+  background-color: var(--glass-2-fill);
+  backdrop-filter: blur(var(--glass-2-blur)) saturate(var(--glass-sat));
+  -webkit-backdrop-filter: blur(var(--glass-2-blur)) saturate(var(--glass-sat));
+  border: 1px solid var(--glass-2-edge);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md), var(--glass-spec), var(--glass-bounce);
+  isolation: isolate;
+}
+
+.glass--1 {
+  background-color: var(--glass-1-fill);
+  backdrop-filter: blur(var(--glass-1-blur)) saturate(var(--glass-sat));
+  -webkit-backdrop-filter: blur(var(--glass-1-blur)) saturate(var(--glass-sat));
+  border-color: var(--glass-1-edge);
+  box-shadow: var(--shadow-sm), var(--glass-spec), var(--glass-bounce);
+}
+
+.glass--3 {
+  background-color: var(--glass-3-fill);
+  backdrop-filter: blur(var(--glass-3-blur)) saturate(var(--glass-sat));
+  -webkit-backdrop-filter: blur(var(--glass-3-blur)) saturate(var(--glass-sat));
+  border-color: var(--glass-3-edge);
+  box-shadow: var(--shadow-xl), var(--glass-spec-strong), var(--glass-bounce);
+}
+
+/* --- Iridescent edge -----------------------------------------
+   A 1px conic-gradient ring, masked to the border only.
+   The mask-composite trick: paint the full rounded rect, then
+   punch out the content-box, leaving exactly the padding ring.
+   ------------------------------------------------------------ */
+.glass--iri::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(from var(--iri-angle), var(--iri-sweep));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.85;
+  animation: iri-rotate var(--dur-sweep) linear infinite;
+  z-index: 2;
+}
+
+@keyframes iri-rotate {
+  to { --iri-angle: 360deg; }
+}
+
+/* --- Specular sheen on hover ---------------------------------
+   A wide, low-opacity diagonal band that crosses the surface.
+   Reads as a light source moving past a physical pane.
+   ------------------------------------------------------------ */
+.glass--sheen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    104deg,
+    transparent 32%,
+    rgba(255, 255, 255, 0.16) 46%,
+    rgba(255, 255, 255, 0.34) 50%,
+    rgba(255, 255, 255, 0.16) 54%,
+    transparent 68%
+  );
+  background-size: 260% 100%;
+  background-position: 140% 0;
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out),
+              background-position var(--dur-slow) var(--ease-out);
+  z-index: 3;
+}
+.glass--sheen:hover::after {
+  opacity: 1;
+  background-position: -40% 0;
+}
+
+/* ------------------------------------------------------------
+   FALLBACK — no backdrop-filter (older Firefox, some Android)
+   Do not ship translucent panels with no blur; text becomes
+   unreadable over the blobs. Go opaque instead.
+   ------------------------------------------------------------ */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass,
+  .glass--1,
+  .glass--3 {
+    background-color: rgba(18, 14, 29, 0.94);
+  }
+  [data-theme='light'] .glass,
+  [data-theme='light'] .glass--1,
+  [data-theme='light'] .glass--3 {
+    background-color: rgba(251, 248, 253, 0.96);
+  }
+}
+
+/* ============================================================
+   4. FOCUS
+   One ring, everywhere, cyan. Never remove it — offset it.
+   ============================================================ */
+:where(.prism) :focus-visible {
+  outline: 2px solid var(--iri-cyan);
+  outline-offset: 2px;
+  border-radius: var(--r-xs);
+}
+
+/* ============================================================
+   5. BUTTONS
+   ============================================================ */
+.btn {
+  --btn-h: 42px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  height: var(--btn-h);
+  padding: 0 var(--sp-5);
+  border: 1px solid var(--glass-2-edge);
+  border-radius: var(--r-pill);
+  background-color: var(--glass-2-fill);
+  backdrop-filter: blur(var(--glass-2-blur)) saturate(var(--glass-sat));
+  -webkit-backdrop-filter: blur(var(--glass-2-blur)) saturate(var(--glass-sat));
+  box-shadow: var(--shadow-sm), var(--glass-spec), var(--glass-bounce);
+  color: var(--text-hi);
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  font-weight: 550;
+  letter-spacing: var(--tr-body);
+  white-space: nowrap;
+  cursor: pointer;
+  isolation: isolate;
+  transition:
+    transform var(--dur-fast) var(--ease-spring),
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.btn:hover {
+  background-color: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.26);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md), var(--glass-spec-strong), var(--glass-bounce);
+}
+
+/* Press: scale down AND drop the shadow. Scaling alone reads as
+   a bug; losing elevation is what sells the physical push. */
+.btn:active {
+  transform: translateY(0) scale(0.972);
+  box-shadow: var(--shadow-sm), inset 0 2px 6px rgba(7, 5, 12, 0.3);
+  transition-duration: var(--dur-instant);
+}
+
+.btn:disabled,
+.btn[aria-disabled='true'] {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* --- Primary: iridescent fill --------------------------------
+   The gradient sits on a pseudo-element so it can be scaled and
+   shifted on hover without touching the button's own transform.
+   Text stays near-black — white on mid-tone iridescence fails
+   contrast every single time.
+   ------------------------------------------------------------ */
+.btn--iri {
+  border-color: transparent;
+  color: #14101f;
+  font-weight: 650;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+.btn--iri::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--iri-line);
+  background-size: 220% 100%;
+  background-position: 0% 0;
+  z-index: -1;
+  transition: background-position var(--dur-slow) var(--ease-out);
+}
+.btn--iri:hover::before { background-position: 100% 0; }
+.btn--iri:hover {
+  box-shadow: var(--shadow-md), 0 0 32px -8px var(--iri-magenta);
+}
+
+/* --- Ghost --------------------------------------------------- */
+.btn--ghost {
+  background-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-color: transparent;
+  box-shadow: none;
+  color: var(--text-mid);
+}
+.btn--ghost:hover {
+  background-color: var(--glass-1-fill);
+  border-color: var(--glass-1-edge);
+  color: var(--text-hi);
+  box-shadow: none;
+}
+
+/* --- Sizes --------------------------------------------------- */
+.btn--sm  { --btn-h: 32px; padding: 0 var(--sp-4); font-size: var(--fs-xs); }
+.btn--lg  { --btn-h: 52px; padding: 0 var(--sp-6); font-size: var(--fs-body); }
+.btn--icon { width: var(--btn-h); padding: 0; border-radius: var(--r-md); }
+.btn--block { width: 100%; }
+
+/* ============================================================
+   6. PANEL / CARD
+   ============================================================ */
+.panel {
+  padding: var(--sp-5);
+  border-radius: var(--r-xl);
+}
+.panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+}
+.panel__title {
+  font-family: var(--font-ui);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: var(--tr-micro);
+  text-transform: uppercase;
+  color: var(--text-low);
+  margin: 0;
+}
+
+.card {
+  overflow: hidden;
+  border-radius: var(--r-xl);
+  transition: transform var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg), var(--glass-spec-strong), var(--glass-bounce);
+}
+.card__media {
+  aspect-ratio: 4 / 5;
+  background: var(--paper-200);
+  position: relative;
+  overflow: hidden;
+}
+.card__body { padding: var(--sp-4); }
+
+/* ============================================================
+   7. TOOL RAIL — the painting app's spine
+   Floating vertical glass rail. The active tool gets an
+   iridescent pill behind it that slides between positions.
+   ============================================================ */
+.rail {
+  position: relative;
+  z-index: var(--z-rail);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  padding: var(--sp-2);
+  border-radius: var(--r-xl);
+}
+.rail--h { flex-direction: row; }
+
+.tool {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 0;
+  border-radius: var(--r-md);
+  background: transparent;
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease-out),
+              background-color var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-spring);
+}
+.tool:hover {
+  color: var(--text-hi);
+  background-color: var(--glass-1-fill);
+}
+.tool:active { transform: scale(0.9); }
+
+.tool[aria-pressed='true'] {
+  color: #14101f;
+}
+.tool[aria-pressed='true']::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: var(--r-sm);
+  background: var(--iri-line);
+  background-size: 200% 100%;
+  z-index: -1;
+  box-shadow: 0 4px 14px -4px var(--iri-violet);
+  animation: iri-shift 6s var(--ease-in-out) infinite alternate;
+}
+@keyframes iri-shift {
+  from { background-position: 0% 0; }
+  to   { background-position: 100% 0; }
+}
+
+.tool__badge {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: currentColor;
+  opacity: 0.55;
+}
+
+/* ============================================================
+   8. COLOR CONTROLS
+   ============================================================ */
+
+/* --- Swatch --------------------------------------------------
+   The checkerboard underlay is not decoration; it is how the
+   user sees alpha. Ship it or transparent colors are a lie.
+   ------------------------------------------------------------ */
+.swatch {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--r-sm);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: var(--glass-spec), var(--shadow-sm);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform var(--dur-fast) var(--ease-spring),
+              box-shadow var(--dur-fast) var(--ease-out);
+  background-image:
+    linear-gradient(45deg, rgba(255,255,255,.14) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.14) 75%),
+    linear-gradient(45deg, rgba(255,255,255,.14) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.14) 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 4px 4px;
+}
+.swatch__fill { position: absolute; inset: 0; }
+.swatch:hover { transform: scale(1.12) rotate(-3deg); }
+.swatch[aria-pressed='true'] {
+  box-shadow: 0 0 0 2px var(--ink-900), 0 0 0 4px var(--iri-cyan), var(--shadow-sm);
+  transform: scale(1.08);
+}
+
+/* --- Hue ring ------------------------------------------------ */
+.hue-ring {
+  position: relative;
+  width: 168px;
+  height: 168px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--iri-sweep));
+  box-shadow: var(--shadow-md), inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+  cursor: crosshair;
+}
+.hue-ring::after {
+  content: '';
+  position: absolute;
+  inset: 26px;
+  border-radius: 50%;
+  background: var(--glass-3-fill);
+  backdrop-filter: blur(var(--glass-3-blur)) saturate(var(--glass-sat));
+  -webkit-backdrop-filter: blur(var(--glass-3-blur)) saturate(var(--glass-sat));
+  border: 1px solid var(--glass-3-edge);
+  box-shadow: var(--glass-spec-strong);
+}
+.hue-ring__thumb {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: var(--shadow-md);
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  pointer-events: none;
+}
+.hue-ring__readout {
+  position: absolute;
+  inset: 26px;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ============================================================
+   9. SLIDER
+   Native range, restyled. Track is glass, fill is iridescent,
+   thumb is a physical glass bead.
+   ============================================================ */
+.slider {
+  --slider-pct: 50%;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 30px;
+  background: transparent;
+  cursor: pointer;
+}
+.slider::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: var(--r-pill);
+  background:
+    linear-gradient(90deg, var(--iri-magenta), var(--iri-violet) 40%, var(--iri-cyan)) 0 / var(--slider-pct) 100% no-repeat,
+    rgba(255, 255, 255, 0.09);
+  box-shadow: inset 0 1px 2px rgba(7, 5, 12, 0.4), var(--glass-spec);
+}
+.slider::-moz-range-track {
+  height: 8px;
+  border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, 0.09);
+  box-shadow: inset 0 1px 2px rgba(7, 5, 12, 0.4);
+}
+.slider::-moz-range-progress {
+  height: 8px;
+  border-radius: var(--r-pill);
+  background: linear-gradient(90deg, var(--iri-magenta), var(--iri-violet) 40%, var(--iri-cyan));
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  margin-top: -7px;
+  border-radius: 50%;
+  background: linear-gradient(160deg, rgba(255,255,255,.95), rgba(255,255,255,.62));
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-md), inset 0 1px 0 #fff;
+  transition: transform var(--dur-fast) var(--ease-spring);
+}
+.slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(160deg, rgba(255,255,255,.95), rgba(255,255,255,.62));
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-md);
+}
+.slider:hover::-webkit-slider-thumb { transform: scale(1.16); }
+.slider:active::-webkit-slider-thumb { transform: scale(0.96); }
+
+.slider-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.slider-row__label {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: var(--fs-xs);
+  color: var(--text-mid);
+  margin-bottom: var(--sp-1);
+}
+
+/* Numeric readouts. Tabular figures so the value does not
+   shimmy left and right while you drag. */
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+  color: var(--text-hi);
+}
+
+/* ============================================================
+   10. SEGMENTED CONTROL
+   ============================================================ */
+.segmented {
+  position: relative;
+  display: inline-flex;
+  padding: 3px;
+  border-radius: var(--r-pill);
+  gap: 2px;
+}
+.segmented__item {
+  position: relative;
+  padding: 7px var(--sp-4);
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--text-mid);
+  font-family: var(--font-ui);
+  font-size: var(--fs-xs);
+  font-weight: 550;
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease-out);
+  z-index: 1;
+}
+.segmented__item:hover { color: var(--text-hi); }
+.segmented__item[aria-selected='true'] {
+  color: var(--text-hi);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: var(--glass-spec), var(--shadow-sm);
+}
+
+/* ============================================================
+   11. TOGGLE
+   ============================================================ */
+.toggle {
+  position: relative;
+  width: 48px;
+  height: 28px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--glass-2-edge);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 1px 3px rgba(7, 5, 12, 0.35);
+  cursor: pointer;
+  transition: background var(--dur-base) var(--ease-out);
+  flex: none;
+}
+.toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(160deg, #fff, rgba(255,255,255,.7));
+  box-shadow: var(--shadow-sm), inset 0 1px 0 #fff;
+  transition: transform var(--dur-base) var(--ease-spring);
+}
+.toggle[aria-checked='true'] {
+  background: var(--iri-line);
+  background-size: 180% 100%;
+  border-color: transparent;
+}
+.toggle[aria-checked='true']::after { transform: translateX(20px); }
+
+/* ============================================================
+   12. INPUT
+   ============================================================ */
+.input {
+  width: 100%;
+  height: 44px;
+  padding: 0 var(--sp-4);
+  border-radius: var(--r-md);
+  border: 1px solid var(--glass-1-edge);
+  background: var(--glass-1-fill);
+  backdrop-filter: blur(var(--glass-1-blur)) saturate(var(--glass-sat));
+  -webkit-backdrop-filter: blur(var(--glass-1-blur)) saturate(var(--glass-sat));
+  box-shadow: inset 0 1px 2px rgba(7, 5, 12, 0.28);
+  color: var(--text-hi);
+  font-family: var(--font-ui);
+  font-size: var(--fs-body);
+  transition: border-color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
+}
+.input::placeholder { color: var(--text-ghost); }
+.input:hover { border-color: var(--glass-2-edge); }
+.input:focus {
+  outline: none;
+  border-color: rgba(63, 216, 255, 0.6);
+  box-shadow: inset 0 1px 2px rgba(7,5,12,.28), 0 0 0 3px rgba(63, 216, 255, 0.18);
+}
+
+/* ============================================================
+   13. LAYER ROW — painting app specific
+   ============================================================ */
+.layer {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-2);
+  border-radius: var(--r-md);
+  border: 1px solid transparent;
+  cursor: grab;
+  transition: background-color var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out);
+}
+.layer:hover { background: var(--glass-1-fill); border-color: var(--glass-1-edge); }
+.layer[aria-selected='true'] {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(63, 216, 255, 0.4);
+  box-shadow: var(--glass-spec);
+}
+.layer__thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-xs);
+  border: 1px solid rgba(255,255,255,.2);
+  background: var(--paper-200);
+  overflow: hidden;
+  flex: none;
+}
+.layer__name {
+  font-size: var(--fs-sm);
+  color: var(--text-hi);
+  line-height: 1.2;
+}
+.layer__meta {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  color: var(--text-low);
+}
+
+/* ============================================================
+   14. MODAL
+   ============================================================ */
+.scrim {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: grid;
+  place-items: center;
+  padding: var(--sp-5);
+  background: rgba(7, 5, 12, 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: fade-in var(--dur-base) var(--ease-out);
+}
+.modal {
+  width: min(480px, 100%);
+  padding: var(--sp-6);
+  border-radius: var(--r-2xl);
+  animation: modal-in var(--dur-base) var(--ease-spring);
+}
+@keyframes fade-in { from { opacity: 0; } }
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(18px) scale(0.96); }
+}
+
+/* ============================================================
+   15. TOAST
+   ============================================================ */
+.toast {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-5);
+  border-radius: var(--r-pill);
+  animation: toast-in var(--dur-base) var(--ease-spring);
+}
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.94); }
+}
+
+/* ============================================================
+   16. CHIP / BADGE / TOOLTIP
+   ============================================================ */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  height: 26px;
+  padding: 0 var(--sp-3);
+  border-radius: var(--r-pill);
+  font-size: var(--fs-xs);
+  font-weight: 550;
+  color: var(--text-mid);
+}
+.chip--iri {
+  border-color: transparent;
+  background: var(--iri-line);
+  background-size: 180% 100%;
+  color: #14101f;
+  font-weight: 650;
+}
+
+.tooltip {
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--r-sm);
+  font-size: var(--fs-xs);
+  color: var(--text-hi);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ============================================================
+   17. TYPE UTILITIES
+   ============================================================ */
+.t-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-variation-settings: 'SOFT' 40, 'WONK' 1;
+  font-size: var(--fs-display);
+  font-weight: 400;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tr-display);
+  margin: 0;
+}
+.t-h1 { font-family: var(--font-display); font-size: var(--fs-h1); font-weight: 500; line-height: var(--lh-snug); letter-spacing: var(--tr-h); margin: 0; }
+.t-h2 { font-family: var(--font-ui); font-size: var(--fs-h2); font-weight: 600; line-height: var(--lh-snug); letter-spacing: var(--tr-h); margin: 0; }
+.t-h3 { font-family: var(--font-ui); font-size: var(--fs-h3); font-weight: 600; line-height: 1.35; margin: 0; }
+.t-body { font-size: var(--fs-body); color: var(--text-mid); margin: 0; }
+.t-sm { font-size: var(--fs-sm); color: var(--text-mid); margin: 0; }
+.t-label {
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: var(--tr-micro);
+  text-transform: uppercase;
+  color: var(--text-low);
+}
+
+/* Iridescent text fill. Only for display sizes — at body size
+   the gradient reduces legibility below AA and it looks cheap. */
+.t-iri {
+  background: var(--iri-line);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: iri-shift 9s var(--ease-in-out) infinite alternate;
+}
+
+/* ============================================================
+   18. MISC
+   ============================================================ */
+.hr {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(90deg, transparent, var(--glass-2-edge) 20%, var(--glass-2-edge) 80%, transparent);
+  margin: var(--sp-4) 0;
+}
+
+.prism ::-webkit-scrollbar { width: 10px; height: 10px; }
+.prism ::-webkit-scrollbar-track { background: transparent; }
+.prism ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border: 3px solid transparent;
+  background-clip: content-box;
+  border-radius: var(--r-pill);
+}
+.prism ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.26); background-clip: content-box; }
+
+/* The canvas surface itself — warm paper, inset so it reads as
+   sitting *below* the glass chrome rather than floating above. */
+.canvas-surface {
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,.7), transparent 60%),
+    var(--paper-100);
+  border-radius: var(--r-lg);
+  box-shadow:
+    inset 0 2px 12px rgba(36, 29, 46, 0.1),
+    0 24px 60px -20px rgba(7, 5, 12, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Entrance stagger. Set --i on each child. One orchestrated
+   page load beats twelve scattered micro-interactions. */
+.stagger > * {
+  opacity: 0;
+  animation: rise var(--dur-slow) var(--ease-out) forwards;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(20px); filter: blur(6px); }
+  to   { opacity: 1; transform: none; filter: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stagger > * { opacity: 1; animation: none; }
+  .prism-blob { animation: none; }
+  .glass--iri::before { animation: none; }
+}

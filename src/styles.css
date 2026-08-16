@@ -1,38 +1,63 @@
-:root {
-  --bg: #1c1a17;
-  --panel: #26231f;
-  --panel-2: #2e2a25;
-  --line: #3a352e;
-  --text: #ece7de;
-  --muted: #a39a8c;
-  --accent: #d9b23a;
-  --accent-ink: #241d08;
-  --warn-bg: #3a2f1a;
-  --warn-text: #e8c987;
-  --error: #d98b7a;
-  --radius: 10px;
-  color-scheme: dark;
-}
+/* ============================================================
+   Pigment — app layer over the Prism design system.
 
-* {
-  box-sizing: border-box;
+   src/prism/ is vendored (see src/prism/PRISM-README.md). All
+   surface, color, and type decisions reference Prism tokens;
+   this file only maps the app's existing class vocabulary onto
+   them and records app-specific semantic tokens. A raw hex here
+   is a bug unless it is defining a semantic token below.
+
+   Perf note (iPad Safari): backdrop-filter is the expensive
+   part of Prism. It is reserved for singletons — the tab bar,
+   modals, the sticky target pin. Repeated elements (rows,
+   cards, chips) use translucent fills WITHOUT blur so a
+   50-tube inventory list doesn't melt the compositor.
+   ============================================================ */
+
+:root {
+  color-scheme: dark;
+
+  /* --- App semantic tokens, derived from the Prism spectrum ---
+     Cyan is Prism's interactive/selected signal. Status colors
+     stay inside the oil-slick palette but remain semantically
+     distinct: mint = good, gold = caution, blush = bad. */
+  --accent: var(--iri-cyan);
+  --good: var(--iri-mint);
+  --warn: var(--iri-gold);
+  --error: var(--iri-blush);
+  --warn-bg: rgba(255, 194, 71, 0.12);
+  --good-bg: rgba(47, 245, 200, 0.1);
+  --error-bg: rgba(255, 125, 146, 0.1);
+  --ink-on-iri: #14101f; /* Prism rule 5: dark ink on iridescent fills */
+
+  /* Self-hosted variable fonts (fontsource) — the offline PWA
+     cannot load from Google Fonts. Same faces, "Variable" names. */
+  --font-display: 'Fraunces Variable', 'Iowan Old Style', Georgia, serif;
+  --font-ui: 'Schibsted Grotesk Variable', 'Helvetica Neue', sans-serif;
+  --font-mono: 'Martian Mono Variable', ui-monospace, 'SF Mono', monospace;
+
+  /* Body copy reads at arm's length on an easel-side iPad. */
+  --fs-body: 1rem;
 }
 
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font: 16px/1.45 -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
+  background: var(--ink-900);
 }
 
+/* ------------------------------------------------------------
+   Shell — .prism (vendored) provides background, type, focus
+   ring, and scrollbars. Content sits above the grain layer.
+   ------------------------------------------------------------ */
 .shell {
+  position: relative;
+  z-index: var(--z-content);
   max-width: 720px;
   margin: 0 auto;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  padding: 0 16px calc(76px + env(safe-area-inset-bottom));
+  padding: 0 16px calc(84px + env(safe-area-inset-bottom));
 }
 
 /* iPad / wide screens: sidebar navigation and a roomier canvas. */
@@ -40,7 +65,7 @@ body {
   .shell {
     max-width: 1280px;
     display: grid;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 210px 1fr;
     grid-template-rows: auto 1fr;
     grid-template-areas:
       'head head'
@@ -58,23 +83,35 @@ body {
 }
 
 .app-head {
-  padding: 20px 0 4px;
+  padding: 26px 0 6px;
 }
 .app-head h1 {
   margin: 0;
-  font-size: 22px;
-  letter-spacing: 0.04em;
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-variation-settings: 'SOFT' 40, 'WONK' 1;
+  font-size: clamp(1.9rem, 4vw, 2.4rem);
+  font-weight: 480;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tr-display);
+}
+/* The one iridescent accent per view (Prism rule: one .glass--iri
+   or gradient-text element, display size only). */
+.app-head h1 .t-iri {
+  padding-right: 0.06em; /* keep Fraunces' italic-ish terminals from clipping */
 }
 .version {
-  font-size: 12px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
   font-weight: 400;
-  color: var(--muted);
-  letter-spacing: 0.02em;
+  color: var(--text-low);
+  letter-spacing: 0;
+  vertical-align: 0.35em;
 }
 .tagline {
-  margin: 2px 0 0;
-  color: var(--muted);
-  font-size: 13px;
+  margin: 4px 0 0;
+  color: var(--text-mid);
+  font-size: var(--fs-sm);
 }
 
 main {
@@ -82,7 +119,12 @@ main {
 }
 
 h2 {
-  font-size: 19px;
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-variation-settings: 'SOFT' 40, 'WONK' 0;
+  font-size: 1.3rem;
+  font-weight: 520;
+  letter-spacing: var(--tr-h);
   margin: 0;
 }
 .screen-head {
@@ -93,47 +135,97 @@ h2 {
   margin: 18px 0 12px;
 }
 .group-head {
-  font-size: 12px;
+  font-size: var(--fs-micro);
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--muted);
+  letter-spacing: var(--tr-micro);
+  color: var(--text-low);
   margin: 18px 0 8px;
 }
 
-/* Buttons */
+/* ------------------------------------------------------------
+   Buttons — Prism glass pills. .primary carries the iridescent
+   fill with dark ink; .ghost is quiet glass; .danger is blush.
+   ------------------------------------------------------------ */
 button {
   font: inherit;
-  border-radius: var(--radius);
+  font-family: var(--font-ui);
+  border-radius: var(--r-pill);
   border: 1px solid transparent;
   cursor: pointer;
-  padding: 8px 14px;
+  padding: 9px 16px;
   background: none;
-  color: var(--text);
+  color: var(--text-hi);
+  transition:
+    transform var(--dur-fast) var(--ease-spring),
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+button:active {
+  transform: scale(0.972);
+  transition-duration: var(--dur-instant);
 }
 button:disabled {
-  opacity: 0.45;
+  opacity: 0.4;
   cursor: default;
+  transform: none;
 }
+
 .primary {
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-weight: 600;
+  position: relative;
+  isolation: isolate;
+  color: var(--ink-on-iri);
+  font-weight: 650;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.28);
+  box-shadow: var(--shadow-sm), var(--glass-spec);
 }
+.primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--iri-line);
+  background-size: 220% 100%;
+  background-position: 0% 0;
+  z-index: -1;
+  transition: background-position var(--dur-slow) var(--ease-out);
+}
+.primary:hover::before {
+  background-position: 100% 0;
+}
+.primary:hover {
+  box-shadow: var(--shadow-md), 0 0 32px -8px var(--iri-magenta);
+}
+
 .ghost {
-  border-color: var(--line);
-  color: var(--text);
+  border-color: var(--glass-2-edge);
+  background-color: var(--glass-1-fill);
+  color: var(--text-hi);
+  box-shadow: var(--glass-spec);
+}
+.ghost:hover {
+  background-color: var(--glass-2-fill);
+  border-color: rgba(255, 255, 255, 0.26);
 }
 .ghost.active {
-  border-color: var(--accent);
+  border-color: rgba(63, 216, 255, 0.55);
   color: var(--accent);
+  box-shadow: var(--glow-cyan);
+}
+.danger {
+  border-color: rgba(255, 125, 146, 0.5);
+  background-color: var(--error-bg);
+  color: var(--error);
 }
 .big {
-  padding: 12px 22px;
-  font-size: 17px;
+  padding: 13px 26px;
+  font-size: 1.0625rem;
 }
 .small {
-  padding: 4px 10px;
-  font-size: 13px;
+  padding: 5px 12px;
+  font-size: var(--fs-sm);
 }
 .btn-row {
   display: flex;
@@ -143,28 +235,58 @@ button:disabled {
   flex-wrap: wrap;
 }
 
-/* Tabs */
+/* ------------------------------------------------------------
+   Tabs — floating glass bar on phone, glass rail on iPad.
+   One of the few places that earns real backdrop-filter.
+   ------------------------------------------------------------ */
 .tabs {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: calc(10px + env(safe-area-inset-bottom));
+  left: 16px;
+  right: 16px;
+  z-index: var(--z-rail);
   display: flex;
   justify-content: center;
-  gap: 8px;
-  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
-  background: color-mix(in srgb, var(--bg) 88%, black);
-  border-top: 1px solid var(--line);
+  gap: 4px;
+  margin: 0 auto;
+  max-width: 480px;
+  padding: 6px;
+  background-color: var(--glass-2-fill);
+  backdrop-filter: blur(var(--glass-2-blur)) saturate(var(--glass-sat));
+  -webkit-backdrop-filter: blur(var(--glass-2-blur)) saturate(var(--glass-sat));
+  border: 1px solid var(--glass-2-edge);
+  border-radius: var(--r-pill);
+  box-shadow: var(--shadow-lg), var(--glass-spec), var(--glass-bounce);
 }
 .tab {
-  flex: 0 1 160px;
+  position: relative;
+  isolation: isolate;
+  flex: 1 1 0;
   padding: 10px 0;
-  color: var(--muted);
-  border-radius: var(--radius);
+  color: var(--text-mid);
+  border-radius: var(--r-pill);
+  font-weight: 550;
+  font-size: var(--fs-sm);
+}
+.tab:hover {
+  color: var(--text-hi);
 }
 .tab.active {
-  color: var(--accent);
-  background: var(--panel);
+  color: var(--ink-on-iri);
+  font-weight: 650;
+}
+/* Active tab: iridescent pill, dark ink — same recipe as Prism's
+   tool rail. */
+.tab.active::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--iri-line);
+  background-size: 200% 100%;
+  box-shadow: 0 4px 14px -4px var(--iri-violet);
+  z-index: -1;
+  animation: iri-shift 6s var(--ease-in-out) infinite alternate;
 }
 @media (min-width: 900px) {
   .tabs {
@@ -175,20 +297,24 @@ button:disabled {
     align-self: start;
     flex-direction: column;
     justify-content: flex-start;
-    background: none;
-    border: none;
-    padding: 0;
+    max-width: none;
+    gap: 4px;
+    padding: var(--sp-2);
+    border-radius: var(--r-xl);
   }
   .tab {
     flex: none;
     width: 100%;
     text-align: left;
     padding: 12px 16px;
-    font-size: 17px;
+    font-size: 1.0625rem;
+    border-radius: var(--r-md);
   }
 }
 
-/* Rows */
+/* ------------------------------------------------------------
+   Rows — tier-1 glass fills, no blur (see perf note).
+   ------------------------------------------------------------ */
 .rows {
   list-style: none;
   margin: 0 0 8px;
@@ -201,9 +327,10 @@ button:disabled {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
+  background: var(--glass-1-fill);
+  border: 1px solid var(--glass-1-edge);
+  border-radius: var(--r-md);
+  box-shadow: var(--glass-spec);
   padding: 10px 12px;
 }
 .row.dimmed {
@@ -219,54 +346,66 @@ button:disabled {
 }
 .row-sub {
   display: block;
-  color: var(--muted);
-  font-size: 13px;
+  color: var(--text-mid);
+  font-size: var(--fs-sm);
   margin-top: 2px;
 }
 .tag-unusable {
   font-style: normal;
-  font-size: 12px;
-  color: var(--warn-text);
+  font-size: var(--fs-xs);
+  color: var(--warn);
   background: var(--warn-bg);
-  border-radius: 6px;
+  border-radius: var(--r-xs);
   padding: 1px 7px;
   margin-left: 6px;
 }
 
+/* Pigment-ID chips. Prism's .chip is backgroundless; the app's
+   chips need to read against rows, so give them a quiet fill. */
 .chip {
-  display: inline-block;
-  font-size: 11px;
-  letter-spacing: 0.04em;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  height: auto;
+  font-size: var(--fs-xs);
+  font-family: var(--font-mono);
+  letter-spacing: 0;
+  border: 1px solid var(--glass-1-edge);
+  background: var(--glass-1-fill);
+  border-radius: var(--r-xs);
+  padding: 1px 6px;
   margin-right: 4px;
-  color: var(--text);
+  color: var(--text-mid);
 }
 .chip-warn {
-  border-color: var(--warn-text);
-  color: var(--warn-text);
+  border-color: rgba(255, 194, 71, 0.5);
+  color: var(--warn);
+  background: var(--warn-bg);
 }
 
 .conf {
-  font-size: 12px;
-  border-radius: 6px;
-  padding: 1px 8px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  border-radius: var(--r-pill);
+  padding: 2px 10px;
 }
 .conf-high {
-  background: #22391f;
-  color: #a9d9a0;
+  background: var(--good-bg);
+  color: var(--good);
 }
 .conf-medium {
   background: var(--warn-bg);
-  color: var(--warn-text);
+  color: var(--warn);
 }
 .conf-low {
-  background: #3d221d;
+  background: var(--error-bg);
   color: var(--error);
 }
 
-/* Swatches */
+/* ------------------------------------------------------------
+   Swatches — paint is the point; give each one Prism's specular
+   bevel so it reads as a wet dab under glass. App swatches are
+   read-only, so neutralize Prism's interactive hover.
+   ------------------------------------------------------------ */
 .swatch-wrap {
   display: inline-flex;
   flex-direction: column;
@@ -274,29 +413,35 @@ button:disabled {
   gap: 4px;
 }
 .swatch {
-  display: inline-block;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  width: auto;
+  height: auto;
+  cursor: default;
+}
+.swatch:hover {
+  transform: none;
 }
 .swatch-label {
-  font-size: 11px;
-  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-family: var(--font-mono);
+  letter-spacing: 0;
+  color: var(--text-low);
 }
 
 /* Banners & states */
 .warn-banner {
   background: var(--warn-bg);
-  color: var(--warn-text);
-  border-radius: var(--radius);
+  border: 1px solid rgba(255, 194, 71, 0.35);
+  color: var(--warn);
+  border-radius: var(--r-md);
   padding: 10px 12px;
-  font-size: 14px;
+  font-size: var(--fs-sm);
 }
 .inline-error {
   color: var(--error);
-  font-size: 14px;
+  font-size: var(--fs-sm);
 }
 .empty-line {
-  color: var(--muted);
+  color: var(--text-mid);
 }
 .empty-block {
   display: flex;
@@ -307,8 +452,8 @@ button:disabled {
   padding: 40px 12px;
 }
 .hint {
-  color: var(--muted);
-  font-size: 13px;
+  color: var(--text-mid);
+  font-size: var(--fs-sm);
 }
 .center {
   text-align: center;
@@ -317,10 +462,15 @@ button:disabled {
 /* Skeleton */
 .skeleton .shimmer,
 .shimmer-line {
-  background: linear-gradient(90deg, var(--panel-2) 25%, var(--line) 50%, var(--panel-2) 75%);
+  background: linear-gradient(
+    90deg,
+    var(--glass-1-fill) 25%,
+    var(--glass-2-fill) 50%,
+    var(--glass-1-fill) 75%
+  );
   background-size: 200% 100%;
   animation: shimmer 1.2s infinite;
-  border-radius: 6px;
+  border-radius: var(--r-xs);
 }
 .skeleton .shimmer {
   width: 36px;
@@ -341,45 +491,101 @@ button:disabled {
   }
 }
 
-/* Modal */
+/* ------------------------------------------------------------
+   Modal — tier-3 glass. Bottom sheet on phone (unchanged UX),
+   centered card on wide screens.
+   ------------------------------------------------------------ */
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(7, 5, 12, 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  z-index: 10;
+  z-index: var(--z-modal);
+  animation: fade-in var(--dur-base) var(--ease-out);
 }
 .modal {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 14px 14px 0 0;
+  background-color: var(--glass-3-fill);
+  backdrop-filter: blur(var(--glass-3-blur)) saturate(var(--glass-sat));
+  -webkit-backdrop-filter: blur(var(--glass-3-blur)) saturate(var(--glass-sat));
+  border: 1px solid var(--glass-3-edge);
+  border-radius: var(--r-2xl) var(--r-2xl) 0 0;
+  box-shadow: var(--shadow-xl), var(--glass-spec-strong), var(--glass-bounce);
   width: min(720px, 100%);
   max-height: 85dvh;
   overflow-y: auto;
-  padding: 6px 16px 20px;
+  padding: 8px 18px 22px;
+  animation: modal-in var(--dur-base) var(--ease-spring);
+}
+@media (min-width: 900px) {
+  .modal-backdrop {
+    align-items: center;
+    padding: var(--sp-5);
+  }
+  .modal {
+    border-radius: var(--r-2xl);
+  }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .modal {
+    background-color: rgba(18, 14, 29, 0.96);
+  }
+}
+
+/* Inputs — Prism's glass input recipe, applied to the app's
+   existing form vocabulary (inputs, selects, fieldsets). */
+.modal input[type='search'],
+.custom-form input,
+.hex-input,
+.palette-confirm input,
+.profile-bar select,
+.swatch-capture-bar select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--glass-1-edge);
+  background: var(--glass-1-fill);
+  box-shadow: inset 0 1px 2px rgba(7, 5, 12, 0.28);
+  color: var(--text-hi);
+  font: inherit;
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
 }
 .modal input[type='search'],
 .custom-form input {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: var(--radius);
-  border: 1px solid var(--line);
-  background: var(--panel-2);
-  color: var(--text);
-  font: inherit;
   margin-bottom: 10px;
+}
+.modal input[type='search']::placeholder,
+.custom-form input::placeholder {
+  color: var(--text-ghost);
+}
+.modal input[type='search']:focus,
+.custom-form input:focus,
+.hex-input:focus,
+.palette-confirm input:focus {
+  outline: none;
+  border-color: rgba(63, 216, 255, 0.6);
+  box-shadow: inset 0 1px 2px rgba(7, 5, 12, 0.28), 0 0 0 3px rgba(63, 216, 255, 0.18);
+}
+.profile-bar select,
+.swatch-capture-bar select {
+  width: auto;
+  max-width: 100%;
+  padding: 8px 10px;
 }
 .custom-form label {
   display: block;
-  font-size: 14px;
-  color: var(--muted);
+  font-size: var(--fs-sm);
+  color: var(--text-mid);
   margin-bottom: 6px;
 }
 .custom-form fieldset {
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border: 1px solid var(--glass-1-edge);
+  border-radius: var(--r-md);
   margin: 0 0 10px;
 }
 .pig-grid {
@@ -400,8 +606,8 @@ button:disabled {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 14px;
-  color: var(--text);
+  font-size: var(--fs-sm);
+  color: var(--text-hi);
 }
 
 /* Target screen */
@@ -424,32 +630,29 @@ button:disabled {
 input[type='color'] {
   width: 56px;
   height: 44px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel-2);
+  border: 1px solid var(--glass-2-edge);
+  border-radius: var(--r-sm);
+  background: var(--glass-1-fill);
   padding: 2px;
 }
 .hex-input {
-  width: 120px;
-  padding: 10px 12px;
-  border-radius: var(--radius);
-  border: 1px solid var(--line);
-  background: var(--panel-2);
-  color: var(--text);
-  font: inherit;
+  width: 130px;
+  font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
 }
 .oklab-readout {
-  color: var(--muted);
-  font-size: 13px;
+  color: var(--text-mid);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
   font-variant-numeric: tabular-nums;
 }
 .dropzone {
-  border: 1.5px dashed var(--line);
-  border-radius: var(--radius);
+  border: 1.5px dashed rgba(255, 255, 255, 0.22);
+  background: var(--glass-1-fill);
+  border-radius: var(--r-lg);
   padding: 14px;
   text-align: center;
-  color: var(--muted);
+  color: var(--text-mid);
   position: relative;
 }
 .canvas-wrap {
@@ -459,7 +662,9 @@ input[type='color'] {
 .canvas-wrap canvas {
   width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: var(--r-md);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: var(--shadow-md);
   cursor: crosshair;
   display: block;
 }
@@ -475,16 +680,21 @@ input[type='color'] {
 }
 .file-btn {
   display: inline-block;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 8px 14px;
+  border: 1px solid var(--glass-2-edge);
+  background: var(--glass-1-fill);
+  border-radius: var(--r-pill);
+  box-shadow: var(--glass-spec);
+  padding: 9px 16px;
   cursor: pointer;
+}
+.file-btn:hover {
+  background: var(--glass-2-fill);
 }
 .spinner {
   width: 26px;
   height: 26px;
   margin: 12px auto;
-  border: 3px solid var(--line);
+  border: 3px solid var(--glass-2-edge);
   border-top-color: var(--accent);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
@@ -502,29 +712,34 @@ input[type='color'] {
   gap: 16px;
   position: sticky;
   top: 0;
-  background: var(--bg);
-  padding: 8px 0;
+  background-color: rgba(11, 8, 19, 0.6);
+  backdrop-filter: blur(var(--glass-2-blur)) saturate(var(--glass-sat));
+  -webkit-backdrop-filter: blur(var(--glass-2-blur)) saturate(var(--glass-sat));
+  border-bottom: 1px solid var(--glass-1-edge);
+  padding: 8px 4px;
+  margin: 0 -4px;
   z-index: 2;
 }
 .progress-block {
   text-align: center;
   padding: 24px 0;
-  color: var(--muted);
+  color: var(--text-mid);
 }
 progress {
   width: min(360px, 100%);
-  accent-color: var(--accent);
+  accent-color: var(--iri-violet);
 }
 .error-block,
 .nomatch-block {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
+  background: var(--glass-1-fill);
+  border: 1px solid var(--glass-1-edge);
+  border-radius: var(--r-lg);
   padding: 14px;
   margin-bottom: 12px;
 }
 .error-block {
-  border-color: var(--error);
+  border-color: rgba(255, 125, 146, 0.5);
+  background: var(--error-bg);
 }
 .cards,
 .saved-grid {
@@ -535,18 +750,25 @@ progress {
   flex-direction: column;
   gap: 8px;
 }
+
+/* Recipe cards. Overrides Prism's gallery .card (block, media
+   aspect) into the app's clickable flex row, keeping the lift. */
 .card {
   display: flex;
   gap: 14px;
   align-items: center;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
+  overflow: visible;
+  background: var(--glass-1-fill);
+  border: 1px solid var(--glass-1-edge);
+  border-radius: var(--r-lg);
+  box-shadow: var(--glass-spec);
   padding: 12px;
   cursor: pointer;
 }
 .card:hover {
-  border-color: var(--accent);
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.26);
+  box-shadow: var(--shadow-md), var(--glass-spec-strong);
 }
 .card-swatches {
   display: flex;
@@ -569,10 +791,12 @@ progress {
 .parts-badge {
   min-width: 68px;
   text-align: center;
-  background: var(--panel-2);
-  border: 1px solid var(--line);
-  border-radius: 8px;
+  background: var(--glass-2-fill);
+  border: 1px solid var(--glass-2-edge);
+  border-radius: var(--r-sm);
+  box-shadow: var(--glass-spec);
   padding: 6px 8px;
+  font-family: var(--font-mono);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
@@ -649,17 +873,20 @@ progress {
   align-items: flex-start;
 }
 .pin-card:hover {
-  border-color: var(--line);
+  transform: none;
+  border-color: var(--glass-1-edge);
+  box-shadow: var(--glass-spec);
 }
 .pin-num {
   min-width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--panel-2);
-  border: 1px solid var(--line);
+  background: var(--glass-2-fill);
+  border: 1px solid var(--glass-2-edge);
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 700;
   margin-top: 10px;
@@ -673,10 +900,6 @@ progress {
   justify-content: flex-start;
   margin: 12px 0;
 }
-.danger {
-  border-color: var(--error);
-  color: var(--error);
-}
 .picker-pane {
   max-width: 460px;
 }
@@ -687,17 +910,19 @@ progress {
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
+  background: var(--glass-1-fill);
+  border: 1px solid var(--glass-1-edge);
+  border-radius: var(--r-lg);
+  box-shadow: var(--glass-spec);
   padding: 10px 12px;
   margin-bottom: 14px;
 }
 .palette-label {
-  font-size: 12px;
+  font-size: var(--fs-micro);
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--muted);
+  letter-spacing: var(--tr-micro);
+  color: var(--text-low);
   margin-right: 4px;
 }
 .palette-chip {
@@ -705,29 +930,24 @@ progress {
   align-items: center;
 }
 .palette-chip .chip-x {
-  padding: 4px 8px;
+  padding: 4px 10px;
   margin-left: -1px;
-  border-radius: 0 var(--radius) var(--radius) 0;
+  border-radius: 0 var(--r-pill) var(--r-pill) 0;
 }
 .palette-chip .ghost:first-child {
-  border-radius: var(--radius) 0 0 var(--radius);
+  border-radius: var(--r-pill) 0 0 var(--r-pill);
 }
 .palette-confirm {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 13px;
-  color: var(--muted);
+  font-size: var(--fs-sm);
+  color: var(--text-mid);
   flex-wrap: wrap;
 }
 .palette-confirm input {
-  padding: 6px 10px;
-  border-radius: var(--radius);
-  border: 1px solid var(--line);
-  background: var(--panel-2);
-  color: var(--text);
-  font: inherit;
   width: 200px;
+  padding: 6px 10px;
 }
 
 /* Comfortable touch targets on coarse pointers (iPad fingers, not trackpads). */
@@ -740,41 +960,37 @@ progress {
   }
 }
 
-/* Lighting profiles */
+/* ------------------------------------------------------------
+   Lighting profiles — the calibration UI. Guides and anchors
+   keep gold: they sit over arbitrary camera pixels and must
+   never be mistaken for interactive chrome.
+   ------------------------------------------------------------ */
 .profile-bar {
   display: flex;
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
+  background: var(--glass-1-fill);
+  border: 1px solid var(--glass-1-edge);
+  border-radius: var(--r-lg);
+  box-shadow: var(--glass-spec);
   padding: 8px 12px;
   margin-bottom: 12px;
 }
-.profile-bar select,
-.swatch-capture-bar select {
-  background: var(--panel-2);
-  color: var(--text);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 8px 10px;
-  font: inherit;
-  max-width: 100%;
-}
 .profile-chip {
   display: inline-block;
-  font-size: 12px;
-  border: 1px solid var(--accent);
+  font-size: var(--fs-xs);
+  border: 1px solid rgba(63, 216, 255, 0.55);
   color: var(--accent);
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   padding: 1px 10px;
   margin-left: 8px;
   vertical-align: middle;
 }
 .profile-chip.chip-warn {
-  border-color: var(--warn-text);
-  color: var(--warn-text);
+  border-color: rgba(255, 194, 71, 0.5);
+  color: var(--warn);
+  background: none;
 }
 .profile-row .row-main {
   display: flex;
@@ -787,10 +1003,10 @@ progress {
 }
 .tag-active {
   font-style: normal;
-  font-size: 12px;
+  font-size: var(--fs-xs);
   color: var(--accent);
-  border: 1px solid var(--accent);
-  border-radius: 6px;
+  border: 1px solid rgba(63, 216, 255, 0.55);
+  border-radius: var(--r-xs);
   padding: 1px 7px;
   margin-left: 6px;
 }
@@ -798,9 +1014,9 @@ progress {
   position: absolute;
   width: 26px;
   height: 26px;
-  border: 2.5px dashed var(--accent);
+  border: 2.5px dashed var(--warn);
   background: rgba(255, 255, 255, 0.85);
-  color: #241d08;
+  color: var(--ink-on-iri);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
@@ -818,14 +1034,14 @@ progress {
 }
 .video-wrap video {
   width: 100%;
-  border-radius: 8px;
+  border-radius: var(--r-md);
   display: block;
 }
 .anchor-guide {
   position: absolute;
-  border: 2px dashed var(--accent);
-  border-radius: 8px;
-  color: var(--accent);
+  border: 2px dashed var(--warn);
+  border-radius: var(--r-sm);
+  color: var(--warn);
   font-size: 12px;
   display: flex;
   align-items: flex-end;
@@ -842,6 +1058,6 @@ progress {
   margin: 10px 0;
 }
 .swatch-capture-bar label {
-  color: var(--text);
-  font-size: 14px;
+  color: var(--text-hi);
+  font-size: var(--fs-sm);
 }

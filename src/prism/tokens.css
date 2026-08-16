@@ -1,0 +1,265 @@
+/* ============================================================
+   PRISM — Design Tokens
+   A glass + oil-slick iridescence system for a painting app.
+   Every value below is a decision. Change tokens, not components.
+   ============================================================ */
+
+/* Animatable custom properties. Required for the rotating
+   conic-gradient borders and the drifting blob field.
+   Without @property, browsers interpolate these as strings
+   and the animation snaps instead of sweeping. */
+@property --iri-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@property --sheen-x {
+  syntax: '<percentage>';
+  initial-value: 50%;
+  inherits: false;
+}
+
+:root {
+  /* ----------------------------------------------------------
+     1. SUBSTRATE
+     Glass is only glass if there is something behind it.
+     The base is a near-black with a violet bias so every
+     iridescent hue reads as *lit* rather than painted on.
+     ---------------------------------------------------------- */
+  --ink-900: #07050c;   /* deepest — page floor */
+  --ink-800: #0b0813;   /* app shell */
+  --ink-700: #120e1d;   /* raised surface behind glass */
+  --ink-600: #1b1529;   /* dividers on solid ground */
+
+  /* Paper — the canvas itself. Warm, not clinical white.
+     Painters do not paint on #FFFFFF. */
+  --paper-100: #faf6f0;
+  --paper-200: #f0e9df;
+  --paper-300: #ded4c7;
+
+  /* ----------------------------------------------------------
+     2. OIL-SLICK SPECTRUM
+     Six hues sampled around a soap-bubble interference pattern.
+     They are deliberately unequal in weight: magenta and violet
+     carry the system, gold and mint are accents, cyan is the
+     interactive/focus signal.
+     ---------------------------------------------------------- */
+  --iri-magenta: #ff3dc4;
+  --iri-violet:  #7b5cff;
+  --iri-cyan:    #3fd8ff;
+  --iri-mint:    #2ff5c8;
+  --iri-gold:    #ffc247;
+  --iri-blush:   #ff7d92;
+
+  /* The canonical sweep. Reuse this everywhere so every
+     iridescent element belongs to the same light source. */
+  --iri-sweep:
+    var(--iri-magenta) 0deg,
+    var(--iri-violet)  58deg,
+    var(--iri-cyan)    124deg,
+    var(--iri-mint)    186deg,
+    var(--iri-gold)    248deg,
+    var(--iri-blush)   306deg,
+    var(--iri-magenta) 360deg;
+
+  /* Linear version, for edges and text fills */
+  --iri-line: linear-gradient(
+    100deg,
+    var(--iri-magenta) 0%,
+    var(--iri-violet) 22%,
+    var(--iri-cyan) 45%,
+    var(--iri-mint) 64%,
+    var(--iri-gold) 82%,
+    var(--iri-blush) 100%
+  );
+
+  /* ----------------------------------------------------------
+     3. GLASS TIERS
+     Three tiers only. More than three and depth stops reading.
+     Each tier = fill + border + inner specular + drop shadow.
+     ---------------------------------------------------------- */
+
+  /* Tier 1 — chips, inline controls, list rows. Barely there. */
+  --glass-1-fill: rgba(255, 255, 255, 0.045);
+  --glass-1-edge: rgba(255, 255, 255, 0.10);
+  --glass-1-blur: 14px;
+
+  /* Tier 2 — panels, cards, toolbars. The workhorse. */
+  --glass-2-fill: rgba(255, 255, 255, 0.075);
+  --glass-2-edge: rgba(255, 255, 255, 0.16);
+  --glass-2-blur: 26px;
+
+  /* Tier 3 — modals, popovers, anything that stops the world. */
+  --glass-3-fill: rgba(255, 255, 255, 0.11);
+  --glass-3-edge: rgba(255, 255, 255, 0.24);
+  --glass-3-blur: 44px;
+
+  /* Saturation boost. This is the single most important value
+     in the file. Real glass concentrates the color behind it.
+     Drop this to 100% and the whole system dies. */
+  --glass-sat: 185%;
+
+  /* Specular highlight — the 1px of light that catches the
+     top bevel. Fakes physical thickness. */
+  --glass-spec: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+  --glass-spec-strong: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  /* Bottom bounce — light kicking back off the surface below */
+  --glass-bounce: inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+
+  /* ----------------------------------------------------------
+     4. SHADOW SCALE
+     Glass casts soft, wide, low-opacity shadows tinted violet —
+     never neutral gray. Gray shadows on a violet floor look dirty.
+     ---------------------------------------------------------- */
+  --shadow-sm: 0 2px 8px -2px rgba(7, 5, 12, 0.5);
+  --shadow-md: 0 12px 32px -8px rgba(7, 5, 12, 0.65),
+               0 2px 8px -2px rgba(7, 5, 12, 0.4);
+  --shadow-lg: 0 28px 64px -16px rgba(7, 5, 12, 0.78),
+               0 8px 20px -6px rgba(7, 5, 12, 0.5);
+  --shadow-xl: 0 48px 120px -24px rgba(7, 5, 12, 0.88),
+               0 16px 40px -12px rgba(7, 5, 12, 0.6);
+
+  /* Colored glows — for active tools and focus states */
+  --glow-cyan:    0 0 0 1px rgba(63, 216, 255, 0.4), 0 0 24px -4px rgba(63, 216, 255, 0.5);
+  --glow-magenta: 0 0 0 1px rgba(255, 61, 196, 0.4), 0 0 24px -4px rgba(255, 61, 196, 0.5);
+
+  /* ----------------------------------------------------------
+     5. TEXT
+     ---------------------------------------------------------- */
+  --text-hi:   rgba(255, 252, 248, 0.96);
+  --text-mid:  rgba(255, 252, 248, 0.68);
+  --text-low:  rgba(255, 252, 248, 0.44);
+  --text-ghost:rgba(255, 252, 248, 0.24);
+  --text-on-paper: #241d2e;
+  --text-on-paper-mid: rgba(36, 29, 46, 0.62);
+
+  /* ----------------------------------------------------------
+     6. TYPOGRAPHY
+     Fraunces  — optical serif with real wonk. The painterly voice.
+                 Display only. Never below 18px.
+     Schibsted — grotesk with slightly humanist terminals. UI voice.
+     Martian   — mono for numerics: hex codes, px, %, opacity.
+                 Tabular by default so sliders do not jitter.
+     ---------------------------------------------------------- */
+  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-ui: 'Schibsted Grotesk', 'Helvetica Neue', sans-serif;
+  --font-mono: 'Martian Mono', ui-monospace, 'SF Mono', monospace;
+
+  --fs-display: clamp(2.6rem, 6vw, 4.75rem);
+  --fs-h1: clamp(1.9rem, 3.4vw, 2.75rem);
+  --fs-h2: 1.375rem;
+  --fs-h3: 1.0625rem;
+  --fs-body: 0.9375rem;
+  --fs-sm: 0.8125rem;
+  --fs-xs: 0.6875rem;
+  --fs-micro: 0.625rem;
+
+  --lh-tight: 1.04;
+  --lh-snug: 1.28;
+  --lh-body: 1.58;
+
+  /* Tracking. Small text opens up, display text closes in. */
+  --tr-display: -0.032em;
+  --tr-h: -0.018em;
+  --tr-body: -0.006em;
+  --tr-label: 0.09em;
+  --tr-micro: 0.16em;
+
+  /* ----------------------------------------------------------
+     7. GEOMETRY
+     Radii follow an iOS-ish superellipse feel. Nested elements
+     step down by ~6px so corners stay concentric.
+     ---------------------------------------------------------- */
+  --r-xs: 7px;
+  --r-sm: 11px;
+  --r-md: 16px;
+  --r-lg: 22px;
+  --r-xl: 30px;
+  --r-2xl: 40px;
+  --r-pill: 999px;
+
+  /* Spacing — 4px base, skipping awkward steps */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 22px;
+  --sp-6: 30px;
+  --sp-7: 42px;
+  --sp-8: 60px;
+  --sp-9: 84px;
+
+  /* ----------------------------------------------------------
+     8. MOTION
+     Glass should feel like it has mass and a little surface
+     tension. Nothing linear. Nothing bouncy-cartoon.
+     ---------------------------------------------------------- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);        /* the default */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.46, 0.64, 1); /* press release */
+
+  --dur-instant: 90ms;
+  --dur-fast: 160ms;
+  --dur-base: 280ms;
+  --dur-slow: 520ms;
+  --dur-drift: 26s;   /* blob field */
+  --dur-sweep: 8s;    /* iridescent border rotation */
+
+  /* ----------------------------------------------------------
+     9. Z-INDEX
+     ---------------------------------------------------------- */
+  --z-blobs: 0;
+  --z-grain: 1;
+  --z-content: 10;
+  --z-rail: 40;
+  --z-popover: 60;
+  --z-modal: 80;
+  --z-toast: 100;
+}
+
+/* ------------------------------------------------------------
+   LIGHT MODE
+   Glass over a light substrate needs the *opposite* treatment:
+   darker fills, stronger borders, and the specular moves from
+   white to a warm near-white. Most glass systems skip this and
+   end up with invisible components on light backgrounds.
+   ------------------------------------------------------------ */
+[data-theme='light'] {
+  --ink-900: #efe9f5;
+  --ink-800: #f5f1f9;
+  --ink-700: #fbf8fd;
+  --ink-600: #e2d9ec;
+
+  --glass-1-fill: rgba(255, 255, 255, 0.44);
+  --glass-1-edge: rgba(255, 255, 255, 0.7);
+  --glass-2-fill: rgba(255, 255, 255, 0.56);
+  --glass-2-edge: rgba(255, 255, 255, 0.85);
+  --glass-3-fill: rgba(255, 255, 255, 0.72);
+  --glass-3-edge: rgba(255, 255, 255, 0.95);
+  --glass-sat: 165%;
+
+  --glass-spec: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --glass-bounce: inset 0 -1px 0 rgba(123, 92, 255, 0.06);
+
+  --shadow-sm: 0 2px 8px -2px rgba(60, 40, 90, 0.14);
+  --shadow-md: 0 12px 32px -8px rgba(60, 40, 90, 0.2), 0 2px 8px -2px rgba(60, 40, 90, 0.1);
+  --shadow-lg: 0 28px 64px -16px rgba(60, 40, 90, 0.26), 0 8px 20px -6px rgba(60, 40, 90, 0.14);
+  --shadow-xl: 0 48px 120px -24px rgba(60, 40, 90, 0.3), 0 16px 40px -12px rgba(60, 40, 90, 0.16);
+
+  --text-hi: rgba(24, 16, 38, 0.94);
+  --text-mid: rgba(24, 16, 38, 0.66);
+  --text-low: rgba(24, 16, 38, 0.44);
+  --text-ghost: rgba(24, 16, 38, 0.22);
+}
+
+/* ------------------------------------------------------------
+   REDUCED MOTION
+   Kill the drift and the sweep. Keep state-change transitions —
+   removing those makes an interface feel broken, not calmer.
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-drift: 0s;
+    --dur-sweep: 0s;
+  }
+}

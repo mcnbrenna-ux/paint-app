@@ -4,8 +4,8 @@
   "description": "Given a target color and the oil paint tubes you actually own: which tubes, what ratio, how wrong.",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#1c1a17",
-  "theme_color": "#1c1a17",
+  "background_color": "#07050c",
+  "theme_color": "#07050c",
   "icons": [
     {
       "src": "./apple-touch-icon.png",

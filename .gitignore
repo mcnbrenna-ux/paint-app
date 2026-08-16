@@ -3,3 +3,5 @@ dist/
 *.local
 tsconfig.tsbuildinfo
 dist-artifact/
+.DS_Store
+painting app/
