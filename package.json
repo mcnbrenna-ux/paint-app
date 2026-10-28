@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.5.0",
   "type": "module",
-  "description": "Oil paint mixing recipes from the tubes you actually own. Single-constant Kubelka-Munk engine, offline PWA.",
+  "description": "Paint mixing and layering predictions from the paints you actually own. Kubelka-Munk engine, watercolor-first, offline PWA.",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

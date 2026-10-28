@@ -2,7 +2,14 @@
 
 *Given this target color and only the tubes I actually own, tell me which ones to squeeze out, in what proportion I can execute with a palette knife, and how wrong the result will be.*
 
-Offline-first PWA for oil painters. React + Vite + TypeScript, IndexedDB, no backend. Built to the Pigment PRD v2.
+Offline-first PWA for painters. React + Vite + TypeScript, IndexedDB, no backend. Oil v1 was built to the Pigment PRD v2.
+
+## Status (2026-10-27)
+
+- **Watercolor is now the primary medium** and is in build: `docs/pigment-watercolor-spec-v1.md` (amendment A4). It covers a two-constant Kubelka–Munk engine over measured paper, a layer check and layer plan for glazing, rule-triggered lessons, and mixing-order steps. Gates W0–W4, CLI first.
+- **Oil v1 is complete and maintained** (no new features) — everything below describes it.
+- **Canvas Coach** is still gated. Phase A failed in white-patch mode; the owner chose the single-lighting protocol (amendment A3).
+- Agent working rules: `CLAUDE.md`.
 
 ## What it does (v1)
 
