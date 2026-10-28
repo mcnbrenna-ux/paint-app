@@ -37,6 +37,8 @@ this capture pipeline.
 
 ## Options forward (owner's call)
 
+> **Decided 2026-10-27: option A.** See `spec-amendments.md` A3.
+
 - **A — Single-lighting protocol ($0, recommended):** constrain the Coach to
   "photograph under the same lighting your swatches were fitted under."
   Within-scene repeatability supports this. Requires re-authoring the gate
